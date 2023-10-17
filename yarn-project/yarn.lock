@@ -541,8 +541,8 @@ __metadata:
   dependencies:
     "@aztec/foundation": "workspace:^"
     "@jest/globals": ^29.5.0
-    "@noir-lang/noir_wasm": ^0.16.0
-    "@noir-lang/source-resolver": ^0.16.0
+    "@noir-lang/noir_wasm": 0.16.0-38acee5.aztec
+    "@noir-lang/source-resolver": 0.16.0-38acee5.aztec
     "@rushstack/eslint-patch": ^1.1.4
     "@types/fs-extra": ^11.0.1
     "@types/jest": ^29.5.0
@@ -564,12 +564,12 @@ __metadata:
     lodash.times: ^4.3.2
     lodash.upperfirst: ^4.3.1
     pako: ^2.1.0
-    tar: ^6.2.0
     toml: ^3.0.0
     ts-jest: ^29.1.0
     ts-node: ^10.9.1
     tslib: ^2.4.0
     typescript: ^5.0.4
+    unzipit: ^1.4.3
   bin:
     aztec-compile: dest/cli.js
   languageName: unknown
@@ -3468,19 +3468,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noir-lang/noir_wasm@npm:^0.16.0":
-  version: 0.16.0
-  resolution: "@noir-lang/noir_wasm@npm:0.16.0"
+"@noir-lang/noir_wasm@npm:0.16.0-38acee5.aztec":
+  version: 0.16.0-38acee5.aztec
+  resolution: "@noir-lang/noir_wasm@npm:0.16.0-38acee5.aztec"
   peerDependencies:
-    "@noir-lang/source-resolver": 0.16.0
-  checksum: eaf677bd62954d7d2fa5a874925741d972205581017c17133c868e1cf68645a2e207cd302cd92ae80d60b08513460462bc58552d0779a874dd8d9b92f19167f4
+    "@noir-lang/source-resolver": 0.16.0-38acee5.aztec
+  checksum: a54875a1b2213795482d477405d929634da78f141e89d1290707768570c00aa3e17f3132d6d5609f9d510a739b12ad5b2de96de8b03739864008379225944559
   languageName: node
   linkType: hard
 
-"@noir-lang/source-resolver@npm:^0.16.0":
-  version: 0.16.0
-  resolution: "@noir-lang/source-resolver@npm:0.16.0"
-  checksum: 66446be8d68efdf7f22de534a6986e9d35236e7e56d66ad688474b3b901052c882a14b9629528240f8f7a0b584f6ce58e5260476d8ef4a560ad2d9a6efd6fb38
+"@noir-lang/source-resolver@npm:0.16.0-38acee5.aztec":
+  version: 0.16.0-38acee5.aztec
+  resolution: "@noir-lang/source-resolver@npm:0.16.0-38acee5.aztec"
+  checksum: 44b96c5b8b5b2d8da8a3f0bcbc3c9fbe6fed117a807ea8a7ae773dcf4c6e3e027bdb833c020642ae919d1c4a7acb0bbe1ede2e8f8c9fa363e94918a566092de9
   languageName: node
   linkType: hard
 
@@ -17819,7 +17819,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar@npm:^6.0.2, tar@npm:^6.2.0":
+"tar@npm:^6.0.2":
   version: 6.2.0
   resolution: "tar@npm:6.2.0"
   dependencies:
@@ -18584,6 +18584,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unzipit@npm:^1.4.3":
+  version: 1.4.3
+  resolution: "unzipit@npm:1.4.3"
+  dependencies:
+    uzip-module: ^1.0.2
+  checksum: ce29348edab7b5fb5b7b4d43437f48e35812ac8b3cc2d76efd1acfcad6dd1b96b4f96bfd03250a724b87ba99dd531d7727ad24b590acf727dde79f54f5e779ed
+  languageName: node
+  linkType: hard
+
 "upath@npm:^2.0.1":
   version: 2.0.1
   resolution: "upath@npm:2.0.1"
@@ -18721,6 +18730,13 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
+  languageName: node
+  linkType: hard
+
+"uzip-module@npm:^1.0.2":
+  version: 1.0.3
+  resolution: "uzip-module@npm:1.0.3"
+  checksum: fc286c44a04d75055577fae8293d3fee499d1e850f87e88c158b1e3657f4794a3a40ca2d34f73474ff82917176dd5ca9d1c0d1e375a083714e11afabd3afa423
   languageName: node
   linkType: hard
 

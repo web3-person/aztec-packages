@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { parse } from 'toml';
 
-import { Filemanager } from './filemanager.js';
+import { FileManager } from './file-manager/file-manager.js';
 import {
   NoirGitDependencyConfig,
   NoirLocalDependencyConfig,
@@ -81,7 +81,7 @@ export class NoirPackage {
    * @param fm - Filemanager to use.
    * @returns The Noir package at the given location
    */
-  public static async new(path: string, fm: Filemanager): Promise<NoirPackage> {
+  public static new(path: string, fm: FileManager): NoirPackage {
     const fileContents = fm.readFileSync(join(path, CONFIG_FILE_NAME), 'utf-8');
     const config = parse(fileContents);
 
@@ -89,7 +89,10 @@ export class NoirPackage {
       throw new Error('Invalid package configuration');
     }
 
-    const srcDir = (await fm.hasEntry(join(path, 'src'))) ? join(path, 'src') : path;
+    const srcDir =
+      fm.hasFileSync(join(path, 'src', 'main.nr')) || fm.hasFileSync(join(path, 'src', 'lib.nr'))
+        ? join(path, 'src')
+        : path;
     return new NoirPackage(path, srcDir, config);
   }
 }

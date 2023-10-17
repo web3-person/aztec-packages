@@ -10,7 +10,7 @@ export type NoirPackageConfig = {
     type: 'lib' | 'contract' | 'binary';
   };
   /** Package dependencies */
-  dependencies: Record<string, NoirGitDependencyConfig | NoirLocalDependencyConfig>;
+  dependencies: Record<string, NoirDependencyConfig>;
 };
 
 /**
@@ -32,6 +32,11 @@ export type NoirLocalDependencyConfig = {
   /** Path to the dependency */
   path: string;
 };
+
+/**
+ * A package dependency.
+ */
+export type NoirDependencyConfig = NoirGitDependencyConfig | NoirLocalDependencyConfig;
 
 /**
  * Checks that an object is a package configuration.

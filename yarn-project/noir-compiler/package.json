@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "@aztec/foundation": "workspace:^",
-    "@noir-lang/noir_wasm": "0.16.0",
-    "@noir-lang/source-resolver": "0.16.0",
+    "@noir-lang/noir_wasm": "0.16.0-38acee5.aztec",
+    "@noir-lang/source-resolver": "0.16.0-38acee5.aztec",
     "base64-js": "^1.5.1",
     "commander": "^9.0.0",
     "fs-extra": "^11.1.1",
@@ -49,9 +49,9 @@
     "lodash.times": "^4.3.2",
     "lodash.upperfirst": "^4.3.1",
     "pako": "^2.1.0",
-    "tar": "^6.2.0",
     "toml": "^3.0.0",
-    "tslib": "^2.4.0"
+    "tslib": "^2.4.0",
+    "unzipit": "^1.4.3"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
