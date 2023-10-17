@@ -38,7 +38,7 @@ export function compileContract(program: Command, name = 'contract', log: LogFn 
         const currentDir = process.cwd();
 
         log(`Compiling contracts...`);
-        const result = await compileUsingNoirWasm(projectPath, { log });
+        const result = await compileUsingNoirWasm(resolve(projectPath), { log });
 
         for (const contract of result) {
           const artifactPath = resolve(projectPath, outdir, `${contract.name}.json`);

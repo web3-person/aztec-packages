@@ -1,6 +1,6 @@
 import { LogFn, createDebugLogger } from '@aztec/foundation/log';
 
-import { join } from 'node:path';
+import { isAbsolute, join } from 'node:path';
 
 import { NoirCompilationArtifacts } from '../../noir_artifact.js';
 import { NoirDependencyManager } from './dependencies/dependency-manager.js';
@@ -23,6 +23,7 @@ export class NoirWasmContractCompiler {
   #projectPath: string;
   #log: LogFn;
   public constructor(projectPath: string, opts: NoirWasmCompileOptions) {
+    if (!isAbsolute(projectPath)) throw new Error('projectPath must be an absolute path');
     this.#projectPath = projectPath;
     this.#log = opts.log ?? createDebugLogger('aztec:noir-compiler:wasm');
   }
@@ -41,13 +42,16 @@ export class NoirWasmContractCompiler {
 
     this.#log(`Compiling contract at ${noirPackage.getEntryPointPath()}`);
 
-    const dependencyManager = new NoirDependencyManager([
-      new LocalDependencyResolver(fileManager),
-      new GithubCodeArchiveDependencyResolver(fileManager),
-      // TODO support actual Git repositories
-    ]);
+    const dependencyManager = new NoirDependencyManager(
+      [
+        new LocalDependencyResolver(fileManager),
+        new GithubCodeArchiveDependencyResolver(fileManager),
+        // TODO support actual Git repositories
+      ],
+      noirPackage,
+    );
 
-    await dependencyManager.recursivelyResolveDependencies(noirPackage);
+    await dependencyManager.resolveDependencies();
 
     this.#log(`Dependencies: ${dependencyManager.getPackageNames().join(', ')}`);
 
@@ -61,7 +65,13 @@ export class NoirWasmContractCompiler {
     });
 
     try {
-      const contract = await compile(noirPackage.getEntryPointPath(), true, dependencyManager.getPackageNames());
+      const contract = await compile(noirPackage.getEntryPointPath(), true, {
+        /* eslint-disable camelcase */
+        root_dependencies: dependencyManager.getEntrypointDependencies(),
+        library_dependencies: dependencyManager.getLibraryDependencies(),
+        /* eslint-enable camelcase */
+      });
+
       return [{ contract }];
     } catch (err) {
       this.#log('Error compiling contract', {

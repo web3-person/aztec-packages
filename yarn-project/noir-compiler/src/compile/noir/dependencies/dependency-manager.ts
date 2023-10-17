@@ -10,28 +10,52 @@ import { DependencyResolver } from './dependency-resolver.js';
  * Noir Dependency Resolver
  */
 export class NoirDependencyManager {
-  dependencies = new Map<string, NoirPackage>();
+  #entryPoint: NoirPackage;
+  #libraries = new Map<string, NoirPackage>();
+  #dependencies = new Map<string, string[]>();
   #log: LogFn;
   #resolvers: readonly DependencyResolver[];
 
   /**
    * Creates a new dependency resolver
    * @param resolvers - A list of dependency resolvers to use
+   * @param entryPoint - The entry point of the project
    */
-  constructor(resolvers: readonly DependencyResolver[] = []) {
+  constructor(resolvers: readonly DependencyResolver[] = [], entryPoint: NoirPackage) {
     this.#log = createDebugOnlyLogger('noir:dependency-resolver');
     this.#resolvers = resolvers;
+    this.#entryPoint = entryPoint;
+  }
+
+  /**
+   * Gets dependencies for the entry point
+   */
+  public getEntrypointDependencies() {
+    return this.#dependencies.get('') ?? [];
+  }
+
+  /**
+   * A map of library dependencies
+   */
+  public getLibraryDependencies() {
+    const entries = Array.from(this.#dependencies.entries());
+    return Object.fromEntries(entries.filter(([name]) => name !== ''));
   }
 
   /**
    * Resolves dependencies for a package.
-   * @param noirPackage - The package to resolve dependencies for
    */
-  public async recursivelyResolveDependencies(noirPackage: NoirPackage): Promise<void> {
+  public async resolveDependencies(): Promise<void> {
+    await this.#recursivelyResolveDependencies('', this.#entryPoint);
+  }
+
+  async #recursivelyResolveDependencies(packageName: string, noirPackage: NoirPackage): Promise<void> {
     for (const [name, config] of Object.entries(noirPackage.getDependencies())) {
       // TODO what happens if more than one package has the same name but different versions?
-      if (this.dependencies.has(name)) {
+      if (this.#libraries.has(name)) {
         this.#log(`skipping already resolved dependency ${name}`);
+        this.#dependencies.set(packageName, [...(this.#dependencies.get(packageName) ?? []), name]);
+
         continue;
       }
 
@@ -41,9 +65,10 @@ export class NoirDependencyManager {
         throw new Error(`Dependency ${name} is not a library`);
       }
 
-      this.dependencies.set(name, dependency);
+      this.#libraries.set(name, dependency);
+      this.#dependencies.set(packageName, [...(this.#dependencies.get(packageName) ?? []), name]);
 
-      await this.recursivelyResolveDependencies(dependency);
+      await this.#recursivelyResolveDependencies(name, dependency);
     }
   }
 
@@ -67,7 +92,7 @@ export class NoirDependencyManager {
    * Gets the names of the crates in this dependency list
    */
   public getPackageNames() {
-    return [...this.dependencies.keys()];
+    return [...this.#libraries.keys()];
   }
 
   /**
@@ -77,7 +102,7 @@ export class NoirDependencyManager {
    */
   public findFile(sourceId: string): string | null {
     const [lib, ...path] = sourceId.split('/').filter(x => x);
-    const pkg = this.dependencies.get(lib);
+    const pkg = this.#libraries.get(lib);
     if (pkg) {
       return join(pkg.getSrcPath(), ...path);
     } else {

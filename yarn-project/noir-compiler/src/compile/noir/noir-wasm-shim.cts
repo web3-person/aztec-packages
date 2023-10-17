@@ -3,8 +3,15 @@ type SourceResolver = {
   initializeResolver: (resolver: (source_id: string) => string) => void;
 };
 
+type DepGraph = {
+  root_dependencies: string[];
+  library_dependencies: {
+    [key: string]: string[];
+  };
+};
+
 type NoirWasm = {
-  compile: (entrypoint: string, contract: boolean, deps: string[]) => Promise<any>;
+  compile: (entrypoint: string, contract: boolean, depGraph: DepGraph) => Promise<any>;
 };
 
 const sourceResolver: SourceResolver = require('@noir-lang/source-resolver');
