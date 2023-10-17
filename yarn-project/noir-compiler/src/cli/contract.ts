@@ -1,7 +1,7 @@
 import { LogFn } from '@aztec/foundation/log';
 
 import { Command } from 'commander';
-import { writeFileSync } from 'fs';
+import { mkdirSync, writeFileSync } from 'fs';
 import { mkdirpSync } from 'fs-extra';
 import path, { resolve } from 'path';
 
@@ -43,6 +43,7 @@ export function compileContract(program: Command, name = 'contract', log: LogFn 
         for (const contract of result) {
           const artifactPath = resolve(projectPath, outdir, `${contract.name}.json`);
           log(`Writing ${contract.name} artifact to ${path.relative(currentDir, artifactPath)}`);
+          mkdirSync(path.dirname(artifactPath), { recursive: true });
           writeFileSync(artifactPath, JSON.stringify(contract, null, 2));
 
           if (noirInterface) {
