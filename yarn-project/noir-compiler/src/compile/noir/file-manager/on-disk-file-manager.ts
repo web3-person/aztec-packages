@@ -9,10 +9,10 @@ import { FileManager } from './file-manager.js';
  * A file manager that writes file to a specific directory but reads globally.
  */
 export class OnDiskFileManager implements FileManager {
-  dataDir: string;
+  #dataDir: string;
 
   public constructor(dataDir: string) {
-    this.dataDir = dataDir;
+    this.#dataDir = dataDir;
   }
 
   /**
@@ -71,7 +71,11 @@ export class OnDiskFileManager implements FileManager {
     }
   }
 
+  public get dataDir() {
+    return this.#dataDir;
+  }
+
   #getPath(name: string) {
-    return isAbsolute(name) ? name : join(this.dataDir, name);
+    return isAbsolute(name) ? name : join(this.#dataDir, name);
   }
 }

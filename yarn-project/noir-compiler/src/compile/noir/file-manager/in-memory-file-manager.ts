@@ -20,7 +20,7 @@ export class InMemoryFileManager implements FileManager {
   readFileSync(name: string, encoding: 'utf-8'): string;
   readFileSync(name: string, encoding: 'binary' | 'utf-8'): string | Uint8Array {
     const file = this.#files.get(name);
-    if (file === undefined) {
+    if (typeof file === 'undefined') {
       throw new Error(`file ${name} not found`);
     }
     if (encoding === 'binary') {

@@ -19,7 +19,7 @@ export class NoirPackage {
   #srcPath: string;
   #config: NoirPackageConfig;
 
-  private constructor(path: string, srcDir: string, config: NoirPackageConfig) {
+  public constructor(path: string, srcDir: string, config: NoirPackageConfig) {
     this.#packagePath = path;
     this.#srcPath = srcDir;
     this.#config = config;
@@ -81,7 +81,7 @@ export class NoirPackage {
    * @param fm - Filemanager to use.
    * @returns The Noir package at the given location
    */
-  public static new(path: string, fm: FileManager): NoirPackage {
+  public static atPath(path: string, fm: FileManager): NoirPackage {
     const fileContents = fm.readFileSync(join(path, CONFIG_FILE_NAME), 'utf-8');
     const config = parse(fileContents);
 

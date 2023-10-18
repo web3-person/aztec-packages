@@ -35,7 +35,7 @@ export class NoirWasmContractCompiler {
     const cacheRoot = process.env.XDG_CACHE_HOME ?? join(process.env.HOME ?? '', '.cache');
     const fileManager = new OnDiskFileManager(join(cacheRoot, 'noir_wasm'));
 
-    const noirPackage = NoirPackage.new(this.#projectPath, fileManager);
+    const noirPackage = NoirPackage.atPath(this.#projectPath, fileManager);
     if (noirPackage.getType() !== 'contract') {
       throw new Error('This is not a contract project');
     }

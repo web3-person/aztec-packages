@@ -17,7 +17,7 @@ export class LocalDependencyResolver implements DependencyResolver {
 
   resolveDependency(pkg: NoirPackage, config: NoirDependencyConfig): Promise<NoirPackage | null> {
     if ('path' in config) {
-      return Promise.resolve(NoirPackage.new(resolve(pkg.getPackagePath(), config.path), this.#fm));
+      return Promise.resolve(NoirPackage.atPath(resolve(pkg.getPackagePath(), config.path), this.#fm));
     } else {
       return Promise.resolve(null);
     }

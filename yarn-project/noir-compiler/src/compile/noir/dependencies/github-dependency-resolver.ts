@@ -34,7 +34,7 @@ export class GithubDependencyResolver implements DependencyResolver {
 
     const archivePath = await this.#fetchZipFromGithub(dependency);
     const libPath = await this.#extractZip(dependency, archivePath);
-    return NoirPackage.new(libPath, this.#fm);
+    return NoirPackage.atPath(libPath, this.#fm);
   }
 
   async #fetchZipFromGithub(dependency: Pick<NoirGitDependencyConfig, 'git' | 'tag'>): Promise<string> {
