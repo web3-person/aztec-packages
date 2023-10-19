@@ -205,6 +205,7 @@ template <typename FF> class BaseTranscript {
         // T* obj_ptr = static_cast<T*>(ordered_objects[num_objects_processed].obj_ptr);
         // ++num_objects_processed; // update num_objects_processed to point to the next object
         // return *obj_ptr;
+        return T();
     }
 
     /**
