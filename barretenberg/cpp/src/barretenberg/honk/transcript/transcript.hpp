@@ -144,30 +144,6 @@ template <typename FF> class BaseTranscript {
   protected:
     size_t num_objects_processed = 0;
 
-    // Enum to deal with various types in Transcript
-    enum TranscriptObjectType { UInt32Obj, FieldElementObj, CommitmentObj, SumcheckUnivariateObj, SumcheckEvalObj };
-    // conversion mapping from type to TranscriptObjectType enum object
-    template <typename T> TranscriptObjectType convert_type_to_enum([[maybe_unused]] T _);
-    static std::vector<uint8_t> serialize_obj(TranscriptObjectType enum_type, void* obj);
-    void deserialize_obj(void* obj_ptr, TranscriptObjectType enum_type, const std::span<const uint8_t>& buf);
-
-    class TranscriptObject {
-      public:
-        template <typename T>
-        TranscriptObject(std::string name, T* ptr)
-            : obj_name(std::move(name))
-            , obj_ptr(static_cast<void*>(ptr))
-            , obj_size(sizeof(T))
-            , obj_type(convert_type_to_enum(*ptr))
-        {}
-        std::string obj_name; // object name as a string
-        void* obj_ptr;        // ptr to member variable object in class
-        size_t obj_size;      // in bytes
-        TranscriptObjectType obj_type;
-    };
-    // List of objects in the transcript by name, pointer, and size in bytes
-    std::vector<TranscriptObject> ordered_objects;
-
     /**
      * @brief Adds challenge elements to the current_round_buffer and updates the manifest.
      *

@@ -453,6 +453,24 @@ class GoblinUltra {
         Commitment shplonk_q_comm;
         Commitment kzg_w_comm;
 
+        MSGPACK_FIELDS(circuit_size,
+                       public_input_size,
+                       pub_inputs_offset,
+                       public_inputs,
+                       w_l_comm,
+                       w_r_comm,
+                       w_o_comm,
+                       sorted_accum_comm,
+                       w_4_comm,
+                       z_perm_comm,
+                       z_lookup_comm,
+                       sumcheck_univariates,
+                       sumcheck_evaluations,
+                       gemini_univariate_comms,
+                       gemini_a_evals,
+                       shplonk_q_comm,
+                       kzg_w_comm);
+
         Transcript(uint32_t circuit_size) { set_up_structure(circuit_size); }
 
         Transcript(uint32_t circuit_size, const std::vector<uint8_t>& proof_data)
