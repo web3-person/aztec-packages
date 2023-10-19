@@ -479,107 +479,47 @@ class GoblinUltra {
         }
 
       private:
-        template <typename T> inline static TranscriptObjectType convert_type_to_enum([[maybe_unused]] T _)
-        {
-            if constexpr (std::same_as<T, uint32_t>) {
-                return UInt32Obj;
-            } else if constexpr (std::same_as<T, FF>) {
-                return FieldElementObj;
-            } else if constexpr (std::same_as<T, Commitment>) {
-                return CommitmentObj;
-            } else if constexpr (std::same_as<T, Univariate<FF, MAX_RELATION_LENGTH>>) {
-                return SumcheckUnivariateObj;
-            } else if constexpr (std::same_as<T, std::array<FF, NUM_ALL_ENTITIES>>) {
-                return SumcheckEvalObj;
-            } else {
-                throw_or_abort("Received unknown type in convert_type_to_enum");
-            }
-        }
-
-        static std::vector<uint8_t> serialize_obj(TranscriptObjectType enum_type, void* obj_ptr)
-        {
-            using serialize::write;
-            switch (enum_type) {
-            case UInt32Obj:
-                return to_buffer(*static_cast<uint32_t*>(obj_ptr));
-            case FieldElementObj:
-                return to_buffer(*static_cast<FF*>(obj_ptr));
-            case CommitmentObj:
-                return to_buffer(*static_cast<Commitment*>(obj_ptr));
-            case SumcheckUnivariateObj:
-                return to_buffer(*static_cast<Univariate<FF, MAX_RELATION_LENGTH>*>(obj_ptr));
-            case SumcheckEvalObj:
-                return to_buffer(*static_cast<std::array<FF, NUM_ALL_ENTITIES>*>(obj_ptr));
-            default:
-                throw_or_abort("Received unknown enum type in convert_type_ptr_from_enum");
-            }
-        }
-
-        void deserialize_obj(void* obj_ptr, TranscriptObjectType enum_type, const std::span<const uint8_t>& buf)
-        {
-            using serialize::read;
-            switch (enum_type) {
-            case UInt32Obj:
-                *static_cast<uint32_t*>(obj_ptr) = from_buffer<uint32_t>(buf);
-                return;
-            case FieldElementObj:
-                *static_cast<FF*>(obj_ptr) = from_buffer<FF>(buf);
-                return;
-            case CommitmentObj:
-                *static_cast<Commitment*>(obj_ptr) = from_buffer<Commitment>(buf);
-                return;
-            case SumcheckUnivariateObj:
-                *static_cast<Univariate<FF, MAX_RELATION_LENGTH>*>(obj_ptr) =
-                    from_buffer<Univariate<FF, MAX_RELATION_LENGTH>>(buf);
-                return;
-            case SumcheckEvalObj:
-                *static_cast<std::array<FF, NUM_ALL_ENTITIES>*>(obj_ptr) =
-                    from_buffer<std::array<FF, NUM_ALL_ENTITIES>>(buf);
-                return;
-            default:
-                throw_or_abort("Received unknown enum type in convert_type_ptr_from_enum");
-            }
-        }
-
         void set_up_structure(uint32_t circuit_size) override
         {
-            // construct the vector
-            auto log_n = numeric::get_msb(circuit_size);
-            // resize the vectors to be the correct size
-            public_inputs.resize(public_input_size);
-            sumcheck_univariates.resize(log_n);
-            gemini_univariate_comms.resize(log_n);
-            gemini_a_evals.resize(log_n);
+            (void)circuit_size;
+            // TODO(AD)
+            // // construct the vector
+            // auto log_n = numeric::get_msb(circuit_size);
+            // // resize the vectors to be the correct size
+            // public_inputs.resize(public_input_size);
+            // sumcheck_univariates.resize(log_n);
+            // gemini_univariate_comms.resize(log_n);
+            // gemini_a_evals.resize(log_n);
 
-            ordered_objects.emplace_back("circuit_size", &circuit_size);
-            ordered_objects.emplace_back("public_input_size", &public_input_size);
-            ordered_objects.emplace_back("pub_inputs_offset", &pub_inputs_offset);
-            for (size_t i = 0; i < public_input_size; ++i) {
-                std::string idx = std::to_string(i);
-                ordered_objects.emplace_back("public_inputs_" + idx, &public_inputs[i]);
-            }
-            ordered_objects.emplace_back("w_l_comm", &w_l_comm);
-            ordered_objects.emplace_back("w_r_comm", &w_r_comm);
-            ordered_objects.emplace_back("w_o_comm", &w_o_comm);
-            ordered_objects.emplace_back("sorted_accum_comm", &sorted_accum_comm);
-            ordered_objects.emplace_back("w_4_comm", &w_4_comm);
-            ordered_objects.emplace_back("z_perm_comm", &z_perm_comm);
-            ordered_objects.emplace_back("z_lookup_comm", &z_lookup_comm);
-            for (size_t i = 0; i < log_n; ++i) {
-                std::string idx = std::to_string(i);
-                ordered_objects.emplace_back("sumcheck_univariate_" + idx, &sumcheck_univariates[i]);
-            }
-            ordered_objects.emplace_back("sumcheck_evaluations", &sumcheck_evaluations);
-            for (size_t i = 0; i < log_n; ++i) {
-                std::string idx = std::to_string(i);
-                ordered_objects.emplace_back("gemini_univariate_comm_" + idx, &gemini_univariate_comms[i]);
-            }
-            for (size_t i = 0; i < log_n; ++i) {
-                std::string idx = std::to_string(i);
-                ordered_objects.emplace_back("gemini_a_eval_" + idx, &gemini_a_evals[i]);
-            }
-            ordered_objects.emplace_back("shplonk_q_comm", &shplonk_q_comm);
-            ordered_objects.emplace_back("kzg_w_comm", &kzg_w_comm);
+            // ordered_objects.emplace_back("circuit_size", &circuit_size);
+            // ordered_objects.emplace_back("public_input_size", &public_input_size);
+            // ordered_objects.emplace_back("pub_inputs_offset", &pub_inputs_offset);
+            // for (size_t i = 0; i < public_input_size; ++i) {
+            //     std::string idx = std::to_string(i);
+            //     ordered_objects.emplace_back("public_inputs_" + idx, &public_inputs[i]);
+            // }
+            // ordered_objects.emplace_back("w_l_comm", &w_l_comm);
+            // ordered_objects.emplace_back("w_r_comm", &w_r_comm);
+            // ordered_objects.emplace_back("w_o_comm", &w_o_comm);
+            // ordered_objects.emplace_back("sorted_accum_comm", &sorted_accum_comm);
+            // ordered_objects.emplace_back("w_4_comm", &w_4_comm);
+            // ordered_objects.emplace_back("z_perm_comm", &z_perm_comm);
+            // ordered_objects.emplace_back("z_lookup_comm", &z_lookup_comm);
+            // for (size_t i = 0; i < log_n; ++i) {
+            //     std::string idx = std::to_string(i);
+            //     ordered_objects.emplace_back("sumcheck_univariate_" + idx, &sumcheck_univariates[i]);
+            // }
+            // ordered_objects.emplace_back("sumcheck_evaluations", &sumcheck_evaluations);
+            // for (size_t i = 0; i < log_n; ++i) {
+            //     std::string idx = std::to_string(i);
+            //     ordered_objects.emplace_back("gemini_univariate_comm_" + idx, &gemini_univariate_comms[i]);
+            // }
+            // for (size_t i = 0; i < log_n; ++i) {
+            //     std::string idx = std::to_string(i);
+            //     ordered_objects.emplace_back("gemini_a_eval_" + idx, &gemini_a_evals[i]);
+            // }
+            // ordered_objects.emplace_back("shplonk_q_comm", &shplonk_q_comm);
+            // ordered_objects.emplace_back("kzg_w_comm", &kzg_w_comm);
         }
     };
 };

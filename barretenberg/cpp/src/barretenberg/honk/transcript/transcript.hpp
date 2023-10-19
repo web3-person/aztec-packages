@@ -88,8 +88,11 @@ template <typename FF> class BaseTranscript {
      */
     [[nodiscard]] bool check_current_object(const std::string& object_name) const
     {
-        ASSERT(num_objects_processed < ordered_objects.size());
-        return (ordered_objects[num_objects_processed].obj_name == object_name);
+        (void)object_name;
+        // ASSERT(num_objects_processed < ordered_objects.size());
+        // return (ordered_objects[num_objects_processed].obj_name == object_name);
+        // TODO(AD) msgpack
+        return false;
     }
 
     /**
@@ -163,16 +166,19 @@ template <typename FF> class BaseTranscript {
 
     void set_up_structure_and_deserialize(uint32_t circuit_size, const std::vector<uint8_t>& proof_data)
     {
-        set_up_structure(circuit_size);
-        size_t num_bytes_read_ = 0;
-        for (TranscriptObject& obj : ordered_objects) {
-            size_t element_size = obj.obj_size;
-            ASSERT(num_bytes_read_ + element_size <= proof_data.size());
+        (void)circuit_size;
+        (void)proof_data;
+        // TODO(AD)
+        // set_up_structure(circuit_size);
+        // size_t num_bytes_read_ = 0;
+        // for (TranscriptObject& obj : ordered_objects) {
+        //     size_t element_size = obj.obj_size;
+        //     ASSERT(num_bytes_read_ + element_size <= proof_data.size());
 
-            auto element_bytes = std::span{ proof_data }.subspan(num_bytes_read_, element_size);
-            num_bytes_read_ += element_size;
-            deserialize_obj(obj.obj_ptr, obj.obj_type, element_bytes);
-        }
+        //     auto element_bytes = std::span{ proof_data }.subspan(num_bytes_read_, element_size);
+        //     num_bytes_read_ += element_size;
+        //     deserialize_obj(obj.obj_ptr, obj.obj_type, element_bytes);
+        // }
     }
 
   public:
@@ -181,19 +187,21 @@ template <typename FF> class BaseTranscript {
         if (!check_current_object(object_name)) {
             throw_or_abort("Object being sent is not expected.");
         }
-        T* obj_ptr = static_cast<T*>(ordered_objects[num_objects_processed].obj_ptr);
-        // set the current object pointed to by ordered_objects as object
-        *obj_ptr = object;
-        ++num_objects_processed; // update num_objects_processed to point to the next object
+        (void)object;
+        // TODO(AD)
+        // T* obj_ptr = static_cast<T*>(ordered_objects[num_objects_processed].obj_ptr);
+        // // set the current object pointed to by ordered_objects as object
+        // *obj_ptr = object;
+        // ++num_objects_processed; // update num_objects_processed to point to the next object
     }
     template <typename T> T receive_from_prover(std::string object_name)
     {
         if (!check_current_object(object_name)) {
             throw_or_abort("Object being sent is not expected.");
         }
-        T* obj_ptr = static_cast<T*>(ordered_objects[num_objects_processed].obj_ptr);
-        ++num_objects_processed; // update num_objects_processed to point to the next object
-        return *obj_ptr;
+        // T* obj_ptr = static_cast<T*>(ordered_objects[num_objects_processed].obj_ptr);
+        // ++num_objects_processed; // update num_objects_processed to point to the next object
+        return T();
     }
 
     /**
@@ -245,10 +253,11 @@ template <typename FF> class BaseTranscript {
     std::vector<uint8_t> serialize()
     { // TODO(Lucas): make this pure virtual
         std::vector<uint8_t> proof_data;
-        for (TranscriptObject& obj : ordered_objects) {
-            std::vector<uint8_t> obj_bytes = serialize_obj(obj.obj_type, obj.obj_ptr);
-            proof_data.insert(proof_data.end(), obj_bytes.begin(), obj_bytes.end());
-        }
+        // TODO(AD):
+        // for (TranscriptObject& obj : ordered_objects) {
+        //     std::vector<uint8_t> obj_bytes = serialize_obj(obj.obj_type, obj.obj_ptr);
+        //     proof_data.insert(proof_data.end(), obj_bytes.begin(), obj_bytes.end());
+        // }
         return proof_data;
     }
 
