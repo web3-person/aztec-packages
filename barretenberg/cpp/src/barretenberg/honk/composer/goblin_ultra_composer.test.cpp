@@ -7,6 +7,7 @@
 #include "barretenberg/honk/proof_system/ultra_prover.hpp"
 #include "barretenberg/proof_system/circuit_builder/goblin_ultra_circuit_builder.hpp"
 #include "barretenberg/proof_system/circuit_builder/ultra_circuit_builder.hpp"
+#include "barretenberg/serialize/cbind.hpp"
 
 using namespace proof_system::honk;
 
@@ -211,6 +212,17 @@ TEST_F(GoblinUltraHonkComposerTests, MultipleCircuitsHonkAndMerge)
         auto expected = commitment_key->commit(op_queue->ultra_ops[idx++]);
         EXPECT_EQ(result, expected);
     }
+}
+
+/**
+ * @brief Very basic exercising of transcript serialization.
+ *
+ */
+TEST_F(GoblinUltraHonkComposerTests, SerializeTranscript)
+{
+    flavor::GoblinUltra::Transcript::Data transcript;
+    msgpack::sbuffer buffer;
+    msgpack::pack(buffer, transcript);
 }
 
 } // namespace test_ultra_honk_composer

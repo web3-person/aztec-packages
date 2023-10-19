@@ -435,92 +435,74 @@ class GoblinUltra {
 
     class Transcript : public BaseTranscript<FF> {
       public:
-        uint32_t circuit_size;
-        uint32_t public_input_size;
-        uint32_t pub_inputs_offset;
-        std::vector<FF> public_inputs;
-        Commitment w_l_comm;
-        Commitment w_r_comm;
-        Commitment w_o_comm;
-        Commitment sorted_accum_comm;
-        Commitment w_4_comm;
-        Commitment z_perm_comm;
-        Commitment z_lookup_comm;
-        std::vector<barretenberg::Univariate<FF, MAX_RELATION_LENGTH>> sumcheck_univariates;
-        std::array<FF, NUM_ALL_ENTITIES> sumcheck_evaluations;
-        std::vector<Commitment> gemini_univariate_comms;
-        std::vector<FF> gemini_a_evals;
-        Commitment shplonk_q_comm;
-        Commitment kzg_w_comm;
+        uint32_t circuit_size{};
+        struct Data {
+            uint32_t circuit_size{};
+            uint32_t public_input_size{};
+            uint32_t pub_inputs_offset{};
+            std::vector<FF> public_inputs;
+            Commitment w_l_comm{};
+            Commitment w_r_comm{};
+            Commitment w_o_comm{};
+            Commitment sorted_accum_comm{};
+            Commitment w_4_comm{};
+            Commitment z_perm_comm{};
+            Commitment z_lookup_comm{};
+            std::vector<barretenberg::Univariate<FF, MAX_RELATION_LENGTH>> sumcheck_univariates;
+            std::array<FF, NUM_ALL_ENTITIES> sumcheck_evaluations{};
+            std::vector<Commitment> gemini_univariate_comms;
+            std::vector<FF> gemini_a_evals;
+            Commitment shplonk_q_comm{};
+            Commitment kzg_w_comm{};
 
-        MSGPACK_FIELDS(circuit_size,
-                       public_input_size,
-                       pub_inputs_offset,
-                       public_inputs,
-                       w_l_comm,
-                       w_r_comm,
-                       w_o_comm,
-                       sorted_accum_comm,
-                       w_4_comm,
-                       z_perm_comm,
-                       z_lookup_comm,
-                       sumcheck_univariates,
-                       sumcheck_evaluations,
-                       gemini_univariate_comms,
-                       gemini_a_evals,
-                       shplonk_q_comm,
-                       kzg_w_comm);
+            MSGPACK_FIELDS(circuit_size,
+                           public_input_size,
+                           pub_inputs_offset,
+                           public_inputs,
+                           w_l_comm,
+                           w_r_comm,
+                           w_o_comm,
+                           sorted_accum_comm,
+                           w_4_comm,
+                           z_perm_comm,
+                           z_lookup_comm,
+                           sumcheck_univariates,
+                           sumcheck_evaluations,
+                           gemini_univariate_comms,
+                           gemini_a_evals,
+                           shplonk_q_comm,
+                           kzg_w_comm);
 
-        Transcript(uint32_t circuit_size) { set_up_structure(circuit_size); }
+            void set_up_structure()
+            {
+                auto log_n = numeric::get_msb(circuit_size);
+                // resize the vectors to be the correct size
+                public_inputs.resize(public_input_size);
+                sumcheck_univariates.resize(log_n);
+                gemini_univariate_comms.resize(log_n);
+                gemini_a_evals.resize(log_n);
+            }
+        };
+        Data data;
 
+        Transcript(uint32_t circuit_size)
+        {
+            data.circuit_size = circuit_size;
+            data.set_up_structure();
+        }
         Transcript(uint32_t circuit_size, const std::vector<uint8_t>& proof_data)
         {
-            this->set_up_structure_and_deserialize(circuit_size, proof_data);
+            msgpack::unpack((const char*)&proof_data[0], proof_data.size())->convert(data);
+            // TODO(AD): make this a non-assert error check
+            ASSERT(circuit_size == data.circuit_size);
+            data.set_up_structure();
+        }
+        virtual void set_up_structure(uint32_t)
+        {
+            // TODO(AD) rethink this
         }
 
       private:
-        void set_up_structure(uint32_t circuit_size) override
-        {
-            (void)circuit_size;
-            // TODO(AD)
-            // // construct the vector
-            // auto log_n = numeric::get_msb(circuit_size);
-            // // resize the vectors to be the correct size
-            // public_inputs.resize(public_input_size);
-            // sumcheck_univariates.resize(log_n);
-            // gemini_univariate_comms.resize(log_n);
-            // gemini_a_evals.resize(log_n);
-
-            // ordered_objects.emplace_back("circuit_size", &circuit_size);
-            // ordered_objects.emplace_back("public_input_size", &public_input_size);
-            // ordered_objects.emplace_back("pub_inputs_offset", &pub_inputs_offset);
-            // for (size_t i = 0; i < public_input_size; ++i) {
-            //     std::string idx = std::to_string(i);
-            //     ordered_objects.emplace_back("public_inputs_" + idx, &public_inputs[i]);
-            // }
-            // ordered_objects.emplace_back("w_l_comm", &w_l_comm);
-            // ordered_objects.emplace_back("w_r_comm", &w_r_comm);
-            // ordered_objects.emplace_back("w_o_comm", &w_o_comm);
-            // ordered_objects.emplace_back("sorted_accum_comm", &sorted_accum_comm);
-            // ordered_objects.emplace_back("w_4_comm", &w_4_comm);
-            // ordered_objects.emplace_back("z_perm_comm", &z_perm_comm);
-            // ordered_objects.emplace_back("z_lookup_comm", &z_lookup_comm);
-            // for (size_t i = 0; i < log_n; ++i) {
-            //     std::string idx = std::to_string(i);
-            //     ordered_objects.emplace_back("sumcheck_univariate_" + idx, &sumcheck_univariates[i]);
-            // }
-            // ordered_objects.emplace_back("sumcheck_evaluations", &sumcheck_evaluations);
-            // for (size_t i = 0; i < log_n; ++i) {
-            //     std::string idx = std::to_string(i);
-            //     ordered_objects.emplace_back("gemini_univariate_comm_" + idx, &gemini_univariate_comms[i]);
-            // }
-            // for (size_t i = 0; i < log_n; ++i) {
-            //     std::string idx = std::to_string(i);
-            //     ordered_objects.emplace_back("gemini_a_eval_" + idx, &gemini_a_evals[i]);
-            // }
-            // ordered_objects.emplace_back("shplonk_q_comm", &shplonk_q_comm);
-            // ordered_objects.emplace_back("kzg_w_comm", &kzg_w_comm);
-        }
     };
 };
 

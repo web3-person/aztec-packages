@@ -25,6 +25,8 @@ template <class Fr, size_t _length> class Univariate {
 
     // TODO(https://github.com/AztecProtocol/barretenberg/issues/714) Try out std::valarray?
     std::array<Fr, _length> evaluations;
+    // For serialization, update with new fields
+    MSGPACK_FIELDS(evaluations);
 
     Univariate() = default;
 

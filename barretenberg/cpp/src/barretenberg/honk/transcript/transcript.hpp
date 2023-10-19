@@ -167,7 +167,6 @@ template <typename FF> class BaseTranscript {
     void set_up_structure_and_deserialize(uint32_t circuit_size, const std::vector<uint8_t>& proof_data)
     {
         (void)circuit_size;
-        (void)proof_data;
         // TODO(AD)
         // set_up_structure(circuit_size);
         // size_t num_bytes_read_ = 0;
@@ -187,21 +186,19 @@ template <typename FF> class BaseTranscript {
         if (!check_current_object(object_name)) {
             throw_or_abort("Object being sent is not expected.");
         }
-        (void)object;
-        // TODO(AD)
-        // T* obj_ptr = static_cast<T*>(ordered_objects[num_objects_processed].obj_ptr);
-        // // set the current object pointed to by ordered_objects as object
-        // *obj_ptr = object;
-        // ++num_objects_processed; // update num_objects_processed to point to the next object
+        T* obj_ptr = static_cast<T*>(ordered_objects[num_objects_processed].obj_ptr);
+        // set the current object pointed to by ordered_objects as object
+        *obj_ptr = object;
+        ++num_objects_processed; // update num_objects_processed to point to the next object
     }
     template <typename T> T receive_from_prover(std::string object_name)
     {
         if (!check_current_object(object_name)) {
             throw_or_abort("Object being sent is not expected.");
         }
-        // T* obj_ptr = static_cast<T*>(ordered_objects[num_objects_processed].obj_ptr);
-        // ++num_objects_processed; // update num_objects_processed to point to the next object
-        return T();
+        T* obj_ptr = static_cast<T*>(ordered_objects[num_objects_processed].obj_ptr);
+        ++num_objects_processed; // update num_objects_processed to point to the next object
+        return *obj_ptr;
     }
 
     /**
@@ -253,11 +250,10 @@ template <typename FF> class BaseTranscript {
     std::vector<uint8_t> serialize()
     { // TODO(Lucas): make this pure virtual
         std::vector<uint8_t> proof_data;
-        // TODO(AD):
-        // for (TranscriptObject& obj : ordered_objects) {
-        //     std::vector<uint8_t> obj_bytes = serialize_obj(obj.obj_type, obj.obj_ptr);
-        //     proof_data.insert(proof_data.end(), obj_bytes.begin(), obj_bytes.end());
-        // }
+        for (TranscriptObject& obj : ordered_objects) {
+            std::vector<uint8_t> obj_bytes = serialize_obj(obj.obj_type, obj.obj_ptr);
+            proof_data.insert(proof_data.end(), obj_bytes.begin(), obj_bytes.end());
+        }
         return proof_data;
     }
 

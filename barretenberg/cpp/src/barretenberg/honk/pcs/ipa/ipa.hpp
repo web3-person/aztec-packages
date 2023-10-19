@@ -151,15 +151,16 @@ template <typename Curve> class IPA {
         std::vector<Fr> round_challenges_inv(log_poly_degree);
         std::vector<Commitment> msm_elements(pippenger_size);
         std::vector<Fr> msm_scalars(pippenger_size);
+
         for (size_t i = 0; i < log_poly_degree; i++) {
             std::string index = std::to_string(i);
-            auto element_L = transcript.template receive_from_prover<Commitment>("IPA:L_" + index);
-            auto element_R = transcript.template receive_from_prover<Commitment>("IPA:R_" + index);
+            transcript.template add_to_challenge<Commitment>(data.ipa.l[i]);
+            transcript.template add_to_challenge<Commitment>(data.ipa.r[i]);
             round_challenges[i] = transcript.get_challenge("IPA:round_challenge_" + index);
             round_challenges_inv[i] = round_challenges[i].invert();
 
-            msm_elements[2 * i] = element_L;
-            msm_elements[2 * i + 1] = element_R;
+            msm_elements[2 * i] = data.ipa.l;
+            msm_elements[2 * i + 1] = data.ipa.r;
             msm_scalars[2 * i] = round_challenges[i].sqr();
             msm_scalars[2 * i + 1] = round_challenges_inv[i].sqr();
         }
