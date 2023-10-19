@@ -167,6 +167,7 @@ template <typename FF> class BaseTranscript {
     void set_up_structure_and_deserialize(uint32_t circuit_size, const std::vector<uint8_t>& proof_data)
     {
         (void)circuit_size;
+        (void)proof_data;
         // TODO(AD)
         // set_up_structure(circuit_size);
         // size_t num_bytes_read_ = 0;
