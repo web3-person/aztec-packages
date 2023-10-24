@@ -1,0 +1,47 @@
+name: Report PKC Size
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  private_kernel_benchmark:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get noir version
+        id: noir_version
+        working-directory: ./yarn-project/noir-compiler
+        run: |
+          NOIR_VERSION=$(cat src/noir-version.json | jq '.tag')
+          echo "version=$NOIR_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Install Nargo
+        uses: noir-lang/noirup@v0.1.2
+        with:
+          toolchain: ${{ steps.noir_version.outputs.version }}
+
+      - name: Generate gates report
+        working-directory: ./yarn-project/noir-private-kernel/src
+        run: |
+          nargo info --json >> ../../../pkc_report.json
+       
+      - name: Compare gates reports
+        id: gates_diff
+        uses: TomAFrench/noir-gates-diff@e7cf131b7e7f044c01615f93f0b855f65ddc02d4
+        with:
+          report: pkc_report.json
+
+      - name: Add gates diff to sticky comment
+        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          # delete the comment in case changes no longer impact circuit sizes
+          delete: ${{ !steps.gates_diff.outputs.markdown }}
+          message: ${{ steps.gates_diff.outputs.markdown }}
