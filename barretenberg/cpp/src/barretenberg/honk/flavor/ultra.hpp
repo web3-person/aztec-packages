@@ -16,30 +16,6 @@
 #include "barretenberg/proof_system/relations/ultra_arithmetic_relation.hpp"
 
 namespace proof_system::honk::flavor {
-#pragma once
-
-#include "barretenberg/ecc/curves/bn254/g1.hpp"
-
-template <typename T> inline std::span<T> inclusive_member_range_span(T& start, T& end)
-{
-    return std::span<T>{ &start, &end + 1 };
-}
-
-// TODO(AD): comment about how this must remain a plain struct and that order matters,
-// care needs to be taken that inclusive member ranges continue to be honored.
-template <typename T> struct UltraColumns {
-    T q_c, q_l, q_r, q_o, q_4, q_m, q_arith, q_sort, q_elliptic, q_aux, q_lookup, sigma_1, sigma_2, sigma_3, sigma_4,
-        id_1, id_2, id_3, id_4, table_1, table_2, table_3, table_4, lagrange_first, lagrange_last, w_l, w_r, w_o, w_4,
-        sorted_accum, z_perm, z_lookup, table_1_shift, table_2_shift, table_3_shift, table_4_shift, w_l_shift,
-        w_r_shift, w_o_shift, w_4_shift, sorted_accum_shift, z_perm_shift, z_lookup_shift;
-
-    std::span<T> get_all() { return inclusive_member_range_span(q_c, z_lookup_shift); }
-    std::span<T> get_wires() { return inclusive_member_range_span(w_l, w_4); }
-    // Gemini-specific getters.
-    std::span<T> get_unshifted() { return inclusive_member_range_span(q_c, z_lookup); }
-    std::span<T> get_to_be_shifted() const { return inclusive_member_range_span(table_1, z_lookup); }
-    std::span<T> get_shifted() const { return inclusive_member_range_span(table_1_shift, z_lookup_shift); }
-};
 
 class Ultra {
   public:
@@ -179,69 +155,72 @@ class Ultra {
     template <typename DataType, typename HandleType>
     class AllEntities : public AllEntities_<DataType, HandleType, NUM_ALL_ENTITIES> {
       public:
-        DataType& q_c = std::get<0>(this->_data);
-        DataType& q_l = std::get<1>(this->_data);
-        DataType& q_r = std::get<2>(this->_data);
-        DataType& q_o = std::get<3>(this->_data);
-        DataType& q_4 = std::get<4>(this->_data);
-        DataType& q_m = std::get<5>(this->_data);
-        DataType& q_arith = std::get<6>(this->_data);
-        DataType& q_sort = std::get<7>(this->_data);
-        DataType& q_elliptic = std::get<8>(this->_data);
-        DataType& q_aux = std::get<9>(this->_data);
-        DataType& q_lookup = std::get<10>(this->_data);
-        DataType& sigma_1 = std::get<11>(this->_data);
-        DataType& sigma_2 = std::get<12>(this->_data);
-        DataType& sigma_3 = std::get<13>(this->_data);
-        DataType& sigma_4 = std::get<14>(this->_data);
-        DataType& id_1 = std::get<15>(this->_data);
-        DataType& id_2 = std::get<16>(this->_data);
-        DataType& id_3 = std::get<17>(this->_data);
-        DataType& id_4 = std::get<18>(this->_data);
-        DataType& table_1 = std::get<19>(this->_data);
-        DataType& table_2 = std::get<20>(this->_data);
-        DataType& table_3 = std::get<21>(this->_data);
-        DataType& table_4 = std::get<22>(this->_data);
-        DataType& lagrange_first = std::get<23>(this->_data);
-        DataType& lagrange_last = std::get<24>(this->_data);
-        DataType& w_l = std::get<25>(this->_data);
-        DataType& w_r = std::get<26>(this->_data);
-        DataType& w_o = std::get<27>(this->_data);
-        DataType& w_4 = std::get<28>(this->_data);
-        DataType& sorted_accum = std::get<29>(this->_data);
-        DataType& z_perm = std::get<30>(this->_data);
-        DataType& z_lookup = std::get<31>(this->_data);
-        DataType& table_1_shift = std::get<32>(this->_data);
-        DataType& table_2_shift = std::get<33>(this->_data);
-        DataType& table_3_shift = std::get<34>(this->_data);
-        DataType& table_4_shift = std::get<35>(this->_data);
-        DataType& w_l_shift = std::get<36>(this->_data);
-        DataType& w_r_shift = std::get<37>(this->_data);
-        DataType& w_o_shift = std::get<38>(this->_data);
-        DataType& w_4_shift = std::get<39>(this->_data);
-        DataType& sorted_accum_shift = std::get<40>(this->_data);
-        DataType& z_perm_shift = std::get<41>(this->_data);
-        DataType& z_lookup_shift = std::get<42>(this->_data);
+        BBERG_INLINE DataType& q_c() { return std::get<0>(this->_data); }
+        BBERG_INLINE DataType& q_l() { return std::get<1>(this->_data); }
+        BBERG_INLINE DataType& q_r() { return std::get<2>(this->_data); }
+        BBERG_INLINE DataType& q_o() { return std::get<3>(this->_data); }
+        BBERG_INLINE DataType& q_4() { return std::get<4>(this->_data); }
+        BBERG_INLINE DataType& q_m() { return std::get<5>(this->_data); }
+        BBERG_INLINE DataType& q_arith() { return std::get<6>(this->_data); }
+        BBERG_INLINE DataType& q_sort() { return std::get<7>(this->_data); }
+        BBERG_INLINE DataType& q_elliptic() { return std::get<8>(this->_data); }
+        BBERG_INLINE DataType& q_aux() { return std::get<9>(this->_data); }
+        BBERG_INLINE DataType& q_lookup() { return std::get<10>(this->_data); }
+        BBERG_INLINE DataType& sigma_1() { return std::get<11>(this->_data); }
+        BBERG_INLINE DataType& sigma_2() { return std::get<12>(this->_data); }
+        BBERG_INLINE DataType& sigma_3() { return std::get<13>(this->_data); }
+        BBERG_INLINE DataType& sigma_4() { return std::get<14>(this->_data); }
+        BBERG_INLINE DataType& id_1() { return std::get<15>(this->_data); }
+        BBERG_INLINE DataType& id_2() { return std::get<16>(this->_data); }
+        BBERG_INLINE DataType& id_3() { return std::get<17>(this->_data); }
+        BBERG_INLINE DataType& id_4() { return std::get<18>(this->_data); }
+        BBERG_INLINE DataType& table_1() { return std::get<19>(this->_data); }
+        BBERG_INLINE DataType& table_2() { return std::get<20>(this->_data); }
+        BBERG_INLINE DataType& table_3() { return std::get<21>(this->_data); }
+        BBERG_INLINE DataType& table_4() { return std::get<22>(this->_data); }
+        BBERG_INLINE DataType& lagrange_first() { return std::get<23>(this->_data); }
+        BBERG_INLINE DataType& lagrange_last() { return std::get<24>(this->_data); }
+        BBERG_INLINE DataType& w_l() { return std::get<25>(this->_data); }
+        BBERG_INLINE DataType& w_r() { return std::get<26>(this->_data); }
+        BBERG_INLINE DataType& w_o() { return std::get<27>(this->_data); }
+        BBERG_INLINE DataType& w_4() { return std::get<28>(this->_data); }
+        BBERG_INLINE DataType& sorted_accum() { return std::get<29>(this->_data); }
+        BBERG_INLINE DataType& z_perm() { return std::get<30>(this->_data); }
+        BBERG_INLINE DataType& z_lookup() { return std::get<31>(this->_data); }
+        BBERG_INLINE DataType& table_1_shift() { return std::get<32>(this->_data); }
+        BBERG_INLINE DataType& table_2_shift() { return std::get<33>(this->_data); }
+        BBERG_INLINE DataType& table_3_shift() { return std::get<34>(this->_data); }
+        BBERG_INLINE DataType& table_4_shift() { return std::get<35>(this->_data); }
+        BBERG_INLINE DataType& w_l_shift() { return std::get<36>(this->_data); }
+        BBERG_INLINE DataType& w_r_shift() { return std::get<37>(this->_data); }
+        BBERG_INLINE DataType& w_o_shift() { return std::get<38>(this->_data); }
+        BBERG_INLINE DataType& w_4_shift() { return std::get<39>(this->_data); }
+        BBERG_INLINE DataType& sorted_accum_shift() { return std::get<40>(this->_data); }
+        BBERG_INLINE DataType& z_perm_shift() { return std::get<41>(this->_data); }
+        BBERG_INLINE DataType& z_lookup_shift() { return std::get<42>(this->_data); }
 
         std::vector<HandleType> get_wires() override { return { w_l, w_r, w_o, w_4 }; };
         // Gemini-specific getters.
         std::vector<HandleType> get_unshifted() override
         {
-            return { q_c,           q_l,   q_r,      q_o,     q_4,     q_m,          q_arith, q_sort,
-                     q_elliptic,    q_aux, q_lookup, sigma_1, sigma_2, sigma_3,      sigma_4, id_1,
-                     id_2,          id_3,  id_4,     table_1, table_2, table_3,      table_4, lagrange_first,
-                     lagrange_last, w_l,   w_r,      w_o,     w_4,     sorted_accum, z_perm,  z_lookup
+            return {
+                q_c(),           q_l(),   q_r(),      q_o(),     q_4(),     q_m(),          q_arith(), q_sort(),
+                q_elliptic(),    q_aux(), q_lookup(), sigma_1(), sigma_2(), sigma_3(),      sigma_4(), id_1(),
+                id_2(),          id_3(),  id_4(),     table_1(), table_2(), table_3(),      table_4(), lagrange_first(),
+                lagrange_last(), w_l(),   w_r(),      w_o(),     w_4(),     sorted_accum(), z_perm(),  z_lookup()
 
             };
         };
         std::vector<HandleType> get_to_be_shifted() override
         {
-            return { table_1, table_2, table_3, table_4, w_l, w_r, w_o, w_4, sorted_accum, z_perm, z_lookup };
+            return { table_1(), table_2(), table_3(),      table_4(), w_l(),     w_r(),
+                     w_o(),     w_4(),     sorted_accum(), z_perm(),  z_lookup() };
         };
         std::vector<HandleType> get_shifted() override
         {
-            return { table_1_shift, table_2_shift, table_3_shift,      table_4_shift, w_l_shift,     w_r_shift,
-                     w_o_shift,     w_4_shift,     sorted_accum_shift, z_perm_shift,  z_lookup_shift };
+            return { table_1_shift(),      table_2_shift(), table_3_shift(), table_4_shift(),
+                     w_l_shift(),          w_r_shift(),     w_o_shift(),     w_4_shift(),
+                     sorted_accum_shift(), z_perm_shift(),  z_lookup_shift() };
         };
 
         AllEntities() = default;
@@ -406,7 +385,8 @@ class Ultra {
 
     class VerifierCommitments : public AllEntities<Commitment, CommitmentHandle> {
       public:
-        VerifierCommitments(std::shared_ptr<VerificationKey> verification_key, VerifierTranscript<FF> transcript)
+        VerifierCommitments(std::shared_ptr<VerificationKey> verification_key,
+                            [[maybe_unused]] const BaseTranscript<FF>& transcript)
         {
             static_cast<void>(transcript);
             q_m = verification_key->q_m;
@@ -441,6 +421,127 @@ class Ultra {
       public:
         std::vector<FF> gate_separation_challenges;
         FF target_sum;
+    };
+
+    /**
+     * @brief Derived class that defines proof structure for Ultra proofs, as well as supporting functions.
+     *
+     */
+    class Transcript : public BaseTranscript<FF> {
+      public:
+        // Transcript objects defined as public member variables for easy access and modification
+        uint32_t circuit_size;
+        uint32_t public_input_size;
+        uint32_t pub_inputs_offset;
+        std::vector<FF> public_inputs;
+        Commitment w_l_comm;
+        Commitment w_r_comm;
+        Commitment w_o_comm;
+        Commitment sorted_accum_comm;
+        Commitment w_4_comm;
+        Commitment z_perm_comm;
+        Commitment z_lookup_comm;
+        std::vector<barretenberg::Univariate<FF, BATCHED_RELATION_PARTIAL_LENGTH>> sumcheck_univariates;
+        std::array<FF, NUM_ALL_ENTITIES> sumcheck_evaluations;
+        std::vector<Commitment> zm_cq_comms;
+        Commitment zm_cq_comm;
+        Commitment zm_pi_comm;
+
+        Transcript() = default;
+
+        // Used by verifier to initialize the transcript
+        Transcript(const std::vector<uint8_t>& proof)
+            : BaseTranscript<FF>(proof)
+        {}
+
+        static Transcript prover_init_empty()
+        {
+            Transcript transcript;
+            constexpr uint32_t init{ 42 }; // arbitrary
+            transcript.send_to_verifier("Init", init);
+            return transcript;
+        };
+
+        static Transcript verifier_init_empty(const Transcript& transcript)
+        {
+            Transcript verifier_transcript{ transcript.proof_data };
+            [[maybe_unused]] auto _ = verifier_transcript.template receive_from_prover<uint32_t>("Init");
+            return verifier_transcript;
+        };
+
+        /**
+         * @brief Takes a FULL Ultra proof and deserializes it into the public member variables that compose the
+         * structure. Must be called in order to access the structure of the proof.
+         *
+         */
+        void deserialize_full_transcript() override
+        {
+            // take current proof and put them into the struct
+            size_t num_bytes_read = 0;
+            circuit_size = deserialize_from_buffer<uint32_t>(proof_data, num_bytes_read);
+            size_t log_n = numeric::get_msb(circuit_size);
+
+            public_input_size = deserialize_from_buffer<uint32_t>(proof_data, num_bytes_read);
+            pub_inputs_offset = deserialize_from_buffer<uint32_t>(proof_data, num_bytes_read);
+            for (size_t i = 0; i < public_input_size; ++i) {
+                public_inputs.push_back(deserialize_from_buffer<FF>(proof_data, num_bytes_read));
+            }
+            w_l_comm = deserialize_from_buffer<Commitment>(proof_data, num_bytes_read);
+            w_r_comm = deserialize_from_buffer<Commitment>(proof_data, num_bytes_read);
+            w_o_comm = deserialize_from_buffer<Commitment>(proof_data, num_bytes_read);
+            sorted_accum_comm = deserialize_from_buffer<Commitment>(proof_data, num_bytes_read);
+            w_4_comm = deserialize_from_buffer<Commitment>(proof_data, num_bytes_read);
+            z_perm_comm = deserialize_from_buffer<Commitment>(proof_data, num_bytes_read);
+            z_lookup_comm = deserialize_from_buffer<Commitment>(proof_data, num_bytes_read);
+            for (size_t i = 0; i < log_n; ++i) {
+                sumcheck_univariates.push_back(
+                    deserialize_from_buffer<barretenberg::Univariate<FF, BATCHED_RELATION_PARTIAL_LENGTH>>(
+                        proof_data, num_bytes_read));
+            }
+            sumcheck_evaluations =
+                deserialize_from_buffer<std::array<FF, NUM_ALL_ENTITIES>>(proof_data, num_bytes_read);
+            for (size_t i = 0; i < log_n; ++i) {
+                zm_cq_comms.push_back(deserialize_from_buffer<Commitment>(proof_data, num_bytes_read));
+            }
+            zm_cq_comm = deserialize_from_buffer<Commitment>(proof_data, num_bytes_read);
+            zm_pi_comm = deserialize_from_buffer<Commitment>(proof_data, num_bytes_read);
+        }
+        /**
+         * @brief Serializes the structure variables into a FULL Ultra proof. Should be called only if
+         * deserialize_full_transcript() was called and some transcript variable was modified.
+         *
+         */
+        void serialize_full_transcript() override
+        {
+            size_t old_proof_length = proof_data.size();
+            proof_data.clear(); // clear proof_data so the rest of the function can replace it
+            size_t log_n = numeric::get_msb(circuit_size);
+            serialize_to_buffer(circuit_size, proof_data);
+            serialize_to_buffer(public_input_size, proof_data);
+            serialize_to_buffer(pub_inputs_offset, proof_data);
+            for (size_t i = 0; i < public_input_size; ++i) {
+                serialize_to_buffer(public_inputs[i], proof_data);
+            }
+            serialize_to_buffer(w_l_comm, proof_data);
+            serialize_to_buffer(w_r_comm, proof_data);
+            serialize_to_buffer(w_o_comm, proof_data);
+            serialize_to_buffer(sorted_accum_comm, proof_data);
+            serialize_to_buffer(w_4_comm, proof_data);
+            serialize_to_buffer(z_perm_comm, proof_data);
+            serialize_to_buffer(z_lookup_comm, proof_data);
+            for (size_t i = 0; i < log_n; ++i) {
+                serialize_to_buffer(sumcheck_univariates[i], proof_data);
+            }
+            serialize_to_buffer(sumcheck_evaluations, proof_data);
+            for (size_t i = 0; i < log_n; ++i) {
+                serialize_to_buffer(zm_cq_comms[i], proof_data);
+            }
+            serialize_to_buffer(zm_cq_comm, proof_data);
+            serialize_to_buffer(zm_pi_comm, proof_data);
+
+            // sanity check to make sure we generate the same length of proof as before.
+            ASSERT(proof_data.size() == old_proof_length);
+        }
     };
 };
 
