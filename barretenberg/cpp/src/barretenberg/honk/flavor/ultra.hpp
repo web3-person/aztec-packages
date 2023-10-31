@@ -16,6 +16,30 @@
 #include "barretenberg/proof_system/relations/ultra_arithmetic_relation.hpp"
 
 namespace proof_system::honk::flavor {
+#pragma once
+
+#include "barretenberg/ecc/curves/bn254/g1.hpp"
+
+template <typename T> inline std::span<T> inclusive_member_range_span(T& start, T& end)
+{
+    return std::span<T>{ &start, &end + 1 };
+}
+
+// TODO(AD): comment about how this must remain a plain struct and that order matters,
+// care needs to be taken that inclusive member ranges continue to be honored.
+template <typename T> struct UltraColumns {
+    T q_c, q_l, q_r, q_o, q_4, q_m, q_arith, q_sort, q_elliptic, q_aux, q_lookup, sigma_1, sigma_2, sigma_3, sigma_4,
+        id_1, id_2, id_3, id_4, table_1, table_2, table_3, table_4, lagrange_first, lagrange_last, w_l, w_r, w_o, w_4,
+        sorted_accum, z_perm, z_lookup, table_1_shift, table_2_shift, table_3_shift, table_4_shift, w_l_shift,
+        w_r_shift, w_o_shift, w_4_shift, sorted_accum_shift, z_perm_shift, z_lookup_shift;
+
+    std::span<T> get_all() { return inclusive_member_range_span(q_c, z_lookup_shift); }
+    std::span<T> get_wires() { return inclusive_member_range_span(w_l, w_4); }
+    // Gemini-specific getters.
+    std::span<T> get_unshifted() { return inclusive_member_range_span(q_c, z_lookup); }
+    std::span<T> get_to_be_shifted() const { return inclusive_member_range_span(table_1, z_lookup); }
+    std::span<T> get_shifted() const { return inclusive_member_range_span(table_1_shift, z_lookup_shift); }
+};
 
 class Ultra {
   public:
