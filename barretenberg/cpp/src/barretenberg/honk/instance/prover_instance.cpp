@@ -432,37 +432,37 @@ std::shared_ptr<typename Flavor::VerificationKey> ProverInstance_<Flavor>::compu
         std::make_shared<typename Flavor::VerificationKey>(proving_key->circuit_size, proving_key->num_public_inputs);
 
     // Compute and store commitments to all precomputed polynomials
-    verification_key->q_m = commitment_key->commit(proving_key->q_m);
-    verification_key->q_l = commitment_key->commit(proving_key->q_l);
-    verification_key->q_r = commitment_key->commit(proving_key->q_r);
-    verification_key->q_o = commitment_key->commit(proving_key->q_o);
-    verification_key->q_c = commitment_key->commit(proving_key->q_c);
-    verification_key->sigma_1 = commitment_key->commit(proving_key->sigma_1);
-    verification_key->sigma_2 = commitment_key->commit(proving_key->sigma_2);
-    verification_key->sigma_3 = commitment_key->commit(proving_key->sigma_3);
-    verification_key->id_1 = commitment_key->commit(proving_key->id_1);
-    verification_key->id_2 = commitment_key->commit(proving_key->id_2);
-    verification_key->id_3 = commitment_key->commit(proving_key->id_3);
-    verification_key->lagrange_first = commitment_key->commit(proving_key->lagrange_first);
-    verification_key->lagrange_last = commitment_key->commit(proving_key->lagrange_last);
+    verification_key->q_m = commitment_key->commit(proving_key->q_m());
+    verification_key->q_l = commitment_key->commit(proving_key->q_l());
+    verification_key->q_r = commitment_key->commit(proving_key->q_r());
+    verification_key->q_o = commitment_key->commit(proving_key->q_o());
+    verification_key->q_c = commitment_key->commit(proving_key->q_c());
+    verification_key->sigma_1 = commitment_key->commit(proving_key->sigma_1());
+    verification_key->sigma_2 = commitment_key->commit(proving_key->sigma_2());
+    verification_key->sigma_3 = commitment_key->commit(proving_key->sigma_3());
+    verification_key->id_1 = commitment_key->commit(proving_key->id_1());
+    verification_key->id_2 = commitment_key->commit(proving_key->id_2());
+    verification_key->id_3 = commitment_key->commit(proving_key->id_3());
+    verification_key->lagrange_first = commitment_key->commit(proving_key->lagrange_first());
+    verification_key->lagrange_last = commitment_key->commit(proving_key->lagrange_last());
 
-    verification_key->q_4 = commitment_key->commit(proving_key->q_4);
-    verification_key->q_arith = commitment_key->commit(proving_key->q_arith);
-    verification_key->q_sort = commitment_key->commit(proving_key->q_sort);
-    verification_key->q_elliptic = commitment_key->commit(proving_key->q_elliptic);
-    verification_key->q_aux = commitment_key->commit(proving_key->q_aux);
-    verification_key->q_lookup = commitment_key->commit(proving_key->q_lookup);
-    verification_key->sigma_4 = commitment_key->commit(proving_key->sigma_4);
-    verification_key->id_4 = commitment_key->commit(proving_key->id_4);
-    verification_key->table_1 = commitment_key->commit(proving_key->table_1);
-    verification_key->table_2 = commitment_key->commit(proving_key->table_2);
-    verification_key->table_3 = commitment_key->commit(proving_key->table_3);
-    verification_key->table_4 = commitment_key->commit(proving_key->table_4);
+    verification_key->q_4 = commitment_key->commit(proving_key->q_4());
+    verification_key->q_arith = commitment_key->commit(proving_key->q_arith());
+    verification_key->q_sort = commitment_key->commit(proving_key->q_sort());
+    verification_key->q_elliptic = commitment_key->commit(proving_key->q_elliptic());
+    verification_key->q_aux = commitment_key->commit(proving_key->q_aux());
+    verification_key->q_lookup = commitment_key->commit(proving_key->q_lookup());
+    verification_key->sigma_4 = commitment_key->commit(proving_key->sigma_4());
+    verification_key->id_4 = commitment_key->commit(proving_key->id_4());
+    verification_key->table_1 = commitment_key->commit(proving_key->table_1());
+    verification_key->table_2 = commitment_key->commit(proving_key->table_2());
+    verification_key->table_3 = commitment_key->commit(proving_key->table_3());
+    verification_key->table_4 = commitment_key->commit(proving_key->table_4());
 
     // TODO(luke): Similar to the lagrange_first/last polynomials, we dont really need to commit to this polynomial
     // due to its simple structure. Handling it in the same way as the lagrange polys for now for simplicity.
     if constexpr (IsGoblinFlavor<Flavor>) {
-        verification_key->lagrange_ecc_op = commitment_key->commit(proving_key->lagrange_ecc_op);
+        verification_key->lagrange_ecc_op = commitment_key->commit(proving_key->lagrange_ecc_op());
     }
 
     // // See `add_recusrive_proof()` for how this recursive data is assigned.

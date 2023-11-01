@@ -410,7 +410,7 @@ template <typename FF> void UltraCircuitBuilder_<FF>::create_ecc_add_gate(const 
     can_fuse_into_previous_gate = can_fuse_into_previous_gate && (q_m()[this->num_gates - 1] == 0);
 
     if (can_fuse_into_previous_gate) {
-        q_1[this->num_gates - 1] = in.sign_coefficient;
+        q_1()[this->num_gates - 1] = in.sign_coefficient;
         q_elliptic[this->num_gates - 1] = 1;
     } else {
         w_l().emplace_back(this->zero_idx);

@@ -530,22 +530,22 @@ template <typename FF> class UltraCircuitBuilder_ : public CircuitBuilderBase<ar
     using WireVector = std::vector<uint32_t, ContainerSlabAllocator<uint32_t>>;
     using SelectorVector = std::vector<FF, ContainerSlabAllocator<FF>>;
 
-    CONST_FRIENDLY_GETTER(WireVector, w_l, std::get<0>(this->wires))
-    CONST_FRIENDLY_GETTER(WireVector, w_r, std::get<1>(this->wires))
-    CONST_FRIENDLY_GETTER(WireVector, w_o, std::get<2>(this->wires))
-    CONST_FRIENDLY_GETTER(WireVector, w_4, std::get<3>(this->wires))
+    CONST_COMPATIBLE_GETTER(WireVector, w_l, std::get<0>(this->wires))
+    CONST_COMPATIBLE_GETTER(WireVector, w_r, std::get<1>(this->wires))
+    CONST_COMPATIBLE_GETTER(WireVector, w_o, std::get<2>(this->wires))
+    CONST_COMPATIBLE_GETTER(WireVector, w_4, std::get<3>(this->wires))
 
-    SelectorVector& q_m = this->selectors.q_m;
-    SelectorVector& q_c = this->selectors.q_c;
-    SelectorVector& q_1 = this->selectors.q_1;
-    SelectorVector& q_2 = this->selectors.q_2;
-    SelectorVector& q_3 = this->selectors.q_3;
-    SelectorVector& q_4 = this->selectors.q_4;
-    SelectorVector& q_arith = this->selectors.q_arith;
-    SelectorVector& q_sort = this->selectors.q_sort;
-    SelectorVector& q_elliptic = this->selectors.q_elliptic;
-    SelectorVector& q_aux = this->selectors.q_aux;
-    SelectorVector& q_lookup_type = this->selectors.q_lookup_type;
+    CONST_COMPATIBLE_GETTER(SelectorVector, q_m, this->selectors.q_m)
+    CONST_COMPATIBLE_GETTER(SelectorVector, q_c, this->selectors.q_c)
+    CONST_COMPATIBLE_GETTER(SelectorVector, q_1, this->selectors.q_1)
+    CONST_COMPATIBLE_GETTER(SelectorVector, q_2, this->selectors.q_2)
+    CONST_COMPATIBLE_GETTER(SelectorVector, q_3, this->selectors.q_3)
+    CONST_COMPATIBLE_GETTER(SelectorVector, q_4, this->selectors.q_4)
+    CONST_COMPATIBLE_GETTER(SelectorVector, q_arith, this->selectors.q_arith)
+    CONST_COMPATIBLE_GETTER(SelectorVector, q_sort, this->selectors.q_sort)
+    CONST_COMPATIBLE_GETTER(SelectorVector, q_elliptic, this->selectors.q_elliptic)
+    CONST_COMPATIBLE_GETTER(SelectorVector, q_aux, this->selectors.q_aux)
+    CONST_COMPATIBLE_GETTER(SelectorVector, q_lookup_type, this->selectors.q_lookup_type)
 
     // These are variables that we have used a gate on, to enforce that they are
     // equal to a defined value.
