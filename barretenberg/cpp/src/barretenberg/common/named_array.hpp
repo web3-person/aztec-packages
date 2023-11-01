@@ -3,10 +3,10 @@
 /* The following code should meet a *reasonable reading* of the C++ standard.
  * It relies on heuristics to check that a struct is packed and consisting of only one type,
  * allowing to use the struct in an array-like manner, while being able to access its fields with names.
- * This should meet all modern compilers, there's no reason for random padding to exist in the struct. */
+ * This should be the case for all modern compilers, there's no reason for random padding to exist in the struct. */
 
-#include "barretenberg/ecc/curves/bn254/fr.hpp"
 #include <cstdint>
+#include <span>
 #include <tuple>
 #include <utility>
 
@@ -42,33 +42,24 @@ concept ArrayLike =
         requires ArrayLike_<Struct, typename Struct::Element, sizeof(Struct) / sizeof(typename Struct::Element)>;
     };
 
-template <typename T> inline std::span<T> inclusive_member_range_span(T& start, T& end)
-{
-    return std::span<T>{ &start, &end + 1 };
-}
+// template <typename T> inline std::span<T> inclusive_member_range_span(T& start, T& end)
+// {
+//     return std::span<T>{ &start, &end + 1 };
+// }
 
-struct X {
-    using Element = barretenberg::fr;
-    // index 0
-    barretenberg::fr x;
-    // index 1
-    barretenberg::fr y;
-    // index 2
-    barretenberg::fr z;
-};
-
-struct Y : X {
-    // index 3
-    barretenberg::fr z2;
-};
-static_assert(ArrayLike<Y>, "X is configured");
-
-template <ArrayLike T> inline auto as_array(T& obj)
+// NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
+template <ArrayLike T> inline auto named_array_span(T& obj)
 {
     using Element = T::Element;
-    // NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
     // We can make the assumption that there's no padding at the end of the object because of our
     // ArrayLike concept.
     return std::span{ reinterpret_cast<Element*>(&obj), reinterpret_cast<Element*>(&obj + 1) };
-    // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
 }
+template <ArrayLike T> inline auto named_array_span(const T& obj)
+{
+    using Element = T::Element;
+    // We can make the assumption that there's no padding at the end of the object because of our
+    // ArrayLike concept.
+    return std::span{ reinterpret_cast<const Element*>(&obj), reinterpret_cast<const Element*>(&obj + 1) };
+}
+// NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)

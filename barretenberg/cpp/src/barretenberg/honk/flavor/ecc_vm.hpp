@@ -92,9 +92,9 @@ template <typename CycleGroup_T, typename Curve_T, typename PCS_T> class ECCVMBa
         DataType& lagrange_second = std::get<1>(this->_data);
         DataType& lagrange_last = std::get<2>(this->_data);
 
-        std::vector<HandleType> get_selectors() override { return { lagrange_first, lagrange_second, lagrange_last }; };
-        std::vector<HandleType> get_sigma_polynomials() override { return {}; };
-        std::vector<HandleType> get_id_polynomials() override { return {}; };
+        std::vector<HandleType> get_selectors() { return { lagrange_first, lagrange_second, lagrange_last }; };
+        std::vector<HandleType> get_sigma_polynomials() { return {}; };
+        std::vector<HandleType> get_id_polynomials() { return {}; };
         std::vector<HandleType> get_table_polynomials() { return {}; };
     };
 
@@ -184,7 +184,7 @@ template <typename CycleGroup_T, typename Curve_T, typename PCS_T> class ECCVMBa
         DataType& lookup_inverses              = std::get<75>(this->_data);
 
         // clang-format on
-        std::vector<HandleType> get_wires() override
+        std::vector<HandleType> get_wires()
         {
             return {
                 transcript_add,
@@ -394,7 +394,7 @@ template <typename CycleGroup_T, typename Curve_T, typename PCS_T> class ECCVMBa
         }
         // clang-format on
 
-        std::vector<HandleType> get_wires() override
+        std::vector<HandleType> get_wires()
         {
             return {
                 transcript_add,
@@ -474,7 +474,7 @@ template <typename CycleGroup_T, typename Curve_T, typename PCS_T> class ECCVMBa
             };
         };
         // Gemini-specific getters.
-        std::vector<HandleType> get_unshifted() override
+        std::vector<HandleType> get_unshifted()
         {
             return {
                 lagrange_first,
@@ -533,7 +533,7 @@ template <typename CycleGroup_T, typename Curve_T, typename PCS_T> class ECCVMBa
             };
         };
 
-        std::vector<HandleType> get_to_be_shifted() override
+        std::vector<HandleType> get_to_be_shifted()
         {
             return {
                 transcript_mul,
@@ -564,7 +564,7 @@ template <typename CycleGroup_T, typename Curve_T, typename PCS_T> class ECCVMBa
                 z_perm,
             };
         };
-        std::vector<HandleType> get_shifted() override
+        std::vector<HandleType> get_shifted()
         {
             return {
                 transcript_mul_shift,
@@ -618,8 +618,6 @@ template <typename CycleGroup_T, typename Curve_T, typename PCS_T> class ECCVMBa
             AllEntities_<DataType, HandleType, NUM_ALL_ENTITIES>::operator=(other);
             return *this;
         }
-
-        ~AllEntities() override = default;
     };
 
   public:

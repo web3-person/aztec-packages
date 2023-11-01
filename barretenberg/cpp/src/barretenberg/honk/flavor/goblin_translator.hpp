@@ -450,7 +450,7 @@ template <size_t mini_circuit_size> class GoblinTranslator_ {
         DataType& ordered_range_constraints_4 = std::get<89>(this->_data);
         DataType& z_perm = std::get<90>(this->_data);
 
-        std::vector<HandleType> get_wires() override
+        std::vector<HandleType> get_wires()
         {
             return { op,
                      x_lo_y_hi,
@@ -834,7 +834,7 @@ template <size_t mini_circuit_size> class GoblinTranslator_ {
         DataType& lagrange_second_to_last_in_minicircuit = std::get<182>(this->_data);
         DataType& ordered_extra_range_constraints_numerator = std::get<183>(this->_data);
 
-        std::vector<HandleType> get_wires() override
+        std::vector<HandleType> get_wires()
         {
 
             return { op,
@@ -1034,7 +1034,7 @@ template <size_t mini_circuit_size> class GoblinTranslator_ {
         };
 
         // Gemini-specific getters.
-        std::vector<HandleType> get_unshifted() override
+        std::vector<HandleType> get_unshifted()
         {
             return {
                 op,
@@ -1135,7 +1135,7 @@ template <size_t mini_circuit_size> class GoblinTranslator_ {
 
             };
         };
-        std::vector<HandleType> get_to_be_shifted() override
+        std::vector<HandleType> get_to_be_shifted()
         {
             return {
                 x_lo_y_hi,
@@ -1227,7 +1227,7 @@ template <size_t mini_circuit_size> class GoblinTranslator_ {
                 z_perm,
             };
         };
-        std::vector<HandleType> get_shifted() override
+        std::vector<HandleType> get_shifted()
         {
             return {
                 x_lo_y_hi_shift,

@@ -126,12 +126,12 @@ template <typename BuilderType> class GoblinUltraRecursive_ {
 
         static constexpr CircuitType CIRCUIT_TYPE = CircuitBuilder::CIRCUIT_TYPE;
 
-        std::vector<HandleType> get_selectors() override
+        std::vector<HandleType> get_selectors()
         {
             return { q_m, q_c, q_l, q_r, q_o, q_4, q_arith, q_sort, q_elliptic, q_aux, q_lookup };
         };
-        std::vector<HandleType> get_sigma_polynomials() override { return { sigma_1, sigma_2, sigma_3, sigma_4 }; };
-        std::vector<HandleType> get_id_polynomials() override { return { id_1, id_2, id_3, id_4 }; };
+        std::vector<HandleType> get_sigma_polynomials() { return { sigma_1, sigma_2, sigma_3, sigma_4 }; };
+        std::vector<HandleType> get_id_polynomials() { return { id_1, id_2, id_3, id_4 }; };
 
         std::vector<HandleType> get_table_polynomials() { return { table_1, table_2, table_3, table_4 }; };
     };
@@ -159,7 +159,7 @@ template <typename BuilderType> class GoblinUltraRecursive_ {
         DataType& ecc_op_wire_3 = std::get<13>(this->_data);
         DataType& ecc_op_wire_4 = std::get<14>(this->_data);
 
-        std::vector<HandleType> get_wires() override { return { w_l, w_r, w_o, w_4 }; };
+        std::vector<HandleType> get_wires() { return { w_l, w_r, w_o, w_4 }; };
         std::vector<HandleType> get_ecc_op_wires()
         {
             return { ecc_op_wire_1, ecc_op_wire_2, ecc_op_wire_3, ecc_op_wire_4 };
@@ -229,13 +229,13 @@ template <typename BuilderType> class GoblinUltraRecursive_ {
         DataType& z_perm_shift = std::get<46>(this->_data);
         DataType& z_lookup_shift = std::get<47>(this->_data);
 
-        std::vector<HandleType> get_wires() override { return { w_l, w_r, w_o, w_4 }; };
+        std::vector<HandleType> get_wires() { return { w_l, w_r, w_o, w_4 }; };
         std::vector<HandleType> get_ecc_op_wires()
         {
             return { ecc_op_wire_1, ecc_op_wire_2, ecc_op_wire_3, ecc_op_wire_4 };
         };
         // Gemini-specific getters.
-        std::vector<HandleType> get_unshifted() override
+        std::vector<HandleType> get_unshifted()
         {
             return { q_c,           q_l,
                      q_r,           q_o,
@@ -257,11 +257,11 @@ template <typename BuilderType> class GoblinUltraRecursive_ {
                      ecc_op_wire_2, ecc_op_wire_3,
                      ecc_op_wire_4 };
         };
-        std::vector<HandleType> get_to_be_shifted() override
+        std::vector<HandleType> get_to_be_shifted()
         {
             return { table_1, table_2, table_3, table_4, w_l, w_r, w_o, w_4, sorted_accum, z_perm, z_lookup };
         };
-        std::vector<HandleType> get_shifted() override
+        std::vector<HandleType> get_shifted()
         {
             return { table_1_shift, table_2_shift, table_3_shift,      table_4_shift, w_l_shift,     w_r_shift,
                      w_o_shift,     w_4_shift,     sorted_accum_shift, z_perm_shift,  z_lookup_shift };

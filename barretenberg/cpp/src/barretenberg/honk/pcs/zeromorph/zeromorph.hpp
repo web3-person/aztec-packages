@@ -614,7 +614,11 @@ template <typename Curve> class ZeroMorphVerifier_ {
         // Construct batched evaluation v = sum_{i=0}^{m-1}\rho^i*f_i(u) + sum_{i=0}^{l-1}\rho^{m+i}*h_i(u)
         FF batched_evaluation = FF(0);
         size_t evaluation_idx = 0;
-        for (auto& value : claimed_evaluations.get_unshifted_then_shifted()) {
+        for (auto& value : claimed_evaluations.get_unshifted()) {
+            batched_evaluation += value * rhos[evaluation_idx];
+            ++evaluation_idx;
+        }
+        for (auto& value : claimed_evaluations.get_shifted()) {
             batched_evaluation += value * rhos[evaluation_idx];
             ++evaluation_idx;
         }

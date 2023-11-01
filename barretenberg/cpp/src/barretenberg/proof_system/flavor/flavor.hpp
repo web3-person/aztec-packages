@@ -75,32 +75,10 @@
 namespace proof_system::honk::flavor {
 
 /**
- * @brief Base data class template, a wrapper for std::array, from which every flavor class ultimately derives.
- *
- * @tparam T The underlying data type stored in the array
- * @tparam HandleType The type that will be used to
- * @tparam NUM_ENTITIES The size of the underlying array.
- */
-template <typename DataType, typename HandleType, size_t NUM_ENTITIES> class Entities_ {
-  public:
-    using ArrayType = std::array<DataType, NUM_ENTITIES>;
-    ArrayType _data;
-
-    virtual ~Entities_() = default;
-
-    DataType& operator[](size_t idx) { return _data[idx]; };
-    typename ArrayType::iterator begin() { return _data.begin(); };
-    typename ArrayType::iterator end() { return _data.end(); };
-
-    constexpr size_t size() { return NUM_ENTITIES; };
-};
-
-/**
  * @brief Base class template containing circuit-specifying data.
  *
  */
-template <typename DataType_, typename HandleType, size_t NUM_PRECOMPUTED_ENTITIES>
-class PrecomputedEntities_ : public Entities_<DataType_, HandleType, NUM_PRECOMPUTED_ENTITIES> {
+template <typename DataType_, typename HandleType, size_t NUM_PRECOMPUTED_ENTITIES> class PrecomputedEntities_ {
   public:
     using DataType = DataType_;
 
@@ -109,19 +87,30 @@ class PrecomputedEntities_ : public Entities_<DataType_, HandleType, NUM_PRECOMP
     size_t num_public_inputs;
     CircuitType circuit_type; // TODO(#392)
 
-    virtual std::vector<HandleType> get_selectors() = 0;
-    virtual std::vector<HandleType> get_sigma_polynomials() = 0;
-    virtual std::vector<HandleType> get_id_polynomials() = 0;
+    using ArrayType = std::array<DataType, NUM_PRECOMPUTED_ENTITIES>;
+    ArrayType _data;
+
+    DataType& operator[](size_t idx) { return _data[idx]; };
+    typename ArrayType::iterator begin() { return _data.begin(); };
+    typename ArrayType::iterator end() { return _data.end(); };
+
+    constexpr size_t size() { return NUM_PRECOMPUTED_ENTITIES; };
 };
 
 /**
  * @brief Base class template containing witness (wires and derived witnesses).
  * @details Shifts are not included here since they do not occupy their own memory.
  */
-template <typename DataType, typename HandleType, size_t NUM_WITNESS_ENTITIES>
-class WitnessEntities_ : public Entities_<DataType, HandleType, NUM_WITNESS_ENTITIES> {
+template <typename DataType, typename HandleType, size_t NUM_WITNESS_ENTITIES> class WitnessEntities_ {
   public:
-    virtual std::vector<HandleType> get_wires() = 0;
+    using ArrayType = std::array<DataType, NUM_WITNESS_ENTITIES>;
+    ArrayType _data;
+
+    DataType& operator[](size_t idx) { return _data[idx]; };
+    typename ArrayType::iterator begin() { return _data.begin(); };
+    typename ArrayType::iterator end() { return _data.end(); };
+
+    constexpr size_t size() { return NUM_WITNESS_ENTITIES; };
 };
 
 /**
@@ -183,22 +172,16 @@ template <typename PrecomputedCommitments> class VerificationKey_ : public Preco
  *
  * @tparam PrecomputedEntities An instance of PrecomputedEntities_ with affine_element data type and handle type.
  */
-template <typename DataType, typename HandleType, size_t NUM_ALL_ENTITIES>
-class AllEntities_ : public Entities_<DataType, DataType, NUM_ALL_ENTITIES> {
+template <typename DataType, typename HandleType, size_t NUM_ALL_ENTITIES> class AllEntities_ {
   public:
-    virtual std::vector<HandleType> get_wires() = 0;
-    virtual std::vector<HandleType> get_unshifted() = 0;
-    virtual std::vector<HandleType> get_to_be_shifted() = 0;
-    virtual std::vector<HandleType> get_shifted() = 0;
+    using ArrayType = std::array<DataType, NUM_ALL_ENTITIES>;
+    ArrayType _data;
 
-    // Because of how Gemini is written, is importat to put the polynomials out in this order.
-    std::vector<HandleType> get_unshifted_then_shifted()
-    {
-        std::vector<HandleType> result{ get_unshifted() };
-        std::vector<HandleType> shifted{ get_shifted() };
-        result.insert(result.end(), shifted.begin(), shifted.end());
-        return result;
-    };
+    DataType& operator[](size_t idx) { return _data[idx]; };
+    typename ArrayType::iterator begin() { return _data.begin(); };
+    typename ArrayType::iterator end() { return _data.end(); };
+
+    constexpr size_t size() { return NUM_ALL_ENTITIES; };
 };
 
 /**

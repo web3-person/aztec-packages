@@ -31,9 +31,8 @@ template <class ProverInstances_> class ProtoGalaxyProver_ {
         Univariate<FF, (Flavor::BATCHED_RELATION_TOTAL_LENGTH - 1) * (ProverInstances::NUM - 1) + 1>;
     using ExtendedUnivariates = typename Flavor::template ProverUnivariates<ExtendedUnivariate::LENGTH>;
 
-    using TupleOfTuplesOfUnivariates =
-        typename Flavor::template ProtogalaxyTupleOfTuplesOfUnivariates<ProverInstances::NUM>;
-    using RelationEvaluations = typename Flavor::TupleOfArraysOfValues;
+    using TupleOfTuplesOfUnivariates = Flavor::template ProtogalaxyTupleOfTuplesOfUnivariates<ProverInstances::NUM>;
+    using RelationEvaluations = Flavor::TupleOfArraysOfValues;
 
     ProverInstances instances;
     BaseTranscript<FF> transcript;
