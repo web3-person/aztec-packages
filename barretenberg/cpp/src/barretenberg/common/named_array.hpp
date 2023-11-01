@@ -47,19 +47,34 @@ concept ArrayLike =
 //     return std::span<T>{ &start, &end + 1 };
 // }
 
-// NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
-template <ArrayLike T> inline auto named_array_span(T& obj)
+template <ArrayLike Struct> inline constexpr size_t named_array_size(const Struct& obj)
 {
-    using Element = T::Element;
+    (void)obj; // Just used for type
+    return sizeof(Struct) / sizeof(typename Struct::Element);
+}
+// NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
+template <ArrayLike Struct> inline auto named_array_span(Struct& obj)
+{
+    using Element = Struct::Element;
     // We can make the assumption that there's no padding at the end of the object because of our
     // ArrayLike concept.
     return std::span{ reinterpret_cast<Element*>(&obj), reinterpret_cast<Element*>(&obj + 1) };
 }
-template <ArrayLike T> inline auto named_array_span(const T& obj)
+template <ArrayLike Struct> inline auto named_array_span(const Struct& obj)
 {
-    using Element = T::Element;
+    using Element = Struct::Element;
     // We can make the assumption that there's no padding at the end of the object because of our
     // ArrayLike concept.
     return std::span{ reinterpret_cast<const Element*>(&obj), reinterpret_cast<const Element*>(&obj + 1) };
 }
 // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
+
+template <ArrayLike Struct, typename Element> inline void named_array_set(Struct& obj, size_t idx, Element&& element)
+{
+    named_array_span(obj)[idx] = element;
+}
+
+template <ArrayLike Struct> inline const typename Struct::Element& named_array_get(const Struct& obj, size_t idx)
+{
+    return named_array_span(obj)[idx];
+}
