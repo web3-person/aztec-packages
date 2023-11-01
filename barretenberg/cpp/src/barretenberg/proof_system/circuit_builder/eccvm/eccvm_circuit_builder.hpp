@@ -511,7 +511,7 @@ template <typename Flavor> class ECCVMCircuitBuilder {
         honk::permutation_library::compute_permutation_grand_product<Flavor, honk::sumcheck::ECCVMSetRelation<FF>>(
             num_rows, polynomials, params);
 
-        polynomials.z_perm_shift = Polynomial(polynomials.z_perm.shifted());
+        polynomials.z_perm_shift = Polynomial(polynomials.z_perm().shifted());
 
         const auto evaluate_relation = [&]<typename Relation>(const std::string& relation_name) {
             typename Relation::SumcheckArrayOfValuesOverSubrelations result;

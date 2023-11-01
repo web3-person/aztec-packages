@@ -255,21 +255,21 @@ TEST_F(GoblinTranslatorRelationConsistency, PermutationRelation)
         using RelationValues = typename Relation::SumcheckArrayOfValuesOverSubrelations;
 
         const InputElements input_elements = random_inputs ? InputElements::get_random() : InputElements::get_special();
-        const auto& concatenated_range_constraints_0 = input_elements.concatenated_range_constraints_0;
-        const auto& concatenated_range_constraints_1 = input_elements.concatenated_range_constraints_1;
-        const auto& concatenated_range_constraints_2 = input_elements.concatenated_range_constraints_2;
-        const auto& concatenated_range_constraints_3 = input_elements.concatenated_range_constraints_3;
-        const auto& ordered_range_constraints_0 = input_elements.ordered_range_constraints_0;
-        const auto& ordered_range_constraints_1 = input_elements.ordered_range_constraints_1;
-        const auto& ordered_range_constraints_2 = input_elements.ordered_range_constraints_2;
-        const auto& ordered_range_constraints_3 = input_elements.ordered_range_constraints_3;
-        const auto& ordered_range_constraints_4 = input_elements.ordered_range_constraints_4;
+        const auto& concatenated_range_constraints_0 = input_elements.concatenated_range_constraints_0();
+        const auto& concatenated_range_constraints_1 = input_elements.concatenated_range_constraints_1();
+        const auto& concatenated_range_constraints_2 = input_elements.concatenated_range_constraints_2();
+        const auto& concatenated_range_constraints_3 = input_elements.concatenated_range_constraints_3();
+        const auto& ordered_range_constraints_0 = input_elements.ordered_range_constraints_0();
+        const auto& ordered_range_constraints_1 = input_elements.ordered_range_constraints_1();
+        const auto& ordered_range_constraints_2 = input_elements.ordered_range_constraints_2();
+        const auto& ordered_range_constraints_3 = input_elements.ordered_range_constraints_3();
+        const auto& ordered_range_constraints_4 = input_elements.ordered_range_constraints_4();
         const auto& ordered_extra_range_constraints_numerator =
-            input_elements.ordered_extra_range_constraints_numerator;
-        const auto& z_perm = input_elements.z_perm;
-        const auto& z_perm_shift = input_elements.z_perm_shift;
-        const auto& lagrange_first = input_elements.lagrange_first;
-        const auto& lagrange_last = input_elements.lagrange_last;
+            input_elements.ordered_extra_range_constraints_numerator();
+        const auto& z_perm = input_elements.z_perm();
+        const auto& z_perm_shift = input_elements.z_perm_shift();
+        const auto& lagrange_first = input_elements.lagrange_first();
+        const auto& lagrange_last = input_elements.lagrange_last();
 
         RelationValues expected_values;
 
@@ -304,17 +304,17 @@ TEST_F(GoblinTranslatorRelationConsistency, GenPermSortRelation)
 
         const InputElements input_elements = random_inputs ? InputElements::get_random() : InputElements::get_special();
 
-        const auto& ordered_range_constraints_0 = input_elements.ordered_range_constraints_0;
-        const auto& ordered_range_constraints_1 = input_elements.ordered_range_constraints_1;
-        const auto& ordered_range_constraints_2 = input_elements.ordered_range_constraints_2;
-        const auto& ordered_range_constraints_3 = input_elements.ordered_range_constraints_3;
-        const auto& ordered_range_constraints_4 = input_elements.ordered_range_constraints_4;
-        const auto& ordered_range_constraints_0_shift = input_elements.ordered_range_constraints_0_shift;
-        const auto& ordered_range_constraints_1_shift = input_elements.ordered_range_constraints_1_shift;
-        const auto& ordered_range_constraints_2_shift = input_elements.ordered_range_constraints_2_shift;
-        const auto& ordered_range_constraints_3_shift = input_elements.ordered_range_constraints_3_shift;
-        const auto& ordered_range_constraints_4_shift = input_elements.ordered_range_constraints_4_shift;
-        const auto& lagrange_last = input_elements.lagrange_last;
+        const auto& ordered_range_constraints_0 = input_elements.ordered_range_constraints_0();
+        const auto& ordered_range_constraints_1 = input_elements.ordered_range_constraints_1();
+        const auto& ordered_range_constraints_2 = input_elements.ordered_range_constraints_2();
+        const auto& ordered_range_constraints_3 = input_elements.ordered_range_constraints_3();
+        const auto& ordered_range_constraints_4 = input_elements.ordered_range_constraints_4();
+        const auto& ordered_range_constraints_0_shift = input_elements.ordered_range_constraints_0_shift();
+        const auto& ordered_range_constraints_1_shift = input_elements.ordered_range_constraints_1_shift();
+        const auto& ordered_range_constraints_2_shift = input_elements.ordered_range_constraints_2_shift();
+        const auto& ordered_range_constraints_3_shift = input_elements.ordered_range_constraints_3_shift();
+        const auto& ordered_range_constraints_4_shift = input_elements.ordered_range_constraints_4_shift();
+        const auto& lagrange_last = input_elements.lagrange_last();
 
         RelationValues expected_values;
 
@@ -369,205 +369,212 @@ TEST_F(GoblinTranslatorRelationConsistency, DecompositionRelation)
         const InputElements input_elements = random_inputs ? InputElements::get_random() : InputElements::get_special();
 
         // Get all the wires
-        const auto& p_x_low_limbs_range_constraint_0 = input_elements.p_x_low_limbs_range_constraint_0;
-        const auto& p_x_low_limbs_range_constraint_1 = input_elements.p_x_low_limbs_range_constraint_1;
-        const auto& p_x_low_limbs_range_constraint_2 = input_elements.p_x_low_limbs_range_constraint_2;
-        const auto& p_x_low_limbs_range_constraint_3 = input_elements.p_x_low_limbs_range_constraint_3;
-        const auto& p_x_low_limbs_range_constraint_4 = input_elements.p_x_low_limbs_range_constraint_4;
-        const auto& p_x_low_limbs_range_constraint_tail = input_elements.p_x_low_limbs_range_constraint_tail;
-        const auto& p_x_low_limbs = input_elements.p_x_low_limbs;
-        const auto& p_x_high_limbs_range_constraint_0 = input_elements.p_x_high_limbs_range_constraint_0;
-        const auto& p_x_high_limbs_range_constraint_1 = input_elements.p_x_high_limbs_range_constraint_1;
-        const auto& p_x_high_limbs_range_constraint_2 = input_elements.p_x_high_limbs_range_constraint_2;
-        const auto& p_x_high_limbs_range_constraint_3 = input_elements.p_x_high_limbs_range_constraint_3;
-        const auto& p_x_high_limbs_range_constraint_4 = input_elements.p_x_high_limbs_range_constraint_4;
-        const auto& p_x_high_limbs_range_constraint_tail = input_elements.p_x_high_limbs_range_constraint_tail;
-        const auto& p_x_high_limbs = input_elements.p_x_high_limbs;
-        const auto& p_x_low_limbs_range_constraint_0_shift = input_elements.p_x_low_limbs_range_constraint_0_shift;
-        const auto& p_x_low_limbs_range_constraint_1_shift = input_elements.p_x_low_limbs_range_constraint_1_shift;
-        const auto& p_x_low_limbs_range_constraint_2_shift = input_elements.p_x_low_limbs_range_constraint_2_shift;
-        const auto& p_x_low_limbs_range_constraint_3_shift = input_elements.p_x_low_limbs_range_constraint_3_shift;
-        const auto& p_x_low_limbs_range_constraint_4_shift = input_elements.p_x_low_limbs_range_constraint_4_shift;
+        const auto& p_x_low_limbs_range_constraint_0 = input_elements.p_x_low_limbs_range_constraint_0();
+        const auto& p_x_low_limbs_range_constraint_1 = input_elements.p_x_low_limbs_range_constraint_1();
+        const auto& p_x_low_limbs_range_constraint_2 = input_elements.p_x_low_limbs_range_constraint_2();
+        const auto& p_x_low_limbs_range_constraint_3 = input_elements.p_x_low_limbs_range_constraint_3();
+        const auto& p_x_low_limbs_range_constraint_4 = input_elements.p_x_low_limbs_range_constraint_4();
+        const auto& p_x_low_limbs_range_constraint_tail = input_elements.p_x_low_limbs_range_constraint_tail();
+        const auto& p_x_low_limbs = input_elements.p_x_low_limbs();
+        const auto& p_x_high_limbs_range_constraint_0 = input_elements.p_x_high_limbs_range_constraint_0();
+        const auto& p_x_high_limbs_range_constraint_1 = input_elements.p_x_high_limbs_range_constraint_1();
+        const auto& p_x_high_limbs_range_constraint_2 = input_elements.p_x_high_limbs_range_constraint_2();
+        const auto& p_x_high_limbs_range_constraint_3 = input_elements.p_x_high_limbs_range_constraint_3();
+        const auto& p_x_high_limbs_range_constraint_4 = input_elements.p_x_high_limbs_range_constraint_4();
+        const auto& p_x_high_limbs_range_constraint_tail = input_elements.p_x_high_limbs_range_constraint_tail();
+        const auto& p_x_high_limbs = input_elements.p_x_high_limbs();
+        const auto& p_x_low_limbs_range_constraint_0_shift = input_elements.p_x_low_limbs_range_constraint_0_shift();
+        const auto& p_x_low_limbs_range_constraint_1_shift = input_elements.p_x_low_limbs_range_constraint_1_shift();
+        const auto& p_x_low_limbs_range_constraint_2_shift = input_elements.p_x_low_limbs_range_constraint_2_shift();
+        const auto& p_x_low_limbs_range_constraint_3_shift = input_elements.p_x_low_limbs_range_constraint_3_shift();
+        const auto& p_x_low_limbs_range_constraint_4_shift = input_elements.p_x_low_limbs_range_constraint_4_shift();
         const auto& p_x_low_limbs_range_constraint_tail_shift =
-            input_elements.p_x_low_limbs_range_constraint_tail_shift;
-        const auto& p_x_low_limbs_shift = input_elements.p_x_low_limbs_shift;
-        const auto& p_x_high_limbs_range_constraint_0_shift = input_elements.p_x_high_limbs_range_constraint_0_shift;
-        const auto& p_x_high_limbs_range_constraint_1_shift = input_elements.p_x_high_limbs_range_constraint_1_shift;
-        const auto& p_x_high_limbs_range_constraint_2_shift = input_elements.p_x_high_limbs_range_constraint_2_shift;
-        const auto& p_x_high_limbs_range_constraint_3_shift = input_elements.p_x_high_limbs_range_constraint_3_shift;
-        const auto& p_x_high_limbs_range_constraint_4_shift = input_elements.p_x_high_limbs_range_constraint_4_shift;
+            input_elements.p_x_low_limbs_range_constraint_tail_shift();
+        const auto& p_x_low_limbs_shift = input_elements.p_x_low_limbs_shift();
+        const auto& p_x_high_limbs_range_constraint_0_shift = input_elements.p_x_high_limbs_range_constraint_0_shift();
+        const auto& p_x_high_limbs_range_constraint_1_shift = input_elements.p_x_high_limbs_range_constraint_1_shift();
+        const auto& p_x_high_limbs_range_constraint_2_shift = input_elements.p_x_high_limbs_range_constraint_2_shift();
+        const auto& p_x_high_limbs_range_constraint_3_shift = input_elements.p_x_high_limbs_range_constraint_3_shift();
+        const auto& p_x_high_limbs_range_constraint_4_shift = input_elements.p_x_high_limbs_range_constraint_4_shift();
         const auto& p_x_high_limbs_range_constraint_tail_shift =
-            input_elements.p_x_high_limbs_range_constraint_tail_shift;
-        const auto& p_x_high_limbs_shift = input_elements.p_x_high_limbs_shift;
-        const auto& p_y_low_limbs_range_constraint_0 = input_elements.p_y_low_limbs_range_constraint_0;
-        const auto& p_y_low_limbs_range_constraint_1 = input_elements.p_y_low_limbs_range_constraint_1;
-        const auto& p_y_low_limbs_range_constraint_2 = input_elements.p_y_low_limbs_range_constraint_2;
-        const auto& p_y_low_limbs_range_constraint_3 = input_elements.p_y_low_limbs_range_constraint_3;
-        const auto& p_y_low_limbs_range_constraint_4 = input_elements.p_y_low_limbs_range_constraint_4;
-        const auto& p_y_low_limbs_range_constraint_tail = input_elements.p_y_low_limbs_range_constraint_tail;
-        const auto& p_y_low_limbs = input_elements.p_y_low_limbs;
-        const auto& p_y_high_limbs_range_constraint_0 = input_elements.p_y_high_limbs_range_constraint_0;
-        const auto& p_y_high_limbs_range_constraint_1 = input_elements.p_y_high_limbs_range_constraint_1;
-        const auto& p_y_high_limbs_range_constraint_2 = input_elements.p_y_high_limbs_range_constraint_2;
-        const auto& p_y_high_limbs_range_constraint_3 = input_elements.p_y_high_limbs_range_constraint_3;
-        const auto& p_y_high_limbs_range_constraint_4 = input_elements.p_y_high_limbs_range_constraint_4;
-        const auto& p_y_high_limbs_range_constraint_tail = input_elements.p_y_high_limbs_range_constraint_tail;
-        const auto& p_y_high_limbs = input_elements.p_y_high_limbs;
-        const auto& p_y_low_limbs_range_constraint_0_shift = input_elements.p_y_low_limbs_range_constraint_0_shift;
-        const auto& p_y_low_limbs_range_constraint_1_shift = input_elements.p_y_low_limbs_range_constraint_1_shift;
-        const auto& p_y_low_limbs_range_constraint_2_shift = input_elements.p_y_low_limbs_range_constraint_2_shift;
-        const auto& p_y_low_limbs_range_constraint_3_shift = input_elements.p_y_low_limbs_range_constraint_3_shift;
-        const auto& p_y_low_limbs_range_constraint_4_shift = input_elements.p_y_low_limbs_range_constraint_4_shift;
+            input_elements.p_x_high_limbs_range_constraint_tail_shift();
+        const auto& p_x_high_limbs_shift = input_elements.p_x_high_limbs_shift();
+        const auto& p_y_low_limbs_range_constraint_0 = input_elements.p_y_low_limbs_range_constraint_0();
+        const auto& p_y_low_limbs_range_constraint_1 = input_elements.p_y_low_limbs_range_constraint_1();
+        const auto& p_y_low_limbs_range_constraint_2 = input_elements.p_y_low_limbs_range_constraint_2();
+        const auto& p_y_low_limbs_range_constraint_3 = input_elements.p_y_low_limbs_range_constraint_3();
+        const auto& p_y_low_limbs_range_constraint_4 = input_elements.p_y_low_limbs_range_constraint_4();
+        const auto& p_y_low_limbs_range_constraint_tail = input_elements.p_y_low_limbs_range_constraint_tail();
+        const auto& p_y_low_limbs = input_elements.p_y_low_limbs();
+        const auto& p_y_high_limbs_range_constraint_0 = input_elements.p_y_high_limbs_range_constraint_0();
+        const auto& p_y_high_limbs_range_constraint_1 = input_elements.p_y_high_limbs_range_constraint_1();
+        const auto& p_y_high_limbs_range_constraint_2 = input_elements.p_y_high_limbs_range_constraint_2();
+        const auto& p_y_high_limbs_range_constraint_3 = input_elements.p_y_high_limbs_range_constraint_3();
+        const auto& p_y_high_limbs_range_constraint_4 = input_elements.p_y_high_limbs_range_constraint_4();
+        const auto& p_y_high_limbs_range_constraint_tail = input_elements.p_y_high_limbs_range_constraint_tail();
+        const auto& p_y_high_limbs = input_elements.p_y_high_limbs();
+        const auto& p_y_low_limbs_range_constraint_0_shift = input_elements.p_y_low_limbs_range_constraint_0_shift();
+        const auto& p_y_low_limbs_range_constraint_1_shift = input_elements.p_y_low_limbs_range_constraint_1_shift();
+        const auto& p_y_low_limbs_range_constraint_2_shift = input_elements.p_y_low_limbs_range_constraint_2_shift();
+        const auto& p_y_low_limbs_range_constraint_3_shift = input_elements.p_y_low_limbs_range_constraint_3_shift();
+        const auto& p_y_low_limbs_range_constraint_4_shift = input_elements.p_y_low_limbs_range_constraint_4_shift();
         const auto& p_y_low_limbs_range_constraint_tail_shift =
-            input_elements.p_y_low_limbs_range_constraint_tail_shift;
-        const auto& p_y_low_limbs_shift = input_elements.p_y_low_limbs_shift;
-        const auto& p_y_high_limbs_range_constraint_0_shift = input_elements.p_y_high_limbs_range_constraint_0_shift;
-        const auto& p_y_high_limbs_range_constraint_1_shift = input_elements.p_y_high_limbs_range_constraint_1_shift;
-        const auto& p_y_high_limbs_range_constraint_2_shift = input_elements.p_y_high_limbs_range_constraint_2_shift;
-        const auto& p_y_high_limbs_range_constraint_3_shift = input_elements.p_y_high_limbs_range_constraint_3_shift;
-        const auto& p_y_high_limbs_range_constraint_4_shift = input_elements.p_y_high_limbs_range_constraint_4_shift;
+            input_elements.p_y_low_limbs_range_constraint_tail_shift();
+        const auto& p_y_low_limbs_shift = input_elements.p_y_low_limbs_shift();
+        const auto& p_y_high_limbs_range_constraint_0_shift = input_elements.p_y_high_limbs_range_constraint_0_shift();
+        const auto& p_y_high_limbs_range_constraint_1_shift = input_elements.p_y_high_limbs_range_constraint_1_shift();
+        const auto& p_y_high_limbs_range_constraint_2_shift = input_elements.p_y_high_limbs_range_constraint_2_shift();
+        const auto& p_y_high_limbs_range_constraint_3_shift = input_elements.p_y_high_limbs_range_constraint_3_shift();
+        const auto& p_y_high_limbs_range_constraint_4_shift = input_elements.p_y_high_limbs_range_constraint_4_shift();
         const auto& p_y_high_limbs_range_constraint_tail_shift =
-            input_elements.p_y_high_limbs_range_constraint_tail_shift;
-        const auto& p_y_high_limbs_shift = input_elements.p_y_high_limbs_shift;
-        const auto& z_low_limbs_range_constraint_0 = input_elements.z_low_limbs_range_constraint_0;
-        const auto& z_low_limbs_range_constraint_1 = input_elements.z_low_limbs_range_constraint_1;
-        const auto& z_low_limbs_range_constraint_2 = input_elements.z_low_limbs_range_constraint_2;
-        const auto& z_low_limbs_range_constraint_3 = input_elements.z_low_limbs_range_constraint_3;
-        const auto& z_low_limbs_range_constraint_4 = input_elements.z_low_limbs_range_constraint_4;
-        const auto& z_low_limbs_range_constraint_tail = input_elements.z_low_limbs_range_constraint_tail;
-        const auto& z_low_limbs = input_elements.z_low_limbs;
-        const auto& z_low_limbs_range_constraint_0_shift = input_elements.z_low_limbs_range_constraint_0_shift;
-        const auto& z_low_limbs_range_constraint_1_shift = input_elements.z_low_limbs_range_constraint_1_shift;
-        const auto& z_low_limbs_range_constraint_2_shift = input_elements.z_low_limbs_range_constraint_2_shift;
-        const auto& z_low_limbs_range_constraint_3_shift = input_elements.z_low_limbs_range_constraint_3_shift;
-        const auto& z_low_limbs_range_constraint_4_shift = input_elements.z_low_limbs_range_constraint_4_shift;
-        const auto& z_low_limbs_range_constraint_tail_shift = input_elements.z_low_limbs_range_constraint_tail_shift;
-        const auto& z_low_limbs_shift = input_elements.z_low_limbs_shift;
-        const auto& z_high_limbs_range_constraint_0 = input_elements.z_high_limbs_range_constraint_0;
-        const auto& z_high_limbs_range_constraint_1 = input_elements.z_high_limbs_range_constraint_1;
-        const auto& z_high_limbs_range_constraint_2 = input_elements.z_high_limbs_range_constraint_2;
-        const auto& z_high_limbs_range_constraint_3 = input_elements.z_high_limbs_range_constraint_3;
-        const auto& z_high_limbs_range_constraint_4 = input_elements.z_high_limbs_range_constraint_4;
-        const auto& z_high_limbs_range_constraint_tail = input_elements.z_high_limbs_range_constraint_tail;
-        const auto& z_high_limbs = input_elements.z_high_limbs;
-        const auto& z_high_limbs_range_constraint_0_shift = input_elements.z_high_limbs_range_constraint_0_shift;
-        const auto& z_high_limbs_range_constraint_1_shift = input_elements.z_high_limbs_range_constraint_1_shift;
-        const auto& z_high_limbs_range_constraint_2_shift = input_elements.z_high_limbs_range_constraint_2_shift;
-        const auto& z_high_limbs_range_constraint_3_shift = input_elements.z_high_limbs_range_constraint_3_shift;
-        const auto& z_high_limbs_range_constraint_4_shift = input_elements.z_high_limbs_range_constraint_4_shift;
-        const auto& z_high_limbs_range_constraint_tail_shift = input_elements.z_high_limbs_range_constraint_tail_shift;
-        const auto& z_high_limbs_shift = input_elements.z_high_limbs_shift;
-        const auto& accumulator_low_limbs_range_constraint_0 = input_elements.accumulator_low_limbs_range_constraint_0;
-        const auto& accumulator_low_limbs_range_constraint_1 = input_elements.accumulator_low_limbs_range_constraint_1;
-        const auto& accumulator_low_limbs_range_constraint_2 = input_elements.accumulator_low_limbs_range_constraint_2;
-        const auto& accumulator_low_limbs_range_constraint_3 = input_elements.accumulator_low_limbs_range_constraint_3;
-        const auto& accumulator_low_limbs_range_constraint_4 = input_elements.accumulator_low_limbs_range_constraint_4;
+            input_elements.p_y_high_limbs_range_constraint_tail_shift();
+        const auto& p_y_high_limbs_shift = input_elements.p_y_high_limbs_shift();
+        const auto& z_low_limbs_range_constraint_0 = input_elements.z_low_limbs_range_constraint_0();
+        const auto& z_low_limbs_range_constraint_1 = input_elements.z_low_limbs_range_constraint_1();
+        const auto& z_low_limbs_range_constraint_2 = input_elements.z_low_limbs_range_constraint_2();
+        const auto& z_low_limbs_range_constraint_3 = input_elements.z_low_limbs_range_constraint_3();
+        const auto& z_low_limbs_range_constraint_4 = input_elements.z_low_limbs_range_constraint_4();
+        const auto& z_low_limbs_range_constraint_tail = input_elements.z_low_limbs_range_constraint_tail();
+        const auto& z_low_limbs = input_elements.z_low_limbs();
+        const auto& z_low_limbs_range_constraint_0_shift = input_elements.z_low_limbs_range_constraint_0_shift();
+        const auto& z_low_limbs_range_constraint_1_shift = input_elements.z_low_limbs_range_constraint_1_shift();
+        const auto& z_low_limbs_range_constraint_2_shift = input_elements.z_low_limbs_range_constraint_2_shift();
+        const auto& z_low_limbs_range_constraint_3_shift = input_elements.z_low_limbs_range_constraint_3_shift();
+        const auto& z_low_limbs_range_constraint_4_shift = input_elements.z_low_limbs_range_constraint_4_shift();
+        const auto& z_low_limbs_range_constraint_tail_shift = input_elements.z_low_limbs_range_constraint_tail_shift();
+        const auto& z_low_limbs_shift = input_elements.z_low_limbs_shift();
+        const auto& z_high_limbs_range_constraint_0 = input_elements.z_high_limbs_range_constraint_0();
+        const auto& z_high_limbs_range_constraint_1 = input_elements.z_high_limbs_range_constraint_1();
+        const auto& z_high_limbs_range_constraint_2 = input_elements.z_high_limbs_range_constraint_2();
+        const auto& z_high_limbs_range_constraint_3 = input_elements.z_high_limbs_range_constraint_3();
+        const auto& z_high_limbs_range_constraint_4 = input_elements.z_high_limbs_range_constraint_4();
+        const auto& z_high_limbs_range_constraint_tail = input_elements.z_high_limbs_range_constraint_tail();
+        const auto& z_high_limbs = input_elements.z_high_limbs();
+        const auto& z_high_limbs_range_constraint_0_shift = input_elements.z_high_limbs_range_constraint_0_shift();
+        const auto& z_high_limbs_range_constraint_1_shift = input_elements.z_high_limbs_range_constraint_1_shift();
+        const auto& z_high_limbs_range_constraint_2_shift = input_elements.z_high_limbs_range_constraint_2_shift();
+        const auto& z_high_limbs_range_constraint_3_shift = input_elements.z_high_limbs_range_constraint_3_shift();
+        const auto& z_high_limbs_range_constraint_4_shift = input_elements.z_high_limbs_range_constraint_4_shift();
+        const auto& z_high_limbs_range_constraint_tail_shift =
+            input_elements.z_high_limbs_range_constraint_tail_shift();
+        const auto& z_high_limbs_shift = input_elements.z_high_limbs_shift();
+        const auto& accumulator_low_limbs_range_constraint_0 =
+            input_elements.accumulator_low_limbs_range_constraint_0();
+        const auto& accumulator_low_limbs_range_constraint_1 =
+            input_elements.accumulator_low_limbs_range_constraint_1();
+        const auto& accumulator_low_limbs_range_constraint_2 =
+            input_elements.accumulator_low_limbs_range_constraint_2();
+        const auto& accumulator_low_limbs_range_constraint_3 =
+            input_elements.accumulator_low_limbs_range_constraint_3();
+        const auto& accumulator_low_limbs_range_constraint_4 =
+            input_elements.accumulator_low_limbs_range_constraint_4();
         const auto& accumulator_low_limbs_range_constraint_tail =
-            input_elements.accumulator_low_limbs_range_constraint_tail;
+            input_elements.accumulator_low_limbs_range_constraint_tail();
         const auto& accumulator_low_limbs_range_constraint_0_shift =
-            input_elements.accumulator_low_limbs_range_constraint_0_shift;
+            input_elements.accumulator_low_limbs_range_constraint_0_shift();
         const auto& accumulator_low_limbs_range_constraint_1_shift =
-            input_elements.accumulator_low_limbs_range_constraint_1_shift;
+            input_elements.accumulator_low_limbs_range_constraint_1_shift();
         const auto& accumulator_low_limbs_range_constraint_2_shift =
-            input_elements.accumulator_low_limbs_range_constraint_2_shift;
+            input_elements.accumulator_low_limbs_range_constraint_2_shift();
         const auto& accumulator_low_limbs_range_constraint_3_shift =
-            input_elements.accumulator_low_limbs_range_constraint_3_shift;
+            input_elements.accumulator_low_limbs_range_constraint_3_shift();
         const auto& accumulator_low_limbs_range_constraint_4_shift =
-            input_elements.accumulator_low_limbs_range_constraint_4_shift;
+            input_elements.accumulator_low_limbs_range_constraint_4_shift();
         const auto& accumulator_low_limbs_range_constraint_tail_shift =
-            input_elements.accumulator_low_limbs_range_constraint_tail_shift;
+            input_elements.accumulator_low_limbs_range_constraint_tail_shift();
         const auto& accumulator_high_limbs_range_constraint_0 =
-            input_elements.accumulator_high_limbs_range_constraint_0;
+            input_elements.accumulator_high_limbs_range_constraint_0();
         const auto& accumulator_high_limbs_range_constraint_1 =
-            input_elements.accumulator_high_limbs_range_constraint_1;
+            input_elements.accumulator_high_limbs_range_constraint_1();
         const auto& accumulator_high_limbs_range_constraint_2 =
-            input_elements.accumulator_high_limbs_range_constraint_2;
+            input_elements.accumulator_high_limbs_range_constraint_2();
         const auto& accumulator_high_limbs_range_constraint_3 =
-            input_elements.accumulator_high_limbs_range_constraint_3;
+            input_elements.accumulator_high_limbs_range_constraint_3();
         const auto& accumulator_high_limbs_range_constraint_4 =
-            input_elements.accumulator_high_limbs_range_constraint_4;
+            input_elements.accumulator_high_limbs_range_constraint_4();
         const auto& accumulator_high_limbs_range_constraint_tail =
-            input_elements.accumulator_high_limbs_range_constraint_tail;
+            input_elements.accumulator_high_limbs_range_constraint_tail();
         const auto& accumulator_high_limbs_range_constraint_0_shift =
-            input_elements.accumulator_high_limbs_range_constraint_0_shift;
+            input_elements.accumulator_high_limbs_range_constraint_0_shift();
         const auto& accumulator_high_limbs_range_constraint_1_shift =
-            input_elements.accumulator_high_limbs_range_constraint_1_shift;
+            input_elements.accumulator_high_limbs_range_constraint_1_shift();
         const auto& accumulator_high_limbs_range_constraint_2_shift =
-            input_elements.accumulator_high_limbs_range_constraint_2_shift;
+            input_elements.accumulator_high_limbs_range_constraint_2_shift();
         const auto& accumulator_high_limbs_range_constraint_3_shift =
-            input_elements.accumulator_high_limbs_range_constraint_3_shift;
+            input_elements.accumulator_high_limbs_range_constraint_3_shift();
         const auto& accumulator_high_limbs_range_constraint_4_shift =
-            input_elements.accumulator_high_limbs_range_constraint_4_shift;
+            input_elements.accumulator_high_limbs_range_constraint_4_shift();
         const auto& accumulator_high_limbs_range_constraint_tail_shift =
-            input_elements.accumulator_high_limbs_range_constraint_tail_shift;
-        const auto& accumulators_binary_limbs_0 = input_elements.accumulators_binary_limbs_0;
-        const auto& accumulators_binary_limbs_1 = input_elements.accumulators_binary_limbs_1;
-        const auto& accumulators_binary_limbs_2 = input_elements.accumulators_binary_limbs_2;
-        const auto& accumulators_binary_limbs_3 = input_elements.accumulators_binary_limbs_3;
-        const auto& quotient_low_limbs_range_constraint_0 = input_elements.quotient_low_limbs_range_constraint_0;
-        const auto& quotient_low_limbs_range_constraint_1 = input_elements.quotient_low_limbs_range_constraint_1;
-        const auto& quotient_low_limbs_range_constraint_2 = input_elements.quotient_low_limbs_range_constraint_2;
-        const auto& quotient_low_limbs_range_constraint_3 = input_elements.quotient_low_limbs_range_constraint_3;
-        const auto& quotient_low_limbs_range_constraint_4 = input_elements.quotient_low_limbs_range_constraint_4;
-        const auto& quotient_low_limbs_range_constraint_tail = input_elements.quotient_low_limbs_range_constraint_tail;
+            input_elements.accumulator_high_limbs_range_constraint_tail_shift();
+        const auto& accumulators_binary_limbs_0 = input_elements.accumulators_binary_limbs_0();
+        const auto& accumulators_binary_limbs_1 = input_elements.accumulators_binary_limbs_1();
+        const auto& accumulators_binary_limbs_2 = input_elements.accumulators_binary_limbs_2();
+        const auto& accumulators_binary_limbs_3 = input_elements.accumulators_binary_limbs_3();
+        const auto& quotient_low_limbs_range_constraint_0 = input_elements.quotient_low_limbs_range_constraint_0();
+        const auto& quotient_low_limbs_range_constraint_1 = input_elements.quotient_low_limbs_range_constraint_1();
+        const auto& quotient_low_limbs_range_constraint_2 = input_elements.quotient_low_limbs_range_constraint_2();
+        const auto& quotient_low_limbs_range_constraint_3 = input_elements.quotient_low_limbs_range_constraint_3();
+        const auto& quotient_low_limbs_range_constraint_4 = input_elements.quotient_low_limbs_range_constraint_4();
+        const auto& quotient_low_limbs_range_constraint_tail =
+            input_elements.quotient_low_limbs_range_constraint_tail();
         const auto& quotient_low_limbs_range_constraint_0_shift =
-            input_elements.quotient_low_limbs_range_constraint_0_shift;
+            input_elements.quotient_low_limbs_range_constraint_0_shift();
         const auto& quotient_low_limbs_range_constraint_1_shift =
-            input_elements.quotient_low_limbs_range_constraint_1_shift;
+            input_elements.quotient_low_limbs_range_constraint_1_shift();
         const auto& quotient_low_limbs_range_constraint_2_shift =
-            input_elements.quotient_low_limbs_range_constraint_2_shift;
+            input_elements.quotient_low_limbs_range_constraint_2_shift();
         const auto& quotient_low_limbs_range_constraint_3_shift =
-            input_elements.quotient_low_limbs_range_constraint_3_shift;
+            input_elements.quotient_low_limbs_range_constraint_3_shift();
         const auto& quotient_low_limbs_range_constraint_4_shift =
-            input_elements.quotient_low_limbs_range_constraint_4_shift;
+            input_elements.quotient_low_limbs_range_constraint_4_shift();
         const auto& quotient_low_limbs_range_constraint_tail_shift =
-            input_elements.quotient_low_limbs_range_constraint_tail_shift;
-        const auto& quotient_high_limbs_range_constraint_0 = input_elements.quotient_high_limbs_range_constraint_0;
-        const auto& quotient_high_limbs_range_constraint_1 = input_elements.quotient_high_limbs_range_constraint_1;
-        const auto& quotient_high_limbs_range_constraint_2 = input_elements.quotient_high_limbs_range_constraint_2;
-        const auto& quotient_high_limbs_range_constraint_3 = input_elements.quotient_high_limbs_range_constraint_3;
-        const auto& quotient_high_limbs_range_constraint_4 = input_elements.quotient_high_limbs_range_constraint_4;
+            input_elements.quotient_low_limbs_range_constraint_tail_shift();
+        const auto& quotient_high_limbs_range_constraint_0 = input_elements.quotient_high_limbs_range_constraint_0();
+        const auto& quotient_high_limbs_range_constraint_1 = input_elements.quotient_high_limbs_range_constraint_1();
+        const auto& quotient_high_limbs_range_constraint_2 = input_elements.quotient_high_limbs_range_constraint_2();
+        const auto& quotient_high_limbs_range_constraint_3 = input_elements.quotient_high_limbs_range_constraint_3();
+        const auto& quotient_high_limbs_range_constraint_4 = input_elements.quotient_high_limbs_range_constraint_4();
         const auto& quotient_high_limbs_range_constraint_tail =
-            input_elements.quotient_high_limbs_range_constraint_tail;
+            input_elements.quotient_high_limbs_range_constraint_tail();
         const auto& quotient_high_limbs_range_constraint_0_shift =
-            input_elements.quotient_high_limbs_range_constraint_0_shift;
+            input_elements.quotient_high_limbs_range_constraint_0_shift();
         const auto& quotient_high_limbs_range_constraint_1_shift =
-            input_elements.quotient_high_limbs_range_constraint_1_shift;
+            input_elements.quotient_high_limbs_range_constraint_1_shift();
         const auto& quotient_high_limbs_range_constraint_2_shift =
-            input_elements.quotient_high_limbs_range_constraint_2_shift;
+            input_elements.quotient_high_limbs_range_constraint_2_shift();
         const auto& quotient_high_limbs_range_constraint_3_shift =
-            input_elements.quotient_high_limbs_range_constraint_3_shift;
+            input_elements.quotient_high_limbs_range_constraint_3_shift();
         const auto& quotient_high_limbs_range_constraint_4_shift =
-            input_elements.quotient_high_limbs_range_constraint_4_shift;
+            input_elements.quotient_high_limbs_range_constraint_4_shift();
         const auto& quotient_high_limbs_range_constraint_tail_shift =
-            input_elements.quotient_high_limbs_range_constraint_tail_shift;
-        const auto& quotient_low_binary_limbs = input_elements.quotient_low_binary_limbs;
-        const auto& quotient_low_binary_limbs_shift = input_elements.quotient_low_binary_limbs_shift;
-        const auto& quotient_high_binary_limbs = input_elements.quotient_high_binary_limbs;
-        const auto& quotient_high_binary_limbs_shift = input_elements.quotient_high_binary_limbs_shift;
-        const auto& relation_wide_limbs_range_constraint_0 = input_elements.relation_wide_limbs_range_constraint_0;
-        const auto& relation_wide_limbs_range_constraint_1 = input_elements.relation_wide_limbs_range_constraint_1;
-        const auto& relation_wide_limbs_range_constraint_2 = input_elements.relation_wide_limbs_range_constraint_2;
-        const auto& relation_wide_limbs_range_constraint_3 = input_elements.relation_wide_limbs_range_constraint_3;
+            input_elements.quotient_high_limbs_range_constraint_tail_shift();
+        const auto& quotient_low_binary_limbs = input_elements.quotient_low_binary_limbs();
+        const auto& quotient_low_binary_limbs_shift = input_elements.quotient_low_binary_limbs_shift();
+        const auto& quotient_high_binary_limbs = input_elements.quotient_high_binary_limbs();
+        const auto& quotient_high_binary_limbs_shift = input_elements.quotient_high_binary_limbs_shift();
+        const auto& relation_wide_limbs_range_constraint_0 = input_elements.relation_wide_limbs_range_constraint_0();
+        const auto& relation_wide_limbs_range_constraint_1 = input_elements.relation_wide_limbs_range_constraint_1();
+        const auto& relation_wide_limbs_range_constraint_2 = input_elements.relation_wide_limbs_range_constraint_2();
+        const auto& relation_wide_limbs_range_constraint_3 = input_elements.relation_wide_limbs_range_constraint_3();
         const auto& relation_wide_limbs_range_constraint_0_shift =
-            input_elements.relation_wide_limbs_range_constraint_0_shift;
+            input_elements.relation_wide_limbs_range_constraint_0_shift();
         const auto& relation_wide_limbs_range_constraint_1_shift =
-            input_elements.relation_wide_limbs_range_constraint_1_shift;
+            input_elements.relation_wide_limbs_range_constraint_1_shift();
         const auto& relation_wide_limbs_range_constraint_2_shift =
-            input_elements.relation_wide_limbs_range_constraint_2_shift;
+            input_elements.relation_wide_limbs_range_constraint_2_shift();
         const auto& relation_wide_limbs_range_constraint_3_shift =
-            input_elements.relation_wide_limbs_range_constraint_3_shift;
-        const auto& relation_wide_limbs = input_elements.relation_wide_limbs;
-        const auto& relation_wide_limbs_shift = input_elements.relation_wide_limbs_shift;
+            input_elements.relation_wide_limbs_range_constraint_3_shift();
+        const auto& relation_wide_limbs = input_elements.relation_wide_limbs();
+        const auto& relation_wide_limbs_shift = input_elements.relation_wide_limbs_shift();
 
-        const auto& x_lo_y_hi = input_elements.x_lo_y_hi;
-        const auto& x_hi_z_1 = input_elements.x_hi_z_1;
-        const auto& y_lo_z_2 = input_elements.y_lo_z_2;
-        const auto& x_lo_y_hi_shift = input_elements.x_lo_y_hi_shift;
-        const auto& x_hi_z_1_shift = input_elements.x_hi_z_1_shift;
-        const auto& y_lo_z_2_shift = input_elements.y_lo_z_2_shift;
+        const auto& x_lo_y_hi = input_elements.x_lo_y_hi();
+        const auto& x_hi_z_1 = input_elements.x_hi_z_1();
+        const auto& y_lo_z_2 = input_elements.y_lo_z_2();
+        const auto& x_lo_y_hi_shift = input_elements.x_lo_y_hi_shift();
+        const auto& x_hi_z_1_shift = input_elements.x_hi_z_1_shift();
+        const auto& y_lo_z_2_shift = input_elements.y_lo_z_2_shift();
 
-        const auto& lagrange_odd_in_minicircuit = input_elements.lagrange_odd_in_minicircuit;
+        const auto& lagrange_odd_in_minicircuit = input_elements.lagrange_odd_in_minicircuit();
 
         RelationValues expected_values;
 
@@ -916,7 +923,7 @@ TEST_F(GoblinTranslatorRelationConsistency, OpcodeConstraintRelation)
         using RelationValues = typename Relation::SumcheckArrayOfValuesOverSubrelations;
 
         const InputElements input_elements = random_inputs ? InputElements::get_random() : InputElements::get_special();
-        const auto& op = input_elements.op;
+        const auto& op = input_elements.op();
 
         RelationValues expected_values;
 
@@ -940,17 +947,17 @@ TEST_F(GoblinTranslatorRelationConsistency, AccumulatorTransferRelation)
 
         const InputElements input_elements = random_inputs ? InputElements::get_random() : InputElements::get_special();
 
-        const auto& lagrange_even_in_minicircuit = input_elements.lagrange_even_in_minicircuit;
-        const auto& lagrange_second = input_elements.lagrange_second;
-        const auto& lagrange_second_to_last_in_minicircuit = input_elements.lagrange_second_to_last_in_minicircuit;
-        const auto& accumulators_binary_limbs_0 = input_elements.accumulators_binary_limbs_0;
-        const auto& accumulators_binary_limbs_0_shift = input_elements.accumulators_binary_limbs_0_shift;
-        const auto& accumulators_binary_limbs_1 = input_elements.accumulators_binary_limbs_1;
-        const auto& accumulators_binary_limbs_1_shift = input_elements.accumulators_binary_limbs_1_shift;
-        const auto& accumulators_binary_limbs_2 = input_elements.accumulators_binary_limbs_2;
-        const auto& accumulators_binary_limbs_2_shift = input_elements.accumulators_binary_limbs_2_shift;
-        const auto& accumulators_binary_limbs_3 = input_elements.accumulators_binary_limbs_3;
-        const auto& accumulators_binary_limbs_3_shift = input_elements.accumulators_binary_limbs_3_shift;
+        const auto& lagrange_even_in_minicircuit = input_elements.lagrange_even_in_minicircuit();
+        const auto& lagrange_second = input_elements.lagrange_second();
+        const auto& lagrange_second_to_last_in_minicircuit = input_elements.lagrange_second_to_last_in_minicircuit();
+        const auto& accumulators_binary_limbs_0 = input_elements.accumulators_binary_limbs_0();
+        const auto& accumulators_binary_limbs_0_shift = input_elements.accumulators_binary_limbs_0_shift();
+        const auto& accumulators_binary_limbs_1 = input_elements.accumulators_binary_limbs_1();
+        const auto& accumulators_binary_limbs_1_shift = input_elements.accumulators_binary_limbs_1_shift();
+        const auto& accumulators_binary_limbs_2 = input_elements.accumulators_binary_limbs_2();
+        const auto& accumulators_binary_limbs_2_shift = input_elements.accumulators_binary_limbs_2_shift();
+        const auto& accumulators_binary_limbs_3 = input_elements.accumulators_binary_limbs_3();
+        const auto& accumulators_binary_limbs_3_shift = input_elements.accumulators_binary_limbs_3_shift();
 
         RelationValues expected_values;
 
@@ -1009,34 +1016,34 @@ TEST_F(GoblinTranslatorRelationConsistency, NonNativeFieldRelation)
 
         const InputElements input_elements = random_inputs ? InputElements::get_random() : InputElements::get_special();
 
-        auto& op = input_elements.op;
-        auto& p_x_low_limbs = input_elements.p_x_low_limbs;
-        auto& p_y_low_limbs = input_elements.p_y_low_limbs;
-        auto& p_x_high_limbs = input_elements.p_x_high_limbs;
-        auto& p_y_high_limbs = input_elements.p_y_high_limbs;
-        auto& accumulators_binary_limbs_0 = input_elements.accumulators_binary_limbs_0;
-        auto& accumulators_binary_limbs_1 = input_elements.accumulators_binary_limbs_1;
-        auto& accumulators_binary_limbs_2 = input_elements.accumulators_binary_limbs_2;
-        auto& accumulators_binary_limbs_3 = input_elements.accumulators_binary_limbs_3;
-        auto& z_low_limbs = input_elements.z_low_limbs;
-        auto& z_high_limbs = input_elements.z_high_limbs;
-        auto& quotient_low_binary_limbs = input_elements.quotient_low_binary_limbs;
-        auto& quotient_high_binary_limbs = input_elements.quotient_high_binary_limbs;
-        auto& p_x_low_limbs_shift = input_elements.p_x_low_limbs_shift;
-        auto& p_y_low_limbs_shift = input_elements.p_y_low_limbs_shift;
-        auto& p_x_high_limbs_shift = input_elements.p_x_high_limbs_shift;
-        auto& p_y_high_limbs_shift = input_elements.p_y_high_limbs_shift;
-        auto& accumulators_binary_limbs_0_shift = input_elements.accumulators_binary_limbs_0_shift;
-        auto& accumulators_binary_limbs_1_shift = input_elements.accumulators_binary_limbs_1_shift;
-        auto& accumulators_binary_limbs_2_shift = input_elements.accumulators_binary_limbs_2_shift;
-        auto& accumulators_binary_limbs_3_shift = input_elements.accumulators_binary_limbs_3_shift;
-        auto& z_low_limbs_shift = input_elements.z_low_limbs_shift;
-        auto& z_high_limbs_shift = input_elements.z_high_limbs_shift;
-        auto& quotient_low_binary_limbs_shift = input_elements.quotient_low_binary_limbs_shift;
-        auto& quotient_high_binary_limbs_shift = input_elements.quotient_high_binary_limbs_shift;
-        auto& relation_wide_limbs = input_elements.relation_wide_limbs;
-        auto& relation_wide_limbs_shift = input_elements.relation_wide_limbs_shift;
-        auto& lagrange_odd_in_minicircuit = input_elements.lagrange_odd_in_minicircuit;
+        auto& op = input_elements.op();
+        auto& p_x_low_limbs = input_elements.p_x_low_limbs();
+        auto& p_y_low_limbs = input_elements.p_y_low_limbs();
+        auto& p_x_high_limbs = input_elements.p_x_high_limbs();
+        auto& p_y_high_limbs = input_elements.p_y_high_limbs();
+        auto& accumulators_binary_limbs_0 = input_elements.accumulators_binary_limbs_0();
+        auto& accumulators_binary_limbs_1 = input_elements.accumulators_binary_limbs_1();
+        auto& accumulators_binary_limbs_2 = input_elements.accumulators_binary_limbs_2();
+        auto& accumulators_binary_limbs_3 = input_elements.accumulators_binary_limbs_3();
+        auto& z_low_limbs = input_elements.z_low_limbs();
+        auto& z_high_limbs = input_elements.z_high_limbs();
+        auto& quotient_low_binary_limbs = input_elements.quotient_low_binary_limbs();
+        auto& quotient_high_binary_limbs = input_elements.quotient_high_binary_limbs();
+        auto& p_x_low_limbs_shift = input_elements.p_x_low_limbs_shift();
+        auto& p_y_low_limbs_shift = input_elements.p_y_low_limbs_shift();
+        auto& p_x_high_limbs_shift = input_elements.p_x_high_limbs_shift();
+        auto& p_y_high_limbs_shift = input_elements.p_y_high_limbs_shift();
+        auto& accumulators_binary_limbs_0_shift = input_elements.accumulators_binary_limbs_0_shift();
+        auto& accumulators_binary_limbs_1_shift = input_elements.accumulators_binary_limbs_1_shift();
+        auto& accumulators_binary_limbs_2_shift = input_elements.accumulators_binary_limbs_2_shift();
+        auto& accumulators_binary_limbs_3_shift = input_elements.accumulators_binary_limbs_3_shift();
+        auto& z_low_limbs_shift = input_elements.z_low_limbs_shift();
+        auto& z_high_limbs_shift = input_elements.z_high_limbs_shift();
+        auto& quotient_low_binary_limbs_shift = input_elements.quotient_low_binary_limbs_shift();
+        auto& quotient_high_binary_limbs_shift = input_elements.quotient_high_binary_limbs_shift();
+        auto& relation_wide_limbs = input_elements.relation_wide_limbs();
+        auto& relation_wide_limbs_shift = input_elements.relation_wide_limbs_shift();
+        auto& lagrange_odd_in_minicircuit = input_elements.lagrange_odd_in_minicircuit();
 
         RelationValues expected_values;
 

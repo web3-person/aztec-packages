@@ -74,8 +74,8 @@ template <UltraFlavor Flavor> void UltraProver_<Flavor>::execute_sorted_list_acc
 
     // Commit to the sorted withness-table accumulator and the finalised (i.e. with memory records) fourth wire
     // polynomial
-    auto sorted_accum_commitment = commitment_key->commit(instance->proving_key->sorted_accum);
-    auto w_4_commitment = commitment_key->commit(instance->proving_key->w_4);
+    auto sorted_accum_commitment = commitment_key->commit(instance->proving_key->sorted_accum());
+    auto w_4_commitment = commitment_key->commit(instance->proving_key->w_4());
     transcript.send_to_verifier(commitment_labels.sorted_accum, sorted_accum_commitment);
     transcript.send_to_verifier(commitment_labels.w_4, w_4_commitment);
 }

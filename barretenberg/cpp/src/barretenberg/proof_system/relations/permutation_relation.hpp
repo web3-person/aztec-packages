@@ -35,8 +35,8 @@ template <typename FF_> class UltraPermutationRelationImpl {
         auto id_3 = View(in.id_3());
         auto id_4 = View(in.id_4());
 
-        const auto& beta = ParameterView(params.beta());
-        const auto& gamma = ParameterView(params.gamma());
+        const auto& beta = ParameterView(params.beta);
+        const auto& gamma = ParameterView(params.gamma);
 
         // witness degree 4; fully degree 8
         return (w_1 + id_1 * beta + gamma) * (w_2 + id_2 * beta + gamma) * (w_3 + id_3 * beta + gamma) *
@@ -59,8 +59,8 @@ template <typename FF_> class UltraPermutationRelationImpl {
         auto sigma_3 = View(in.sigma_3());
         auto sigma_4 = View(in.sigma_4());
 
-        const auto& beta = ParameterView(params.beta());
-        const auto& gamma = ParameterView(params.gamma());
+        const auto& beta = ParameterView(params.beta);
+        const auto& gamma = ParameterView(params.gamma);
 
         // witness degree 4; fully degree 8
         return (w_1 + sigma_1 * beta + gamma) * (w_2 + sigma_2 * beta + gamma) * (w_3 + sigma_3 * beta + gamma) *
@@ -89,7 +89,7 @@ template <typename FF_> class UltraPermutationRelationImpl {
             using Accumulator = std::tuple_element_t<0, ContainerOverSubrelations>;
             using View = typename Accumulator::View;
             using ParameterView = GetParameterView<Parameters, View>;
-            const auto public_input_delta = ParameterView(params.public_input_delta());
+            const auto public_input_delta = ParameterView(params.public_input_delta);
             const auto z_perm = View(in.z_perm());
             const auto z_perm_shift = View(in.z_perm_shift());
             const auto lagrange_first = View(in.lagrange_first());

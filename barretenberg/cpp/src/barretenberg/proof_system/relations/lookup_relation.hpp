@@ -64,9 +64,9 @@ template <typename FF_> class LookupRelationImpl {
         using View = typename Accumulator::View;
         using ParameterView = GetParameterView<Parameters, View>;
 
-        const auto& beta = ParameterView(params.beta());
-        const auto& gamma = ParameterView(params.gamma());
-        const auto& eta = ParameterView(params.eta());
+        const auto& beta = ParameterView(params.beta);
+        const auto& gamma = ParameterView(params.gamma);
+        const auto& eta = ParameterView(params.eta);
         const auto eta_sqr = eta * eta;
         const auto eta_cube = eta_sqr * eta;
 
@@ -134,8 +134,8 @@ template <typename FF_> class LookupRelationImpl {
         using View = typename Accumulator::View;
         using ParameterView = GetParameterView<Parameters, View>;
 
-        const auto& beta = ParameterView(params.beta());
-        const auto& gamma = ParameterView(params.gamma());
+        const auto& beta = ParameterView(params.beta);
+        const auto& gamma = ParameterView(params.gamma);
 
         const auto one_plus_beta = beta + FF(1);
         const auto gamma_by_one_plus_beta = gamma * one_plus_beta; // deg 0 or 2
@@ -178,7 +178,7 @@ template <typename FF_> class LookupRelationImpl {
             using View = typename Accumulator::View;
             using ParameterView = GetParameterView<Parameters, View>;
 
-            const auto& grand_product_delta = ParameterView(params.lookup_grand_product_delta());
+            const auto& grand_product_delta = ParameterView(params.lookup_grand_product_delta);
 
             auto z_lookup = View(in.z_lookup());
             auto z_lookup_shift = View(in.z_lookup_shift());

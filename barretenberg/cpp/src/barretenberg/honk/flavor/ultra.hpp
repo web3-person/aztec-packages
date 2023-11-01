@@ -142,9 +142,9 @@ class Ultra {
         DataType& z_perm() { return std::get<9>(this->_data); }
         DataType& z_lookup() { return std::get<10>(this->_data); }
 
-        std::vector<HandleType> get_wires() override { return { w_l, w_r, w_o, w_4 }; };
+        std::vector<HandleType> get_wires() override { return { w_l(), w_r(), w_o(), w_4() }; };
         // The sorted concatenations of table and witness data needed for plookup.
-        std::vector<HandleType> get_sorted_polynomials() { return { sorted_1, sorted_2, sorted_3, sorted_4 }; };
+        std::vector<HandleType> get_sorted_polynomials() { return { sorted_1(), sorted_2(), sorted_3(), sorted_4() }; };
     };
 
     /**
@@ -159,49 +159,49 @@ class Ultra {
     template <typename DataType, typename HandleType>
     class AllEntities : public AllEntities_<DataType, HandleType, NUM_ALL_ENTITIES> {
       public:
-        BBERG_INLINE DataType& q_c() { return std::get<0>(this->_data); }
-        BBERG_INLINE DataType& q_l() { return std::get<1>(this->_data); }
-        BBERG_INLINE DataType& q_r() { return std::get<2>(this->_data); }
-        BBERG_INLINE DataType& q_o() { return std::get<3>(this->_data); }
-        BBERG_INLINE DataType& q_4() { return std::get<4>(this->_data); }
-        BBERG_INLINE DataType& q_m() { return std::get<5>(this->_data); }
-        BBERG_INLINE DataType& q_arith() { return std::get<6>(this->_data); }
-        BBERG_INLINE DataType& q_sort() { return std::get<7>(this->_data); }
-        BBERG_INLINE DataType& q_elliptic() { return std::get<8>(this->_data); }
-        BBERG_INLINE DataType& q_aux() { return std::get<9>(this->_data); }
-        BBERG_INLINE DataType& q_lookup() { return std::get<10>(this->_data); }
-        BBERG_INLINE DataType& sigma_1() { return std::get<11>(this->_data); }
-        BBERG_INLINE DataType& sigma_2() { return std::get<12>(this->_data); }
-        BBERG_INLINE DataType& sigma_3() { return std::get<13>(this->_data); }
-        BBERG_INLINE DataType& sigma_4() { return std::get<14>(this->_data); }
-        BBERG_INLINE DataType& id_1() { return std::get<15>(this->_data); }
-        BBERG_INLINE DataType& id_2() { return std::get<16>(this->_data); }
-        BBERG_INLINE DataType& id_3() { return std::get<17>(this->_data); }
-        BBERG_INLINE DataType& id_4() { return std::get<18>(this->_data); }
-        BBERG_INLINE DataType& table_1() { return std::get<19>(this->_data); }
-        BBERG_INLINE DataType& table_2() { return std::get<20>(this->_data); }
-        BBERG_INLINE DataType& table_3() { return std::get<21>(this->_data); }
-        BBERG_INLINE DataType& table_4() { return std::get<22>(this->_data); }
-        BBERG_INLINE DataType& lagrange_first() { return std::get<23>(this->_data); }
-        BBERG_INLINE DataType& lagrange_last() { return std::get<24>(this->_data); }
-        BBERG_INLINE DataType& w_l() { return std::get<25>(this->_data); }
-        BBERG_INLINE DataType& w_r() { return std::get<26>(this->_data); }
-        BBERG_INLINE DataType& w_o() { return std::get<27>(this->_data); }
-        BBERG_INLINE DataType& w_4() { return std::get<28>(this->_data); }
-        BBERG_INLINE DataType& sorted_accum() { return std::get<29>(this->_data); }
-        BBERG_INLINE DataType& z_perm() { return std::get<30>(this->_data); }
-        BBERG_INLINE DataType& z_lookup() { return std::get<31>(this->_data); }
-        BBERG_INLINE DataType& table_1_shift() { return std::get<32>(this->_data); }
-        BBERG_INLINE DataType& table_2_shift() { return std::get<33>(this->_data); }
-        BBERG_INLINE DataType& table_3_shift() { return std::get<34>(this->_data); }
-        BBERG_INLINE DataType& table_4_shift() { return std::get<35>(this->_data); }
-        BBERG_INLINE DataType& w_l_shift() { return std::get<36>(this->_data); }
-        BBERG_INLINE DataType& w_r_shift() { return std::get<37>(this->_data); }
-        BBERG_INLINE DataType& w_o_shift() { return std::get<38>(this->_data); }
-        BBERG_INLINE DataType& w_4_shift() { return std::get<39>(this->_data); }
-        BBERG_INLINE DataType& sorted_accum_shift() { return std::get<40>(this->_data); }
-        BBERG_INLINE DataType& z_perm_shift() { return std::get<41>(this->_data); }
-        BBERG_INLINE DataType& z_lookup_shift() { return std::get<42>(this->_data); }
+        CONST_FRIENDLY_GETTER(DataType, q_c, std::get<0>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_l, std::get<1>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_r, std::get<2>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_o, std::get<3>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_4, std::get<4>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_m, std::get<5>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_arith, std::get<6>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_sort, std::get<7>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_elliptic, std::get<8>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_aux, std::get<9>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_lookup, std::get<10>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_1, std::get<11>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_2, std::get<12>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_3, std::get<13>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_4, std::get<14>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_1, std::get<15>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_2, std::get<16>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_3, std::get<17>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_4, std::get<18>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_1, std::get<19>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_2, std::get<20>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_3, std::get<21>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_4, std::get<22>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_first, std::get<23>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_last, std::get<24>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_l, std::get<25>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_r, std::get<26>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_o, std::get<27>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_4, std::get<28>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_accum, std::get<29>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_perm, std::get<30>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_lookup, std::get<31>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_1_shift, std::get<32>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_2_shift, std::get<33>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_3_shift, std::get<34>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_4_shift, std::get<35>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_l_shift, std::get<36>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_r_shift, std::get<37>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_o_shift, std::get<38>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_4_shift, std::get<39>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_accum_shift, std::get<40>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_perm_shift, std::get<41>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_lookup_shift, std::get<42>(this->_data))
 
         std::vector<HandleType> get_wires() override { return { w_l(), w_r(), w_o(), w_4() }; };
         // Gemini-specific getters.
@@ -271,7 +271,7 @@ class Ultra {
         std::vector<uint32_t> memory_write_records;
 
         // The plookup wires that store plookup read data.
-        std::array<PolynomialHandle, 3> get_table_column_wires() { return { w_l, w_r, w_o }; };
+        std::array<PolynomialHandle, 3> get_table_column_wires() { return { w_l(), w_r(), w_o() }; };
     };
 
     /**
@@ -393,31 +393,31 @@ class Ultra {
                             [[maybe_unused]] const BaseTranscript<FF>& transcript)
         {
             static_cast<void>(transcript);
-            q_m() = verification_key->q_m;
-            q_l() = verification_key->q_l;
-            q_r() = verification_key->q_r;
-            q_o() = verification_key->q_o;
-            q_4() = verification_key->q_4;
-            q_c() = verification_key->q_c;
-            q_arith() = verification_key->q_arith;
-            q_sort() = verification_key->q_sort;
-            q_elliptic() = verification_key->q_elliptic;
-            q_aux() = verification_key->q_aux;
-            q_lookup() = verification_key->q_lookup;
-            sigma_1() = verification_key->sigma_1;
-            sigma_2() = verification_key->sigma_2;
-            sigma_3() = verification_key->sigma_3;
-            sigma_4() = verification_key->sigma_4;
-            id_1() = verification_key->id_1;
-            id_2() = verification_key->id_2;
-            id_3() = verification_key->id_3;
-            id_4() = verification_key->id_4;
-            table_1() = verification_key->table_1;
-            table_2() = verification_key->table_2;
-            table_3() = verification_key->table_3;
-            table_4() = verification_key->table_4;
-            lagrange_first() = verification_key->lagrange_first;
-            lagrange_last() = verification_key->lagrange_last;
+            q_m() = verification_key->q_m();
+            q_l() = verification_key->q_l();
+            q_r() = verification_key->q_r();
+            q_o() = verification_key->q_o();
+            q_4() = verification_key->q_4();
+            q_c() = verification_key->q_c();
+            q_arith() = verification_key->q_arith();
+            q_sort() = verification_key->q_sort();
+            q_elliptic() = verification_key->q_elliptic();
+            q_aux() = verification_key->q_aux();
+            q_lookup() = verification_key->q_lookup();
+            sigma_1() = verification_key->sigma_1();
+            sigma_2() = verification_key->sigma_2();
+            sigma_3() = verification_key->sigma_3();
+            sigma_4() = verification_key->sigma_4();
+            id_1() = verification_key->id_1();
+            id_2() = verification_key->id_2();
+            id_3() = verification_key->id_3();
+            id_4() = verification_key->id_4();
+            table_1() = verification_key->table_1();
+            table_2() = verification_key->table_2();
+            table_3() = verification_key->table_3();
+            table_4() = verification_key->table_4();
+            lagrange_first() = verification_key->lagrange_first();
+            lagrange_last() = verification_key->lagrange_last();
         }
     };
 
