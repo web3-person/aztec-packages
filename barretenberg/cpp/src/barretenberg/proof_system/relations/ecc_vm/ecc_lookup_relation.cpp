@@ -2,6 +2,8 @@
 #include "barretenberg/honk/sumcheck/relation_definitions_fwd.hpp"
 #include "ecc_msm_relation.hpp"
 
+#include "barretenberg/common/named_array.hpp"
+
 namespace proof_system::honk::sumcheck {
 
 /**
