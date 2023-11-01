@@ -64,6 +64,7 @@
  */
 
 #pragma once
+#include "barretenberg/common/getters.hpp"
 #include "barretenberg/polynomials/barycentric.hpp"
 #include "barretenberg/polynomials/evaluation_domain.hpp"
 #include "barretenberg/polynomials/univariate.hpp"
@@ -71,17 +72,6 @@
 #include <array>
 #include <concepts>
 #include <vector>
-
-// TODO(AD) move this to a better home once usage is finalized
-#define CONST_FRIENDLY_GETTER(T, name, value)                                                                          \
-    T& name()                                                                                                          \
-    {                                                                                                                  \
-        return value;                                                                                                  \
-    }                                                                                                                  \
-    const T& name() const                                                                                              \
-    {                                                                                                                  \
-        return value;                                                                                                  \
-    }
 
 namespace proof_system::honk::flavor {
 

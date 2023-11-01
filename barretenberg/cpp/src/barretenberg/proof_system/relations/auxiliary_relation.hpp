@@ -95,7 +95,7 @@ template <typename FF_> class AuxiliaryRelationImpl {
         using View = typename Accumulator::View;
         using ParameterView = GetParameterView<Parameters, View>;
 
-        const auto& eta = ParameterView(params.eta);
+        const auto& eta = ParameterView(params.eta());
 
         auto w_1 = View(in.w_l());
         auto w_2 = View(in.w_r());

@@ -11,6 +11,7 @@
  * satisfied in general by random inputs) only that the two implementations are equivalent.
  *
  */
+#include "barretenberg/common/getters.hpp"
 #include "barretenberg/ecc/curves/bn254/fr.hpp"
 #include "barretenberg/proof_system/relations/relation_parameters.hpp"
 #include "barretenberg/proof_system/relations/translator_vm/translator_decomposition_relation.hpp"

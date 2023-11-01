@@ -35,7 +35,7 @@ template <typename FF_> class GoblinTranslatorOpcodeConstraintRelationImpl {
         using Accumulator = std::tuple_element_t<0, ContainerOverSubrelations>;
         using View = typename Accumulator::View;
 
-        auto op = View(in.op);
+        auto op = View(in.op());
         static const FF minus_one = FF(-1);
         static const FF minus_two = FF(-2);
         static const FF minus_three = FF(-3);
@@ -97,22 +97,22 @@ template <typename FF_> class GoblinTranslatorAccumulatorTransferRelationImpl {
         using Accumulator = std::tuple_element_t<0, ContainerOverSubrelations>;
         using View = typename Accumulator::View;
         // We use combination of lagrange polynomials at even indices in the minicircuit for copying the accumulator
-        auto lagrange_even_in_minicircuit = View(in.lagrange_even_in_minicircuit);
+        auto lagrange_even_in_minicircuit = View(in.lagrange_even_in_minicircuit());
 
         // Lagrange at index 1 is used to confirm the accumulator result
-        auto lagrange_second = View(in.lagrange_second);
+        auto lagrange_second = View(in.lagrange_second());
 
         // Lagrange at index (size of minicircuit - 2) is used to enforce that it starts with zero
-        auto lagrange_second_to_last_in_minicircuit = View(in.lagrange_second_to_last_in_minicircuit);
+        auto lagrange_second_to_last_in_minicircuit = View(in.lagrange_second_to_last_in_minicircuit());
 
-        auto accumulators_binary_limbs_0 = View(in.accumulators_binary_limbs_0);
-        auto accumulators_binary_limbs_1 = View(in.accumulators_binary_limbs_1);
-        auto accumulators_binary_limbs_2 = View(in.accumulators_binary_limbs_2);
-        auto accumulators_binary_limbs_3 = View(in.accumulators_binary_limbs_3);
-        auto accumulators_binary_limbs_0_shift = View(in.accumulators_binary_limbs_0_shift);
-        auto accumulators_binary_limbs_1_shift = View(in.accumulators_binary_limbs_1_shift);
-        auto accumulators_binary_limbs_2_shift = View(in.accumulators_binary_limbs_2_shift);
-        auto accumulators_binary_limbs_3_shift = View(in.accumulators_binary_limbs_3_shift);
+        auto accumulators_binary_limbs_0 = View(in.accumulators_binary_limbs_0());
+        auto accumulators_binary_limbs_1 = View(in.accumulators_binary_limbs_1());
+        auto accumulators_binary_limbs_2 = View(in.accumulators_binary_limbs_2());
+        auto accumulators_binary_limbs_3 = View(in.accumulators_binary_limbs_3());
+        auto accumulators_binary_limbs_0_shift = View(in.accumulators_binary_limbs_0_shift());
+        auto accumulators_binary_limbs_1_shift = View(in.accumulators_binary_limbs_1_shift());
+        auto accumulators_binary_limbs_2_shift = View(in.accumulators_binary_limbs_2_shift());
+        auto accumulators_binary_limbs_3_shift = View(in.accumulators_binary_limbs_3_shift());
 
         // Contribution (1) (1-4 ensure transfer of accumulator limbs at even indices of the minicircuit)
         auto tmp_1 = accumulators_binary_limbs_0 - accumulators_binary_limbs_0_shift;

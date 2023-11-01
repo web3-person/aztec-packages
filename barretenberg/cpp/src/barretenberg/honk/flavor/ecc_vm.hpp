@@ -1,5 +1,6 @@
 #pragma once
 #include "../sumcheck/relation_definitions_fwd.hpp"
+#include "barretenberg/common/getters.hpp"
 #include "barretenberg/ecc/curves/bn254/bn254.hpp"
 #include "barretenberg/ecc/curves/grumpkin/grumpkin.hpp"
 #include "barretenberg/honk/pcs/commitment_key.hpp"

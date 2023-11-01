@@ -248,32 +248,32 @@ Accumulator ECCVMSetRelationBase<FF>::compute_permutation_denominator(const AllE
      */
     Accumulator denominator(1); // degree-0
     {
-        const auto& add1 = View(in.msm_add1);
-        const auto& msm_slice1 = View(in.msm_slice1);
+        const auto& add1 = View(in.msm_add1());
+        const auto& msm_slice1 = View(in.msm_slice1());
 
         auto wnaf_slice_output1 =
             add1 * (msm_slice1 + gamma + (msm_pc - msm_count) * beta + msm_round * beta_sqr) + (-add1 + 1);
         denominator *= wnaf_slice_output1; // degree-2
     }
     {
-        const auto& add2 = View(in.msm_add2);
-        const auto& msm_slice2 = View(in.msm_slice2);
+        const auto& add2 = View(in.msm_add2());
+        const auto& msm_slice2 = View(in.msm_slice2());
 
         auto wnaf_slice_output2 =
             add2 * (msm_slice2 + gamma + (msm_pc - msm_count - 1) * beta + msm_round * beta_sqr) + (-add2 + 1);
         denominator *= wnaf_slice_output2; // degree-4
     }
     {
-        const auto& add3 = View(in.msm_add3);
-        const auto& msm_slice3 = View(in.msm_slice3);
+        const auto& add3 = View(in.msm_add3());
+        const auto& msm_slice3 = View(in.msm_slice3());
 
         auto wnaf_slice_output3 =
             add3 * (msm_slice3 + gamma + (msm_pc - msm_count - 2) * beta + msm_round * beta_sqr) + (-add3 + 1);
         denominator *= wnaf_slice_output3; // degree-6
     }
     {
-        const auto& add4 = View(in.msm_add4);
-        const auto& msm_slice4 = View(in.msm_slice4);
+        const auto& add4 = View(in.msm_add4());
+        const auto& msm_slice4 = View(in.msm_slice4());
         auto wnaf_slice_output4 =
             add4 * (msm_slice4 + gamma + (msm_pc - msm_count - 3) * beta + msm_round * beta_sqr) + (-add4 + 1);
         denominator *= wnaf_slice_output4; // degree-8
@@ -286,15 +286,15 @@ Accumulator ECCVMSetRelationBase<FF>::compute_permutation_denominator(const AllE
      * term values in `compute_permutation_numerator`
      */
     {
-        const auto& transcript_pc = View(in.transcript_pc);
+        const auto& transcript_pc = View(in.transcript_pc());
 
-        auto transcript_x = View(in.transcript_x);
-        auto transcript_y = View(in.transcript_y);
-        auto z1 = View(in.transcript_z1);
-        auto z2 = View(in.transcript_z2);
-        auto z1_zero = View(in.transcript_z1zero);
-        auto z2_zero = View(in.transcript_z2zero);
-        auto transcript_mul = View(in.transcript_mul);
+        auto transcript_x = View(in.transcript_x());
+        auto transcript_y = View(in.transcript_y());
+        auto z1 = View(in.transcript_z1());
+        auto z2 = View(in.transcript_z2());
+        auto z1_zero = View(in.transcript_z1zero());
+        auto z2_zero = View(in.transcript_z2zero());
+        auto transcript_mul = View(in.transcript_mul());
 
         auto lookup_first = (-z1_zero + 1);
         auto lookup_second = (-z2_zero + 1);
@@ -331,14 +331,14 @@ Accumulator ECCVMSetRelationBase<FF>::compute_permutation_denominator(const AllE
      * `transcript_pc` and has size `transcript_msm_count`
      */
     {
-        auto transcript_pc_shift = View(in.transcript_pc_shift);
-        auto transcript_msm_x = View(in.transcript_msm_x);
-        auto transcript_msm_y = View(in.transcript_msm_y);
-        auto transcript_msm_transition = View(in.transcript_msm_transition);
-        auto transcript_msm_count = View(in.transcript_msm_count);
-        auto z1_zero = View(in.transcript_z1zero);
-        auto z2_zero = View(in.transcript_z2zero);
-        auto transcript_mul = View(in.transcript_mul);
+        auto transcript_pc_shift = View(in.transcript_pc_shift());
+        auto transcript_msm_x = View(in.transcript_msm_x());
+        auto transcript_msm_y = View(in.transcript_msm_y());
+        auto transcript_msm_transition = View(in.transcript_msm_transition());
+        auto transcript_msm_count = View(in.transcript_msm_count());
+        auto z1_zero = View(in.transcript_z1zero());
+        auto z2_zero = View(in.transcript_z2zero());
+        auto transcript_mul = View(in.transcript_mul());
 
         auto full_msm_count = transcript_msm_count + transcript_mul * ((-z1_zero + 1) + (-z2_zero + 1));
         //      auto count_test = transcript_msm_count

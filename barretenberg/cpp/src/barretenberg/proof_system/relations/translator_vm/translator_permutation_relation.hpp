@@ -22,12 +22,12 @@ template <typename FF_> class GoblinTranslatorPermutationRelationImpl {
     {
         using View = typename Accumulator::View;
 
-        auto concatenated_range_constraints_0 = View(in.concatenated_range_constraints_0);
-        auto concatenated_range_constraints_1 = View(in.concatenated_range_constraints_1);
-        auto concatenated_range_constraints_2 = View(in.concatenated_range_constraints_2);
-        auto concatenated_range_constraints_3 = View(in.concatenated_range_constraints_3);
+        auto concatenated_range_constraints_0 = View(in.concatenated_range_constraints_0());
+        auto concatenated_range_constraints_1 = View(in.concatenated_range_constraints_1());
+        auto concatenated_range_constraints_2 = View(in.concatenated_range_constraints_2());
+        auto concatenated_range_constraints_3 = View(in.concatenated_range_constraints_3());
 
-        auto ordered_extra_range_constraints_numerator = View(in.ordered_extra_range_constraints_numerator);
+        auto ordered_extra_range_constraints_numerator = View(in.ordered_extra_range_constraints_numerator());
 
         const auto& gamma = params.gamma;
         return (concatenated_range_constraints_0 + gamma) * (concatenated_range_constraints_1 + gamma) *
@@ -40,11 +40,11 @@ template <typename FF_> class GoblinTranslatorPermutationRelationImpl {
     {
         using View = typename Accumulator::View;
 
-        auto ordered_range_constraints_0 = View(in.ordered_range_constraints_0);
-        auto ordered_range_constraints_1 = View(in.ordered_range_constraints_1);
-        auto ordered_range_constraints_2 = View(in.ordered_range_constraints_2);
-        auto ordered_range_constraints_3 = View(in.ordered_range_constraints_3);
-        auto ordered_range_constraints_4 = View(in.ordered_range_constraints_4);
+        auto ordered_range_constraints_0 = View(in.ordered_range_constraints_0());
+        auto ordered_range_constraints_1 = View(in.ordered_range_constraints_1());
+        auto ordered_range_constraints_2 = View(in.ordered_range_constraints_2());
+        auto ordered_range_constraints_3 = View(in.ordered_range_constraints_3());
+        auto ordered_range_constraints_4 = View(in.ordered_range_constraints_4());
 
         const auto& gamma = params.gamma;
 

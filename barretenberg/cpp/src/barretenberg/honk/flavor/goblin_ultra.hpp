@@ -1,4 +1,5 @@
 #pragma once
+#include "barretenberg/common/getters.hpp"
 #include "barretenberg/honk/pcs/kzg/kzg.hpp"
 #include "barretenberg/honk/transcript/transcript.hpp"
 #include "barretenberg/polynomials/univariate.hpp"

@@ -11,6 +11,7 @@
  * satisfied in general by random inputs) only that the two implementations are equivalent.
  *
  */
+#include "barretenberg/common/getters.hpp"
 #include "barretenberg/ecc/curves/bn254/fr.hpp"
 #include "barretenberg/ecc/curves/grumpkin/grumpkin.hpp"
 #include "barretenberg/proof_system/relations/auxiliary_relation.hpp"
@@ -21,17 +22,6 @@
 #include "barretenberg/proof_system/relations/relation_parameters.hpp"
 #include "barretenberg/proof_system/relations/ultra_arithmetic_relation.hpp"
 #include <gtest/gtest.h>
-
-// TODO(AD) move this to a better home once usage is finalized
-#define CONST_FRIENDLY_GETTER(T, name, value)                                                                          \
-    T& name()                                                                                                          \
-    {                                                                                                                  \
-        return value;                                                                                                  \
-    }                                                                                                                  \
-    const T& name() const                                                                                              \
-    {                                                                                                                  \
-        return value;                                                                                                  \
-    }
 
 using namespace proof_system;
 

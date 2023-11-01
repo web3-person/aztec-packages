@@ -5,6 +5,7 @@
 #include "barretenberg/polynomials/barycentric.hpp"
 #include "barretenberg/polynomials/univariate.hpp"
 
+#include "barretenberg/common/getters.hpp"
 #include "barretenberg/honk/flavor/goblin_ultra.hpp"
 #include "barretenberg/honk/transcript/transcript.hpp"
 #include "barretenberg/polynomials/evaluation_domain.hpp"

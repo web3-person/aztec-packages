@@ -44,17 +44,17 @@ template <typename FF_> class GoblinTranslatorGenPermSortRelationImpl {
     {
         using Accumulator = std::tuple_element_t<0, ContainerOverSubrelations>;
         using View = typename Accumulator::View;
-        auto ordered_range_constraints_0 = View(in.ordered_range_constraints_0);
-        auto ordered_range_constraints_1 = View(in.ordered_range_constraints_1);
-        auto ordered_range_constraints_2 = View(in.ordered_range_constraints_2);
-        auto ordered_range_constraints_3 = View(in.ordered_range_constraints_3);
-        auto ordered_range_constraints_4 = View(in.ordered_range_constraints_4);
-        auto ordered_range_constraints_0_shift = View(in.ordered_range_constraints_0_shift);
-        auto ordered_range_constraints_1_shift = View(in.ordered_range_constraints_1_shift);
-        auto ordered_range_constraints_2_shift = View(in.ordered_range_constraints_2_shift);
-        auto ordered_range_constraints_3_shift = View(in.ordered_range_constraints_3_shift);
-        auto ordered_range_constraints_4_shift = View(in.ordered_range_constraints_4_shift);
-        auto lagrange_last = View(in.lagrange_last);
+        auto ordered_range_constraints_0 = View(in.ordered_range_constraints_0());
+        auto ordered_range_constraints_1 = View(in.ordered_range_constraints_1());
+        auto ordered_range_constraints_2 = View(in.ordered_range_constraints_2());
+        auto ordered_range_constraints_3 = View(in.ordered_range_constraints_3());
+        auto ordered_range_constraints_4 = View(in.ordered_range_constraints_4());
+        auto ordered_range_constraints_0_shift = View(in.ordered_range_constraints_0_shift());
+        auto ordered_range_constraints_1_shift = View(in.ordered_range_constraints_1_shift());
+        auto ordered_range_constraints_2_shift = View(in.ordered_range_constraints_2_shift());
+        auto ordered_range_constraints_3_shift = View(in.ordered_range_constraints_3_shift());
+        auto ordered_range_constraints_4_shift = View(in.ordered_range_constraints_4_shift());
+        auto lagrange_last = View(in.lagrange_last());
 
         static const FF minus_one = FF(-1);
         static const FF minus_two = FF(-2);
