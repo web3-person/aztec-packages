@@ -26,16 +26,16 @@ void ECCVMPointTableRelationBase<FF>::accumulate(ContainerOverSubrelations& accu
     using Accumulator = typename std::tuple_element_t<0, ContainerOverSubrelations>;
     using View = typename Accumulator::View;
 
-    const auto& Tx = View(in.precompute_tx);
-    const auto& Tx_shift = View(in.precompute_tx_shift);
-    const auto& Ty = View(in.precompute_ty);
-    const auto& Ty_shift = View(in.precompute_ty_shift);
-    const auto& Dx = View(in.precompute_dx);
-    const auto& Dx_shift = View(in.precompute_dx_shift);
-    const auto& Dy = View(in.precompute_dy);
-    const auto& Dy_shift = View(in.precompute_dy_shift);
-    const auto& precompute_point_transition = View(in.precompute_point_transition);
-    const auto& lagrange_first = View(in.lagrange_first);
+    const auto& Tx = View(in.precompute_tx());
+    const auto& Tx_shift = View(in.precompute_tx_shift());
+    const auto& Ty = View(in.precompute_ty());
+    const auto& Ty_shift = View(in.precompute_ty_shift());
+    const auto& Dx = View(in.precompute_dx());
+    const auto& Dx_shift = View(in.precompute_dx_shift());
+    const auto& Dy = View(in.precompute_dy());
+    const auto& Dy_shift = View(in.precompute_dy_shift());
+    const auto& precompute_point_transition = View(in.precompute_point_transition());
+    const auto& lagrange_first = View(in.lagrange_first());
 
     /**
      * @brief Row structure

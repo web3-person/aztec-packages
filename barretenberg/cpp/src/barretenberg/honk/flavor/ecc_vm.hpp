@@ -88,11 +88,14 @@ template <typename CycleGroup_T, typename Curve_T, typename PCS_T> class ECCVMBa
     template <typename DataType, typename HandleType>
     class PrecomputedEntities : public PrecomputedEntities_<DataType, HandleType, NUM_PRECOMPUTED_ENTITIES> {
       public:
-        DataType& lagrange_first = std::get<0>(this->_data);
-        DataType& lagrange_second = std::get<1>(this->_data);
-        DataType& lagrange_last = std::get<2>(this->_data);
+        CONST_FRIENDLY_GETTER(DataType, lagrange_first, std::get<0>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_second, std::get<1>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_last, std::get<2>(this->_data))
 
-        std::vector<HandleType> get_selectors() override { return { lagrange_first, lagrange_second, lagrange_last }; };
+        std::vector<HandleType> get_selectors() override
+        {
+            return { lagrange_first(), lagrange_second(), lagrange_last() };
+        };
         std::vector<HandleType> get_sigma_polynomials() override { return {}; };
         std::vector<HandleType> get_id_polynomials() override { return {}; };
         std::vector<HandleType> get_table_polynomials() { return {}; };
@@ -106,161 +109,161 @@ template <typename CycleGroup_T, typename Curve_T, typename PCS_T> class ECCVMBa
     class WitnessEntities : public WitnessEntities_<DataType, HandleType, NUM_WITNESS_ENTITIES> {
       public:
         // clang-format off
-        DataType& transcript_add               = std::get<0>(this->_data);
-        DataType& transcript_mul               = std::get<1>(this->_data);
-        DataType& transcript_eq                = std::get<2>(this->_data);
-        DataType& transcript_collision_check   = std::get<3>(this->_data);
-        DataType& transcript_msm_transition    = std::get<4>(this->_data);
-        DataType& transcript_pc                = std::get<5>(this->_data);
-        DataType& transcript_msm_count         = std::get<6>(this->_data);
-        DataType& transcript_x                 = std::get<7>(this->_data);
-        DataType& transcript_y                 = std::get<8>(this->_data);
-        DataType& transcript_z1                = std::get<9>(this->_data);
-        DataType& transcript_z2                = std::get<10>(this->_data);
-        DataType& transcript_z1zero            = std::get<11>(this->_data); 
-        DataType& transcript_z2zero            = std::get<12>(this->_data);
-        DataType& transcript_op                = std::get<13>(this->_data);
-        DataType& transcript_accumulator_x     = std::get<14>(this->_data);
-        DataType& transcript_accumulator_y     = std::get<15>(this->_data);
-        DataType& transcript_msm_x             = std::get<16>(this->_data);
-        DataType& transcript_msm_y             = std::get<17>(this->_data);
-        DataType& precompute_pc                = std::get<18>(this->_data);
-        DataType& precompute_point_transition  = std::get<19>(this->_data);
-        DataType& precompute_round             = std::get<20>(this->_data);
-        DataType& precompute_scalar_sum        = std::get<21>(this->_data);
-        DataType& precompute_s1hi              = std::get<22>(this->_data);
-        DataType& precompute_s1lo              = std::get<23>(this->_data);
-        DataType& precompute_s2hi              = std::get<24>(this->_data);
-        DataType& precompute_s2lo              = std::get<25>(this->_data);
-        DataType& precompute_s3hi              = std::get<26>(this->_data);
-        DataType& precompute_s3lo              = std::get<27>(this->_data);
-        DataType& precompute_s4hi              = std::get<28>(this->_data);
-        DataType& precompute_s4lo              = std::get<29>(this->_data);
-        DataType& precompute_skew              = std::get<30>(this->_data);
-        DataType& precompute_dx                = std::get<31>(this->_data);
-        DataType& precompute_dy                = std::get<32>(this->_data);
-        DataType& precompute_tx                = std::get<33>(this->_data);
-        DataType& precompute_ty                = std::get<34>(this->_data);
-        DataType& msm_transition               = std::get<35>(this->_data);
-        DataType& msm_add                      = std::get<36>(this->_data);
-        DataType& msm_double                   = std::get<37>(this->_data);
-        DataType& msm_skew                     = std::get<38>(this->_data);
-        DataType& msm_accumulator_x            = std::get<39>(this->_data);
-        DataType& msm_accumulator_y            = std::get<40>(this->_data);
-        DataType& msm_pc                       = std::get<41>(this->_data);
-        DataType& msm_size_of_msm              = std::get<42>(this->_data);
-        DataType& msm_count                    = std::get<43>(this->_data);
-        DataType& msm_round                    = std::get<44>(this->_data);
-        DataType& msm_add1                     = std::get<45>(this->_data);
-        DataType& msm_add2                     = std::get<46>(this->_data);
-        DataType& msm_add3                     = std::get<47>(this->_data);
-        DataType& msm_add4                     = std::get<48>(this->_data);
-        DataType& msm_x1                       = std::get<49>(this->_data);
-        DataType& msm_y1                       = std::get<50>(this->_data);
-        DataType& msm_x2                       = std::get<51>(this->_data);
-        DataType& msm_y2                       = std::get<52>(this->_data);
-        DataType& msm_x3                       = std::get<53>(this->_data);
-        DataType& msm_y3                       = std::get<54>(this->_data);
-        DataType& msm_x4                       = std::get<55>(this->_data);
-        DataType& msm_y4                       = std::get<56>(this->_data);
-        DataType& msm_collision_x1             = std::get<57>(this->_data);
-        DataType& msm_collision_x2             = std::get<58>(this->_data);
-        DataType& msm_collision_x3             = std::get<59>(this->_data);
-        DataType& msm_collision_x4             = std::get<60>(this->_data);
-        DataType& msm_lambda1                  = std::get<61>(this->_data);
-        DataType& msm_lambda2                  = std::get<62>(this->_data);
-        DataType& msm_lambda3                  = std::get<63>(this->_data);
-        DataType& msm_lambda4                  = std::get<64>(this->_data);
-        DataType& msm_slice1                   = std::get<65>(this->_data);
-        DataType& msm_slice2                   = std::get<66>(this->_data);
-        DataType& msm_slice3                   = std::get<67>(this->_data);
-        DataType& msm_slice4                   = std::get<68>(this->_data);
-        DataType& transcript_accumulator_empty = std::get<69>(this->_data);
-        DataType& transcript_reset_accumulator = std::get<70>(this->_data);
-        DataType& precompute_select            = std::get<71>(this->_data);
-        DataType& lookup_read_counts_0         = std::get<72>(this->_data);
-        DataType& lookup_read_counts_1         = std::get<73>(this->_data);
-        DataType& z_perm                       = std::get<74>(this->_data);
-        DataType& lookup_inverses              = std::get<75>(this->_data);
+        CONST_FRIENDLY_GETTER(DataType, transcript_add              , std::get<0>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_mul              , std::get<1>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_eq               , std::get<2>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_collision_check  , std::get<3>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_msm_transition   , std::get<4>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_pc               , std::get<5>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_msm_count        , std::get<6>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_x                , std::get<7>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_y                , std::get<8>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_z1               , std::get<9>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_z2               , std::get<10>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_z1zero           , std::get<11>(this->_data)) 
+        CONST_FRIENDLY_GETTER(DataType, transcript_z2zero           , std::get<12>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_op               , std::get<13>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_accumulator_x    , std::get<14>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_accumulator_y    , std::get<15>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_msm_x            , std::get<16>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_msm_y            , std::get<17>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_pc               , std::get<18>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_point_transition , std::get<19>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_round            , std::get<20>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_scalar_sum       , std::get<21>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s1hi             , std::get<22>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s1lo             , std::get<23>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s2hi             , std::get<24>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s2lo             , std::get<25>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s3hi             , std::get<26>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s3lo             , std::get<27>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s4hi             , std::get<28>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s4lo             , std::get<29>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_skew             , std::get<30>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_dx               , std::get<31>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_dy               , std::get<32>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_tx               , std::get<33>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_ty               , std::get<34>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_transition              , std::get<35>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add                     , std::get<36>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_double                  , std::get<37>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_skew                    , std::get<38>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_accumulator_x           , std::get<39>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_accumulator_y           , std::get<40>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_pc                      , std::get<41>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_size_of_msm             , std::get<42>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_count                   , std::get<43>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_round                   , std::get<44>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add1                    , std::get<45>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add2                    , std::get<46>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add3                    , std::get<47>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add4                    , std::get<48>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_x1                      , std::get<49>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_y1                      , std::get<50>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_x2                      , std::get<51>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_y2                      , std::get<52>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_x3                      , std::get<53>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_y3                      , std::get<54>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_x4                      , std::get<55>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_y4                      , std::get<56>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_collision_x1            , std::get<57>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_collision_x2            , std::get<58>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_collision_x3            , std::get<59>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_collision_x4            , std::get<60>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_lambda1                 , std::get<61>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_lambda2                 , std::get<62>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_lambda3                 , std::get<63>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_lambda4                 , std::get<64>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_slice1                  , std::get<65>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_slice2                  , std::get<66>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_slice3                  , std::get<67>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_slice4                  , std::get<68>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_accumulator_empty, std::get<69>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_reset_accumulator, std::get<70>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_select           , std::get<71>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lookup_read_counts_0        , std::get<72>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lookup_read_counts_1        , std::get<73>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_perm                      , std::get<74>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lookup_inverses             , std::get<75>(this->_data))
 
         // clang-format on
         std::vector<HandleType> get_wires() override
         {
             return {
-                transcript_add,
-                transcript_mul,
-                transcript_eq,
-                transcript_collision_check,
-                transcript_msm_transition,
-                transcript_pc,
-                transcript_msm_count,
-                transcript_x,
-                transcript_y,
-                transcript_z1,
-                transcript_z2,
-                transcript_z1zero,
-                transcript_z2zero,
-                transcript_op,
-                transcript_accumulator_x,
-                transcript_accumulator_y,
-                transcript_msm_x,
-                transcript_msm_y,
-                precompute_pc,
-                precompute_point_transition,
-                precompute_round,
-                precompute_scalar_sum,
-                precompute_s1hi,
-                precompute_s1lo,
-                precompute_s2hi,
-                precompute_s2lo,
-                precompute_s3hi,
-                precompute_s3lo,
-                precompute_s4hi,
-                precompute_s4lo,
-                precompute_skew,
-                precompute_dx,
-                precompute_dy,
-                precompute_tx,
-                precompute_ty,
-                msm_transition,
-                msm_add,
-                msm_double,
-                msm_skew,
-                msm_accumulator_x,
-                msm_accumulator_y,
-                msm_pc,
-                msm_size_of_msm,
-                msm_count,
-                msm_round,
-                msm_add1,
-                msm_add2,
-                msm_add3,
-                msm_add4,
-                msm_x1,
-                msm_y1,
-                msm_x2,
-                msm_y2,
-                msm_x3,
-                msm_y3,
-                msm_x4,
-                msm_y4,
-                msm_collision_x1,
-                msm_collision_x2,
-                msm_collision_x3,
-                msm_collision_x4,
-                msm_lambda1,
-                msm_lambda2,
-                msm_lambda3,
-                msm_lambda4,
-                msm_slice1,
-                msm_slice2,
-                msm_slice3,
-                msm_slice4,
-                transcript_accumulator_empty,
-                transcript_reset_accumulator,
-                precompute_select,
-                lookup_read_counts_0,
-                lookup_read_counts_1,
+                transcript_add(),
+                transcript_mul(),
+                transcript_eq(),
+                transcript_collision_check(),
+                transcript_msm_transition(),
+                transcript_pc(),
+                transcript_msm_count(),
+                transcript_x(),
+                transcript_y(),
+                transcript_z1(),
+                transcript_z2(),
+                transcript_z1zero(),
+                transcript_z2zero(),
+                transcript_op(),
+                transcript_accumulator_x(),
+                transcript_accumulator_y(),
+                transcript_msm_x(),
+                transcript_msm_y(),
+                precompute_pc(),
+                precompute_point_transition(),
+                precompute_round(),
+                precompute_scalar_sum(),
+                precompute_s1hi(),
+                precompute_s1lo(),
+                precompute_s2hi(),
+                precompute_s2lo(),
+                precompute_s3hi(),
+                precompute_s3lo(),
+                precompute_s4hi(),
+                precompute_s4lo(),
+                precompute_skew(),
+                precompute_dx(),
+                precompute_dy(),
+                precompute_tx(),
+                precompute_ty(),
+                msm_transition(),
+                msm_add(),
+                msm_double(),
+                msm_skew(),
+                msm_accumulator_x(),
+                msm_accumulator_y(),
+                msm_pc(),
+                msm_size_of_msm(),
+                msm_count(),
+                msm_round(),
+                msm_add1(),
+                msm_add2(),
+                msm_add3(),
+                msm_add4(),
+                msm_x1(),
+                msm_y1(),
+                msm_x2(),
+                msm_y2(),
+                msm_x3(),
+                msm_y3(),
+                msm_x4(),
+                msm_y4(),
+                msm_collision_x1(),
+                msm_collision_x2(),
+                msm_collision_x3(),
+                msm_collision_x4(),
+                msm_lambda1(),
+                msm_lambda2(),
+                msm_lambda3(),
+                msm_lambda4(),
+                msm_slice1(),
+                msm_slice2(),
+                msm_slice3(),
+                msm_slice4(),
+                transcript_accumulator_empty(),
+                transcript_reset_accumulator(),
+                precompute_select(),
+                lookup_read_counts_0(),
+                lookup_read_counts_1(),
             };
         };
         // The sorted concatenations of table and witness data needed for plookup.
@@ -280,111 +283,111 @@ template <typename CycleGroup_T, typename Curve_T, typename PCS_T> class ECCVMBa
     class AllEntities : public AllEntities_<DataType, HandleType, NUM_ALL_ENTITIES> {
       public:
         // clang-format off
-        DataType& lagrange_first                     = std::get<0>(this->_data);
-        DataType& lagrange_second                    = std::get<1>(this->_data);
-        DataType& lagrange_last                      = std::get<2>(this->_data);
-        DataType& transcript_add                     = std::get<3>(this->_data);
-        DataType& transcript_mul                     = std::get<4>(this->_data);
-        DataType& transcript_eq                      = std::get<5>(this->_data);
-        DataType& transcript_collision_check         = std::get<6>(this->_data);
-        DataType& transcript_msm_transition          = std::get<7>(this->_data);
-        DataType& transcript_pc                      = std::get<8>(this->_data);
-        DataType& transcript_msm_count               = std::get<9>(this->_data);
-        DataType& transcript_x                       = std::get<10>(this->_data);
-        DataType& transcript_y                       = std::get<11>(this->_data);
-        DataType& transcript_z1                      = std::get<12>(this->_data);
-        DataType& transcript_z2                      = std::get<13>(this->_data);
-        DataType& transcript_z1zero                  = std::get<14>(this->_data); 
-        DataType& transcript_z2zero                  = std::get<15>(this->_data);
-        DataType& transcript_op                      = std::get<16>(this->_data);
-        DataType& transcript_accumulator_x           = std::get<17>(this->_data);
-        DataType& transcript_accumulator_y           = std::get<18>(this->_data);
-        DataType& transcript_msm_x                   = std::get<19>(this->_data);
-        DataType& transcript_msm_y                   = std::get<20>(this->_data);
-        DataType& precompute_pc                      = std::get<21>(this->_data);
-        DataType& precompute_point_transition        = std::get<22>(this->_data);
-        DataType& precompute_round                   = std::get<23>(this->_data);
-        DataType& precompute_scalar_sum              = std::get<24>(this->_data);
-        DataType& precompute_s1hi                    = std::get<25>(this->_data);
-        DataType& precompute_s1lo                    = std::get<26>(this->_data);
-        DataType& precompute_s2hi                    = std::get<27>(this->_data);
-        DataType& precompute_s2lo                    = std::get<28>(this->_data);
-        DataType& precompute_s3hi                    = std::get<29>(this->_data);
-        DataType& precompute_s3lo                    = std::get<30>(this->_data);
-        DataType& precompute_s4hi                    = std::get<31>(this->_data);
-        DataType& precompute_s4lo                    = std::get<32>(this->_data);
-        DataType& precompute_skew                    = std::get<33>(this->_data);
-        DataType& precompute_dx                      = std::get<34>(this->_data);
-        DataType& precompute_dy                      = std::get<35>(this->_data);
-        DataType& precompute_tx                      = std::get<36>(this->_data);
-        DataType& precompute_ty                      = std::get<37>(this->_data);
-        DataType& msm_transition                     = std::get<38>(this->_data);
-        DataType& msm_add                            = std::get<39>(this->_data);
-        DataType& msm_double                         = std::get<40>(this->_data);
-        DataType& msm_skew                           = std::get<41>(this->_data);
-        DataType& msm_accumulator_x                  = std::get<42>(this->_data);
-        DataType& msm_accumulator_y                  = std::get<43>(this->_data);
-        DataType& msm_pc                             = std::get<44>(this->_data);
-        DataType& msm_size_of_msm                    = std::get<45>(this->_data);
-        DataType& msm_count                          = std::get<46>(this->_data);
-        DataType& msm_round                          = std::get<47>(this->_data);
-        DataType& msm_add1                           = std::get<48>(this->_data);
-        DataType& msm_add2                           = std::get<49>(this->_data);
-        DataType& msm_add3                           = std::get<50>(this->_data);
-        DataType& msm_add4                           = std::get<51>(this->_data);
-        DataType& msm_x1                             = std::get<52>(this->_data);
-        DataType& msm_y1                             = std::get<53>(this->_data);
-        DataType& msm_x2                             = std::get<54>(this->_data);
-        DataType& msm_y2                             = std::get<55>(this->_data);
-        DataType& msm_x3                             = std::get<56>(this->_data);
-        DataType& msm_y3                             = std::get<57>(this->_data);
-        DataType& msm_x4                             = std::get<58>(this->_data);
-        DataType& msm_y4                             = std::get<59>(this->_data);
-        DataType& msm_collision_x1                   = std::get<60>(this->_data);
-        DataType& msm_collision_x2                   = std::get<61>(this->_data);
-        DataType& msm_collision_x3                   = std::get<62>(this->_data);
-        DataType& msm_collision_x4                   = std::get<63>(this->_data);
-        DataType& msm_lambda1                        = std::get<64>(this->_data);
-        DataType& msm_lambda2                        = std::get<65>(this->_data);
-        DataType& msm_lambda3                        = std::get<66>(this->_data);
-        DataType& msm_lambda4                        = std::get<67>(this->_data);
-        DataType& msm_slice1                         = std::get<68>(this->_data);
-        DataType& msm_slice2                         = std::get<69>(this->_data);
-        DataType& msm_slice3                         = std::get<70>(this->_data);
-        DataType& msm_slice4                         = std::get<71>(this->_data);
-        DataType& transcript_accumulator_empty       = std::get<72>(this->_data);
-        DataType& transcript_reset_accumulator       = std::get<73>(this->_data);
-        DataType& precompute_select                  = std::get<74>(this->_data);
-        DataType& lookup_read_counts_0               = std::get<75>(this->_data);
-        DataType& lookup_read_counts_1               = std::get<76>(this->_data);
-        DataType& z_perm                             = std::get<77>(this->_data);
-        DataType& lookup_inverses                    = std::get<78>(this->_data);
-        DataType& transcript_mul_shift               = std::get<79>(this->_data);
-        DataType& transcript_msm_count_shift         = std::get<80>(this->_data);
-        DataType& transcript_accumulator_x_shift     = std::get<81>(this->_data);
-        DataType& transcript_accumulator_y_shift     = std::get<82>(this->_data);
-        DataType& precompute_scalar_sum_shift        = std::get<83>(this->_data);
-        DataType& precompute_s1hi_shift              = std::get<84>(this->_data);
-        DataType& precompute_dx_shift                = std::get<85>(this->_data);
-        DataType& precompute_dy_shift                = std::get<86>(this->_data);
-        DataType& precompute_tx_shift                = std::get<87>(this->_data);
-        DataType& precompute_ty_shift                = std::get<88>(this->_data);
-        DataType& msm_transition_shift               = std::get<89>(this->_data);
-        DataType& msm_add_shift                      = std::get<90>(this->_data);
-        DataType& msm_double_shift                   = std::get<91>(this->_data);
-        DataType& msm_skew_shift                     = std::get<92>(this->_data);
-        DataType& msm_accumulator_x_shift            = std::get<93>(this->_data);
-        DataType& msm_accumulator_y_shift            = std::get<94>(this->_data);
-        DataType& msm_count_shift                    = std::get<95>(this->_data);
-        DataType& msm_round_shift                    = std::get<96>(this->_data);
-        DataType& msm_add1_shift                     = std::get<97>(this->_data);
-        DataType& msm_pc_shift                       = std::get<98>(this->_data);
-        DataType& precompute_pc_shift                = std::get<99>(this->_data);
-        DataType& transcript_pc_shift                = std::get<100>(this->_data);
-        DataType& precompute_round_shift             = std::get<101>(this->_data);
-        DataType& transcript_accumulator_empty_shift = std::get<102>(this->_data);
-        DataType& precompute_select_shift            = std::get<103>(this->_data);
-        DataType& z_perm_shift                       = std::get<104>(this->_data);
+        CONST_FRIENDLY_GETTER(DataType, lagrange_first                    , std::get<0>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_second                   , std::get<1>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_last                     , std::get<2>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_add                    , std::get<3>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_mul                    , std::get<4>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_eq                     , std::get<5>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_collision_check        , std::get<6>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_msm_transition         , std::get<7>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_pc                     , std::get<8>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_msm_count              , std::get<9>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_x                      , std::get<10>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_y                      , std::get<11>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_z1                     , std::get<12>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_z2                     , std::get<13>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_z1zero                 , std::get<14>(this->_data)) 
+        CONST_FRIENDLY_GETTER(DataType, transcript_z2zero                 , std::get<15>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_op                     , std::get<16>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_accumulator_x          , std::get<17>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_accumulator_y          , std::get<18>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_msm_x                  , std::get<19>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_msm_y                  , std::get<20>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_pc                     , std::get<21>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_point_transition       , std::get<22>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_round                  , std::get<23>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_scalar_sum             , std::get<24>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s1hi                   , std::get<25>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s1lo                   , std::get<26>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s2hi                   , std::get<27>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s2lo                   , std::get<28>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s3hi                   , std::get<29>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s3lo                   , std::get<30>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s4hi                   , std::get<31>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s4lo                   , std::get<32>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_skew                   , std::get<33>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_dx                     , std::get<34>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_dy                     , std::get<35>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_tx                     , std::get<36>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_ty                     , std::get<37>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_transition                    , std::get<38>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add                           , std::get<39>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_double                        , std::get<40>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_skew                          , std::get<41>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_accumulator_x                 , std::get<42>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_accumulator_y                 , std::get<43>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_pc                            , std::get<44>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_size_of_msm                   , std::get<45>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_count                         , std::get<46>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_round                         , std::get<47>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add1                          , std::get<48>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add2                          , std::get<49>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add3                          , std::get<50>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add4                          , std::get<51>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_x1                            , std::get<52>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_y1                            , std::get<53>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_x2                            , std::get<54>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_y2                            , std::get<55>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_x3                            , std::get<56>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_y3                            , std::get<57>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_x4                            , std::get<58>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_y4                            , std::get<59>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_collision_x1                  , std::get<60>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_collision_x2                  , std::get<61>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_collision_x3                  , std::get<62>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_collision_x4                  , std::get<63>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_lambda1                       , std::get<64>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_lambda2                       , std::get<65>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_lambda3                       , std::get<66>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_lambda4                       , std::get<67>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_slice1                        , std::get<68>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_slice2                        , std::get<69>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_slice3                        , std::get<70>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_slice4                        , std::get<71>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_accumulator_empty      , std::get<72>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_reset_accumulator      , std::get<73>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_select                 , std::get<74>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lookup_read_counts_0              , std::get<75>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lookup_read_counts_1              , std::get<76>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_perm                            , std::get<77>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lookup_inverses                   , std::get<78>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_mul_shift              , std::get<79>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_msm_count_shift        , std::get<80>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_accumulator_x_shift    , std::get<81>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_accumulator_y_shift    , std::get<82>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_scalar_sum_shift       , std::get<83>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_s1hi_shift             , std::get<84>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_dx_shift               , std::get<85>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_dy_shift               , std::get<86>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_tx_shift               , std::get<87>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_ty_shift               , std::get<88>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_transition_shift              , std::get<89>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add_shift                     , std::get<90>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_double_shift                  , std::get<91>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_skew_shift                    , std::get<92>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_accumulator_x_shift           , std::get<93>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_accumulator_y_shift           , std::get<94>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_count_shift                   , std::get<95>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_round_shift                   , std::get<96>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_add1_shift                    , std::get<97>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, msm_pc_shift                      , std::get<98>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_pc_shift               , std::get<99>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_pc_shift               , std::get<100>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_round_shift            , std::get<101>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, transcript_accumulator_empty_shift, std::get<102>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, precompute_select_shift           , std::get<103>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_perm_shift                      , std::get<104>(this->_data))
 
         template <size_t index>
         [[nodiscard]] const DataType& lookup_read_counts() const
@@ -397,202 +400,202 @@ template <typename CycleGroup_T, typename Curve_T, typename PCS_T> class ECCVMBa
         std::vector<HandleType> get_wires() override
         {
             return {
-                transcript_add,
-                transcript_mul,
-                transcript_eq,
-                transcript_collision_check,
-                transcript_msm_transition,
-                transcript_pc,
-                transcript_msm_count,
-                transcript_x,
-                transcript_y,
-                transcript_z1,
-                transcript_z2,
-                transcript_z1zero,
-                transcript_z2zero,
-                transcript_op,
-                transcript_accumulator_x,
-                transcript_accumulator_y,
-                transcript_msm_x,
-                transcript_msm_y,
-                precompute_pc,
-                precompute_point_transition,
-                precompute_round,
-                precompute_scalar_sum,
-                precompute_s1hi,
-                precompute_s1lo,
-                precompute_s2hi,
-                precompute_s2lo,
-                precompute_s3hi,
-                precompute_s3lo,
-                precompute_s4hi,
-                precompute_s4lo,
-                precompute_skew,
-                precompute_dx,
-                precompute_dy,
-                precompute_tx,
-                precompute_ty,
-                msm_transition,
-                msm_add,
-                msm_double,
-                msm_skew,
-                msm_accumulator_x,
-                msm_accumulator_y,
-                msm_pc,
-                msm_size_of_msm,
-                msm_count,
-                msm_round,
-                msm_add1,
-                msm_add2,
-                msm_add3,
-                msm_add4,
-                msm_x1,
-                msm_y1,
-                msm_x2,
-                msm_y2,
-                msm_x3,
-                msm_y3,
-                msm_x4,
-                msm_y4,
-                msm_collision_x1,
-                msm_collision_x2,
-                msm_collision_x3,
-                msm_collision_x4,
-                msm_lambda1,
-                msm_lambda2,
-                msm_lambda3,
-                msm_lambda4,
-                msm_slice1,
-                msm_slice2,
-                msm_slice3,
-                msm_slice4,
-                transcript_accumulator_empty,
-                transcript_reset_accumulator,
-                precompute_select,
-                lookup_read_counts_0,
-                lookup_read_counts_1,
+                transcript_add(),
+                transcript_mul(),
+                transcript_eq(),
+                transcript_collision_check(),
+                transcript_msm_transition(),
+                transcript_pc(),
+                transcript_msm_count(),
+                transcript_x(),
+                transcript_y(),
+                transcript_z1(),
+                transcript_z2(),
+                transcript_z1zero(),
+                transcript_z2zero(),
+                transcript_op(),
+                transcript_accumulator_x(),
+                transcript_accumulator_y(),
+                transcript_msm_x(),
+                transcript_msm_y(),
+                precompute_pc(),
+                precompute_point_transition(),
+                precompute_round(),
+                precompute_scalar_sum(),
+                precompute_s1hi(),
+                precompute_s1lo(),
+                precompute_s2hi(),
+                precompute_s2lo(),
+                precompute_s3hi(),
+                precompute_s3lo(),
+                precompute_s4hi(),
+                precompute_s4lo(),
+                precompute_skew(),
+                precompute_dx(),
+                precompute_dy(),
+                precompute_tx(),
+                precompute_ty(),
+                msm_transition(),
+                msm_add(),
+                msm_double(),
+                msm_skew(),
+                msm_accumulator_x(),
+                msm_accumulator_y(),
+                msm_pc(),
+                msm_size_of_msm(),
+                msm_count(),
+                msm_round(),
+                msm_add1(),
+                msm_add2(),
+                msm_add3(),
+                msm_add4(),
+                msm_x1(),
+                msm_y1(),
+                msm_x2(),
+                msm_y2(),
+                msm_x3(),
+                msm_y3(),
+                msm_x4(),
+                msm_y4(),
+                msm_collision_x1(),
+                msm_collision_x2(),
+                msm_collision_x3(),
+                msm_collision_x4(),
+                msm_lambda1(),
+                msm_lambda2(),
+                msm_lambda3(),
+                msm_lambda4(),
+                msm_slice1(),
+                msm_slice2(),
+                msm_slice3(),
+                msm_slice4(),
+                transcript_accumulator_empty(),
+                transcript_reset_accumulator(),
+                precompute_select(),
+                lookup_read_counts_0(),
+                lookup_read_counts_1(),
             };
         };
         // Gemini-specific getters.
         std::vector<HandleType> get_unshifted() override
         {
             return {
-                lagrange_first,
-                lagrange_second,
-                lagrange_last,
-                transcript_add,
-                transcript_eq,
-                transcript_collision_check,
-                transcript_msm_transition,
-                transcript_x,
-                transcript_y,
-                transcript_z1,
-                transcript_z2,
-                transcript_z1zero,
-                transcript_z2zero,
-                transcript_op,
-                transcript_msm_x,
-                transcript_msm_y,
-                precompute_point_transition,
-                precompute_s1hi,
-                precompute_s2hi,
-                precompute_s2lo,
-                precompute_s3hi,
-                precompute_s3lo,
-                precompute_s4hi,
-                precompute_s4lo,
-                precompute_skew,
-                msm_size_of_msm,
-                msm_add2,
-                msm_add3,
-                msm_add4,
-                msm_x1,
-                msm_y1,
-                msm_x2,
-                msm_y2,
-                msm_x3,
-                msm_y3,
-                msm_x4,
-                msm_y4,
-                msm_collision_x1,
-                msm_collision_x2,
-                msm_collision_x3,
-                msm_collision_x4,
-                msm_lambda1,
-                msm_lambda2,
-                msm_lambda3,
-                msm_lambda4,
-                msm_slice1,
-                msm_slice2,
-                msm_slice3,
-                msm_slice4,
-                transcript_reset_accumulator,
-                lookup_read_counts_0,
-                lookup_read_counts_1,
-                lookup_inverses,
+                lagrange_first(),
+                lagrange_second(),
+                lagrange_last(),
+                transcript_add(),
+                transcript_eq(),
+                transcript_collision_check(),
+                transcript_msm_transition(),
+                transcript_x(),
+                transcript_y(),
+                transcript_z1(),
+                transcript_z2(),
+                transcript_z1zero(),
+                transcript_z2zero(),
+                transcript_op(),
+                transcript_msm_x(),
+                transcript_msm_y(),
+                precompute_point_transition(),
+                precompute_s1hi(),
+                precompute_s2hi(),
+                precompute_s2lo(),
+                precompute_s3hi(),
+                precompute_s3lo(),
+                precompute_s4hi(),
+                precompute_s4lo(),
+                precompute_skew(),
+                msm_size_of_msm(),
+                msm_add2(),
+                msm_add3(),
+                msm_add4(),
+                msm_x1(),
+                msm_y1(),
+                msm_x2(),
+                msm_y2(),
+                msm_x3(),
+                msm_y3(),
+                msm_x4(),
+                msm_y4(),
+                msm_collision_x1(),
+                msm_collision_x2(),
+                msm_collision_x3(),
+                msm_collision_x4(),
+                msm_lambda1(),
+                msm_lambda2(),
+                msm_lambda3(),
+                msm_lambda4(),
+                msm_slice1(),
+                msm_slice2(),
+                msm_slice3(),
+                msm_slice4(),
+                transcript_reset_accumulator(),
+                lookup_read_counts_0(),
+                lookup_read_counts_1(),
+                lookup_inverses(),
             };
         };
 
         std::vector<HandleType> get_to_be_shifted() override
         {
             return {
-                transcript_mul,
-                transcript_msm_count,
-                transcript_accumulator_x,
-                transcript_accumulator_y,
-                precompute_scalar_sum,
-                precompute_s1hi,
-                precompute_dx,
-                precompute_dy,
-                precompute_tx,
-                precompute_ty,
-                msm_transition,
-                msm_add,
-                msm_double,
-                msm_skew,
-                msm_accumulator_x,
-                msm_accumulator_y,
-                msm_count,
-                msm_round,
-                msm_add1,
-                msm_pc,
-                precompute_pc,
-                transcript_pc,
-                precompute_round,
-                transcript_accumulator_empty,
-                precompute_select,
-                z_perm,
+                transcript_mul(),
+                transcript_msm_count(),
+                transcript_accumulator_x(),
+                transcript_accumulator_y(),
+                precompute_scalar_sum(),
+                precompute_s1hi(),
+                precompute_dx(),
+                precompute_dy(),
+                precompute_tx(),
+                precompute_ty(),
+                msm_transition(),
+                msm_add(),
+                msm_double(),
+                msm_skew(),
+                msm_accumulator_x(),
+                msm_accumulator_y(),
+                msm_count(),
+                msm_round(),
+                msm_add1(),
+                msm_pc(),
+                precompute_pc(),
+                transcript_pc(),
+                precompute_round(),
+                transcript_accumulator_empty(),
+                precompute_select(),
+                z_perm(),
             };
         };
         std::vector<HandleType> get_shifted() override
         {
             return {
-                transcript_mul_shift,
-                transcript_msm_count_shift,
-                transcript_accumulator_x_shift,
-                transcript_accumulator_y_shift,
-                precompute_scalar_sum_shift,
-                precompute_s1hi_shift,
-                precompute_dx_shift,
-                precompute_dy_shift,
-                precompute_tx_shift,
-                precompute_ty_shift,
-                msm_transition_shift,
-                msm_add_shift,
-                msm_double_shift,
-                msm_skew_shift,
-                msm_accumulator_x_shift,
-                msm_accumulator_y_shift,
-                msm_count_shift,
-                msm_round_shift,
-                msm_add1_shift,
-                msm_pc_shift,
-                precompute_pc_shift,
-                transcript_pc_shift,
-                precompute_round_shift,
-                transcript_accumulator_empty_shift,
-                precompute_select_shift,
-                z_perm_shift,
+                transcript_mul_shift(),
+                transcript_msm_count_shift(),
+                transcript_accumulator_x_shift(),
+                transcript_accumulator_y_shift(),
+                precompute_scalar_sum_shift(),
+                precompute_s1hi_shift(),
+                precompute_dx_shift(),
+                precompute_dy_shift(),
+                precompute_tx_shift(),
+                precompute_ty_shift(),
+                msm_transition_shift(),
+                msm_add_shift(),
+                msm_double_shift(),
+                msm_skew_shift(),
+                msm_accumulator_x_shift(),
+                msm_accumulator_y_shift(),
+                msm_count_shift(),
+                msm_round_shift(),
+                msm_add1_shift(),
+                msm_pc_shift(),
+                precompute_pc_shift(),
+                transcript_pc_shift(),
+                precompute_round_shift(),
+                transcript_accumulator_empty_shift(),
+                precompute_select_shift(),
+                z_perm_shift(),
             };
         };
 

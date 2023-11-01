@@ -97,23 +97,23 @@ template <typename FF_> class AuxiliaryRelationImpl {
 
         const auto& eta = ParameterView(params.eta);
 
-        auto w_1 = View(in.w_l);
-        auto w_2 = View(in.w_r);
-        auto w_3 = View(in.w_o);
-        auto w_4 = View(in.w_4);
-        auto w_1_shift = View(in.w_l_shift);
-        auto w_2_shift = View(in.w_r_shift);
-        auto w_3_shift = View(in.w_o_shift);
-        auto w_4_shift = View(in.w_4_shift);
+        auto w_1 = View(in.w_l());
+        auto w_2 = View(in.w_r());
+        auto w_3 = View(in.w_o());
+        auto w_4 = View(in.w_4());
+        auto w_1_shift = View(in.w_l_shift());
+        auto w_2_shift = View(in.w_r_shift());
+        auto w_3_shift = View(in.w_o_shift());
+        auto w_4_shift = View(in.w_4_shift());
 
-        auto q_1 = View(in.q_l);
-        auto q_2 = View(in.q_r);
-        auto q_3 = View(in.q_o);
-        auto q_4 = View(in.q_4);
-        auto q_m = View(in.q_m);
-        auto q_c = View(in.q_c);
-        auto q_arith = View(in.q_arith);
-        auto q_aux = View(in.q_aux);
+        auto q_1 = View(in.q_l());
+        auto q_2 = View(in.q_r());
+        auto q_3 = View(in.q_o());
+        auto q_4 = View(in.q_4());
+        auto q_m = View(in.q_m());
+        auto q_c = View(in.q_c());
+        auto q_arith = View(in.q_arith());
+        auto q_aux = View(in.q_aux());
 
         const FF LIMB_SIZE(uint256_t(1) << 68);
         const FF SUBLIMB_SHIFT(uint256_t(1) << 14);

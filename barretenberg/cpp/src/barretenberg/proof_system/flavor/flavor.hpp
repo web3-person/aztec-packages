@@ -15,7 +15,7 @@
  * relationships between these. We aim for a more uniform treatment, to enfore identical and informative naming, and to
  * prevent the developer having to think very much about the ordering of protocol entities in disparate places.
  *
- * Another motivation is iterate on the polynomial manifest of plonk, which is nice in its compatness, but which feels
+ * Another motivation is iterate on the polynomial manifest of plonk, which is nice in its compactness, but which feels
  * needlessly manual and low-level. In the past, this contained even more boolean parameters, making it quite hard to
  * parse. A typical construction is to loop over the polynomial manifest by extracting a globally-defined
  * "FOO_MANIFEST_SIZE" (the use of "manifest" here is distinct from the manifests in the transcript) to loop
@@ -71,6 +71,17 @@
 #include <array>
 #include <concepts>
 #include <vector>
+
+// TODO(AD) move this to a better home once usage is finalized
+#define CONST_FRIENDLY_GETTER(T, name, value)                                                                          \
+    T& name()                                                                                                          \
+    {                                                                                                                  \
+        return value;                                                                                                  \
+    }                                                                                                                  \
+    const T& name() const                                                                                              \
+    {                                                                                                                  \
+        return value;                                                                                                  \
+    }
 
 namespace proof_system::honk::flavor {
 

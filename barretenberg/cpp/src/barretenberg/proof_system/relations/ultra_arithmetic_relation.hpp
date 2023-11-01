@@ -72,18 +72,18 @@ template <typename FF_> class UltraArithmeticRelationImpl {
         {
             using Accumulator = std::tuple_element_t<0, ContainerOverSubrelations>;
             using View = typename Accumulator::View;
-            auto w_l = View(in.w_l);
-            auto w_r = View(in.w_r);
-            auto w_o = View(in.w_o);
-            auto w_4 = View(in.w_4);
-            auto w_4_shift = View(in.w_4_shift);
-            auto q_m = View(in.q_m);
-            auto q_l = View(in.q_l);
-            auto q_r = View(in.q_r);
-            auto q_o = View(in.q_o);
-            auto q_4 = View(in.q_4);
-            auto q_c = View(in.q_c);
-            auto q_arith = View(in.q_arith);
+            auto w_l = View(in.w_l());
+            auto w_r = View(in.w_r());
+            auto w_o = View(in.w_o());
+            auto w_4 = View(in.w_4());
+            auto w_4_shift = View(in.w_4_shift());
+            auto q_m = View(in.q_m());
+            auto q_l = View(in.q_l());
+            auto q_r = View(in.q_r());
+            auto q_o = View(in.q_o());
+            auto q_4 = View(in.q_4());
+            auto q_c = View(in.q_c());
+            auto q_arith = View(in.q_arith());
 
             static const FF neg_half = FF(-2).invert();
 
@@ -97,11 +97,11 @@ template <typename FF_> class UltraArithmeticRelationImpl {
         {
             using Accumulator = std::tuple_element_t<1, ContainerOverSubrelations>;
             using View = typename Accumulator::View;
-            auto w_l = View(in.w_l);
-            auto w_4 = View(in.w_4);
-            auto w_l_shift = View(in.w_l_shift);
-            auto q_m = View(in.q_m);
-            auto q_arith = View(in.q_arith);
+            auto w_l = View(in.w_l());
+            auto w_4 = View(in.w_4());
+            auto w_l_shift = View(in.w_l_shift());
+            auto q_m = View(in.q_m());
+            auto q_arith = View(in.q_arith());
 
             auto tmp = w_l + w_4 - w_l_shift + q_m;
             tmp *= (q_arith - 2);

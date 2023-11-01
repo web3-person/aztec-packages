@@ -37,12 +37,12 @@ template <typename FF_> class GenPermSortRelationImpl {
     {
         using Accumulator = std::tuple_element_t<0, ContainerOverSubrelations>;
         using View = typename Accumulator::View;
-        auto w_1 = View(in.w_l);
-        auto w_2 = View(in.w_r);
-        auto w_3 = View(in.w_o);
-        auto w_4 = View(in.w_4);
-        auto w_1_shift = View(in.w_l_shift);
-        auto q_sort = View(in.q_sort);
+        auto w_1 = View(in.w_l());
+        auto w_2 = View(in.w_r());
+        auto w_3 = View(in.w_o());
+        auto w_4 = View(in.w_4());
+        auto w_1_shift = View(in.w_l_shift());
+        auto q_sort = View(in.q_sort());
 
         static const FF minus_one = FF(-1);
         static const FF minus_two = FF(-2);

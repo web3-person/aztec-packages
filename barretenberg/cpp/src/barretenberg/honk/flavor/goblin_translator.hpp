@@ -338,14 +338,14 @@ template <size_t mini_circuit_size> class GoblinTranslator_ {
      */
     class PrecomputedEntities : public PrecomputedEntities_<DataType, HandleType, NUM_PRECOMPUTED_ENTITIES> {
       public:
-        DataType& lagrange_first = std::get<0>(this->_data);
-        DataType& lagrange_last = std::get<1>(this->_data);
+        DataType& lagrange_first() { return std::get<0>(this->_data); }
+        DataType& lagrange_last() { return std::get<1>(this->_data); }
         // TODO(#758): Check if one of these can be replaced by shifts
-        DataType& lagrange_odd_in_minicircuit = std::get<2>(this->_data);
-        DataType& lagrange_even_in_minicircuit = std::get<3>(this->_data);
-        DataType& lagrange_second = std::get<4>(this->_data);
-        DataType& lagrange_second_to_last_in_minicircuit = std::get<5>(this->_data);
-        DataType& ordered_extra_range_constraints_numerator = std::get<6>(this->_data);
+        DataType& lagrange_odd_in_minicircuit() { return std::get<2>(this->_data); }
+        DataType& lagrange_even_in_minicircuit() { return std::get<3>(this->_data); }
+        DataType& lagrange_second() { return std::get<4>(this->_data); }
+        DataType& lagrange_second_to_last_in_minicircuit() { return std::get<5>(this->_data); }
+        DataType& ordered_extra_range_constraints_numerator() { return std::get<6>(this->_data); }
         std::vector<HandleType> get_selectors() { return {}; };
         std::vector<HandleType> get_sigma_polynomials() { return {}; };
         std::vector<HandleType> get_id_polynomials() { return {}; };
@@ -358,97 +358,97 @@ template <size_t mini_circuit_size> class GoblinTranslator_ {
     template <typename DataType, typename HandleType>
     class WitnessEntities : public WitnessEntities_<DataType, HandleType, NUM_WITNESS_ENTITIES> {
       public:
-        DataType& op = std::get<0>(this->_data);
-        DataType& x_lo_y_hi = std::get<1>(this->_data);
-        DataType& x_hi_z_1 = std::get<2>(this->_data);
-        DataType& y_lo_z_2 = std::get<3>(this->_data);
-        DataType& p_x_low_limbs = std::get<4>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_0 = std::get<5>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_1 = std::get<6>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_2 = std::get<7>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_3 = std::get<8>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_4 = std::get<9>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_tail = std::get<10>(this->_data);
-        DataType& p_x_high_limbs = std::get<11>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_0 = std::get<12>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_1 = std::get<13>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_2 = std::get<14>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_3 = std::get<15>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_4 = std::get<16>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_tail = std::get<17>(this->_data);
-        DataType& p_y_low_limbs = std::get<18>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_0 = std::get<19>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_1 = std::get<20>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_2 = std::get<21>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_3 = std::get<22>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_4 = std::get<23>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_tail = std::get<24>(this->_data);
-        DataType& p_y_high_limbs = std::get<25>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_0 = std::get<26>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_1 = std::get<27>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_2 = std::get<28>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_3 = std::get<29>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_4 = std::get<30>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_tail = std::get<31>(this->_data);
-        DataType& z_low_limbs = std::get<32>(this->_data);
-        DataType& z_low_limbs_range_constraint_0 = std::get<33>(this->_data);
-        DataType& z_low_limbs_range_constraint_1 = std::get<34>(this->_data);
-        DataType& z_low_limbs_range_constraint_2 = std::get<35>(this->_data);
-        DataType& z_low_limbs_range_constraint_3 = std::get<36>(this->_data);
-        DataType& z_low_limbs_range_constraint_4 = std::get<37>(this->_data);
-        DataType& z_low_limbs_range_constraint_tail = std::get<38>(this->_data);
-        DataType& z_high_limbs = std::get<39>(this->_data);
-        DataType& z_high_limbs_range_constraint_0 = std::get<40>(this->_data);
-        DataType& z_high_limbs_range_constraint_1 = std::get<41>(this->_data);
-        DataType& z_high_limbs_range_constraint_2 = std::get<42>(this->_data);
-        DataType& z_high_limbs_range_constraint_3 = std::get<43>(this->_data);
-        DataType& z_high_limbs_range_constraint_4 = std::get<44>(this->_data);
-        DataType& z_high_limbs_range_constraint_tail = std::get<45>(this->_data);
-        DataType& accumulators_binary_limbs_0 = std::get<46>(this->_data);
-        DataType& accumulators_binary_limbs_1 = std::get<47>(this->_data);
-        DataType& accumulators_binary_limbs_2 = std::get<48>(this->_data);
-        DataType& accumulators_binary_limbs_3 = std::get<49>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_0 = std::get<50>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_1 = std::get<51>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_2 = std::get<52>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_3 = std::get<53>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_4 = std::get<54>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_tail = std::get<55>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_0 = std::get<56>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_1 = std::get<57>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_2 = std::get<58>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_3 = std::get<59>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_4 = std::get<60>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_tail = std::get<61>(this->_data);
-        DataType& quotient_low_binary_limbs = std::get<62>(this->_data);
-        DataType& quotient_high_binary_limbs = std::get<63>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_0 = std::get<64>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_1 = std::get<65>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_2 = std::get<66>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_3 = std::get<67>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_4 = std::get<68>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_tail = std::get<69>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_0 = std::get<70>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_1 = std::get<71>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_2 = std::get<72>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_3 = std::get<73>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_4 = std::get<74>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_tail = std::get<75>(this->_data);
-        DataType& relation_wide_limbs = std::get<76>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_0 = std::get<77>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_1 = std::get<78>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_2 = std::get<79>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_3 = std::get<80>(this->_data);
-        DataType& concatenated_range_constraints_0 = std::get<81>(this->_data);
-        DataType& concatenated_range_constraints_1 = std::get<82>(this->_data);
-        DataType& concatenated_range_constraints_2 = std::get<83>(this->_data);
-        DataType& concatenated_range_constraints_3 = std::get<84>(this->_data);
-        DataType& ordered_range_constraints_0 = std::get<85>(this->_data);
-        DataType& ordered_range_constraints_1 = std::get<86>(this->_data);
-        DataType& ordered_range_constraints_2 = std::get<87>(this->_data);
-        DataType& ordered_range_constraints_3 = std::get<88>(this->_data);
-        DataType& ordered_range_constraints_4 = std::get<89>(this->_data);
-        DataType& z_perm = std::get<90>(this->_data);
+        DataType& op() { return std::get<0>(this->_data); }
+        DataType& x_lo_y_hi() { return std::get<1>(this->_data); }
+        DataType& x_hi_z_1() { return std::get<2>(this->_data); }
+        DataType& y_lo_z_2() { return std::get<3>(this->_data); }
+        DataType& p_x_low_limbs() { return std::get<4>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_0() { return std::get<5>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_1() { return std::get<6>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_2() { return std::get<7>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_3() { return std::get<8>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_4() { return std::get<9>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_tail() { return std::get<10>(this->_data); }
+        DataType& p_x_high_limbs() { return std::get<11>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_0() { return std::get<12>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_1() { return std::get<13>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_2() { return std::get<14>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_3() { return std::get<15>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_4() { return std::get<16>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_tail() { return std::get<17>(this->_data); }
+        DataType& p_y_low_limbs() { return std::get<18>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_0() { return std::get<19>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_1() { return std::get<20>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_2() { return std::get<21>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_3() { return std::get<22>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_4() { return std::get<23>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_tail() { return std::get<24>(this->_data); }
+        DataType& p_y_high_limbs() { return std::get<25>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_0() { return std::get<26>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_1() { return std::get<27>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_2() { return std::get<28>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_3() { return std::get<29>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_4() { return std::get<30>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_tail() { return std::get<31>(this->_data); }
+        DataType& z_low_limbs() { return std::get<32>(this->_data); }
+        DataType& z_low_limbs_range_constraint_0() { return std::get<33>(this->_data); }
+        DataType& z_low_limbs_range_constraint_1() { return std::get<34>(this->_data); }
+        DataType& z_low_limbs_range_constraint_2() { return std::get<35>(this->_data); }
+        DataType& z_low_limbs_range_constraint_3() { return std::get<36>(this->_data); }
+        DataType& z_low_limbs_range_constraint_4() { return std::get<37>(this->_data); }
+        DataType& z_low_limbs_range_constraint_tail() { return std::get<38>(this->_data); }
+        DataType& z_high_limbs() { return std::get<39>(this->_data); }
+        DataType& z_high_limbs_range_constraint_0() { return std::get<40>(this->_data); }
+        DataType& z_high_limbs_range_constraint_1() { return std::get<41>(this->_data); }
+        DataType& z_high_limbs_range_constraint_2() { return std::get<42>(this->_data); }
+        DataType& z_high_limbs_range_constraint_3() { return std::get<43>(this->_data); }
+        DataType& z_high_limbs_range_constraint_4() { return std::get<44>(this->_data); }
+        DataType& z_high_limbs_range_constraint_tail() { return std::get<45>(this->_data); }
+        DataType& accumulators_binary_limbs_0() { return std::get<46>(this->_data); }
+        DataType& accumulators_binary_limbs_1() { return std::get<47>(this->_data); }
+        DataType& accumulators_binary_limbs_2() { return std::get<48>(this->_data); }
+        DataType& accumulators_binary_limbs_3() { return std::get<49>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_0() { return std::get<50>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_1() { return std::get<51>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_2() { return std::get<52>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_3() { return std::get<53>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_4() { return std::get<54>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_tail() { return std::get<55>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_0() { return std::get<56>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_1() { return std::get<57>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_2() { return std::get<58>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_3() { return std::get<59>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_4() { return std::get<60>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_tail() { return std::get<61>(this->_data); }
+        DataType& quotient_low_binary_limbs() { return std::get<62>(this->_data); }
+        DataType& quotient_high_binary_limbs() { return std::get<63>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_0() { return std::get<64>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_1() { return std::get<65>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_2() { return std::get<66>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_3() { return std::get<67>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_4() { return std::get<68>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_tail() { return std::get<69>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_0() { return std::get<70>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_1() { return std::get<71>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_2() { return std::get<72>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_3() { return std::get<73>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_4() { return std::get<74>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_tail() { return std::get<75>(this->_data); }
+        DataType& relation_wide_limbs() { return std::get<76>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_0() { return std::get<77>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_1() { return std::get<78>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_2() { return std::get<79>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_3() { return std::get<80>(this->_data); }
+        DataType& concatenated_range_constraints_0() { return std::get<81>(this->_data); }
+        DataType& concatenated_range_constraints_1() { return std::get<82>(this->_data); }
+        DataType& concatenated_range_constraints_2() { return std::get<83>(this->_data); }
+        DataType& concatenated_range_constraints_3() { return std::get<84>(this->_data); }
+        DataType& ordered_range_constraints_0() { return std::get<85>(this->_data); }
+        DataType& ordered_range_constraints_1() { return std::get<86>(this->_data); }
+        DataType& ordered_range_constraints_2() { return std::get<87>(this->_data); }
+        DataType& ordered_range_constraints_3() { return std::get<88>(this->_data); }
+        DataType& ordered_range_constraints_4() { return std::get<89>(this->_data); }
+        DataType& z_perm() { return std::get<90>(this->_data); }
 
         std::vector<HandleType> get_wires() override
         {
@@ -649,190 +649,190 @@ template <size_t mini_circuit_size> class GoblinTranslator_ {
     template <typename DataType, typename HandleType>
     class AllEntities : public AllEntities_<DataType, HandleType, NUM_ALL_ENTITIES> {
       public:
-        DataType& op = std::get<0>(this->_data);
-        DataType& x_lo_y_hi = std::get<1>(this->_data);
-        DataType& x_hi_z_1 = std::get<2>(this->_data);
-        DataType& y_lo_z_2 = std::get<3>(this->_data);
-        DataType& p_x_low_limbs = std::get<4>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_0 = std::get<5>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_1 = std::get<6>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_2 = std::get<7>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_3 = std::get<8>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_4 = std::get<9>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_tail = std::get<10>(this->_data);
-        DataType& p_x_high_limbs = std::get<11>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_0 = std::get<12>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_1 = std::get<13>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_2 = std::get<14>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_3 = std::get<15>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_4 = std::get<16>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_tail = std::get<17>(this->_data);
-        DataType& p_y_low_limbs = std::get<18>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_0 = std::get<19>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_1 = std::get<20>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_2 = std::get<21>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_3 = std::get<22>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_4 = std::get<23>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_tail = std::get<24>(this->_data);
-        DataType& p_y_high_limbs = std::get<25>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_0 = std::get<26>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_1 = std::get<27>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_2 = std::get<28>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_3 = std::get<29>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_4 = std::get<30>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_tail = std::get<31>(this->_data);
-        DataType& z_low_limbs = std::get<32>(this->_data);
-        DataType& z_low_limbs_range_constraint_0 = std::get<33>(this->_data);
-        DataType& z_low_limbs_range_constraint_1 = std::get<34>(this->_data);
-        DataType& z_low_limbs_range_constraint_2 = std::get<35>(this->_data);
-        DataType& z_low_limbs_range_constraint_3 = std::get<36>(this->_data);
-        DataType& z_low_limbs_range_constraint_4 = std::get<37>(this->_data);
-        DataType& z_low_limbs_range_constraint_tail = std::get<38>(this->_data);
-        DataType& z_high_limbs = std::get<39>(this->_data);
-        DataType& z_high_limbs_range_constraint_0 = std::get<40>(this->_data);
-        DataType& z_high_limbs_range_constraint_1 = std::get<41>(this->_data);
-        DataType& z_high_limbs_range_constraint_2 = std::get<42>(this->_data);
-        DataType& z_high_limbs_range_constraint_3 = std::get<43>(this->_data);
-        DataType& z_high_limbs_range_constraint_4 = std::get<44>(this->_data);
-        DataType& z_high_limbs_range_constraint_tail = std::get<45>(this->_data);
-        DataType& accumulators_binary_limbs_0 = std::get<46>(this->_data);
-        DataType& accumulators_binary_limbs_1 = std::get<47>(this->_data);
-        DataType& accumulators_binary_limbs_2 = std::get<48>(this->_data);
-        DataType& accumulators_binary_limbs_3 = std::get<49>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_0 = std::get<50>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_1 = std::get<51>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_2 = std::get<52>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_3 = std::get<53>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_4 = std::get<54>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_tail = std::get<55>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_0 = std::get<56>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_1 = std::get<57>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_2 = std::get<58>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_3 = std::get<59>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_4 = std::get<60>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_tail = std::get<61>(this->_data);
-        DataType& quotient_low_binary_limbs = std::get<62>(this->_data);
-        DataType& quotient_high_binary_limbs = std::get<63>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_0 = std::get<64>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_1 = std::get<65>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_2 = std::get<66>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_3 = std::get<67>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_4 = std::get<68>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_tail = std::get<69>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_0 = std::get<70>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_1 = std::get<71>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_2 = std::get<72>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_3 = std::get<73>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_4 = std::get<74>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_tail = std::get<75>(this->_data);
-        DataType& relation_wide_limbs = std::get<76>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_0 = std::get<77>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_1 = std::get<78>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_2 = std::get<79>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_3 = std::get<80>(this->_data);
-        DataType& concatenated_range_constraints_0 = std::get<81>(this->_data);
-        DataType& concatenated_range_constraints_1 = std::get<82>(this->_data);
-        DataType& concatenated_range_constraints_2 = std::get<83>(this->_data);
-        DataType& concatenated_range_constraints_3 = std::get<84>(this->_data);
-        DataType& ordered_range_constraints_0 = std::get<85>(this->_data);
-        DataType& ordered_range_constraints_1 = std::get<86>(this->_data);
-        DataType& ordered_range_constraints_2 = std::get<87>(this->_data);
-        DataType& ordered_range_constraints_3 = std::get<88>(this->_data);
-        DataType& ordered_range_constraints_4 = std::get<89>(this->_data);
-        DataType& z_perm = std::get<90>(this->_data);
-        DataType& x_lo_y_hi_shift = std::get<91>(this->_data);
-        DataType& x_hi_z_1_shift = std::get<92>(this->_data);
-        DataType& y_lo_z_2_shift = std::get<93>(this->_data);
-        DataType& p_x_low_limbs_shift = std::get<94>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_0_shift = std::get<95>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_1_shift = std::get<96>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_2_shift = std::get<97>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_3_shift = std::get<98>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_4_shift = std::get<99>(this->_data);
-        DataType& p_x_low_limbs_range_constraint_tail_shift = std::get<100>(this->_data);
-        DataType& p_x_high_limbs_shift = std::get<101>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_0_shift = std::get<102>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_1_shift = std::get<103>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_2_shift = std::get<104>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_3_shift = std::get<105>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_4_shift = std::get<106>(this->_data);
-        DataType& p_x_high_limbs_range_constraint_tail_shift = std::get<107>(this->_data);
-        DataType& p_y_low_limbs_shift = std::get<108>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_0_shift = std::get<109>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_1_shift = std::get<110>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_2_shift = std::get<111>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_3_shift = std::get<112>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_4_shift = std::get<113>(this->_data);
-        DataType& p_y_low_limbs_range_constraint_tail_shift = std::get<114>(this->_data);
-        DataType& p_y_high_limbs_shift = std::get<115>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_0_shift = std::get<116>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_1_shift = std::get<117>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_2_shift = std::get<118>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_3_shift = std::get<119>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_4_shift = std::get<120>(this->_data);
-        DataType& p_y_high_limbs_range_constraint_tail_shift = std::get<121>(this->_data);
-        DataType& z_low_limbs_shift = std::get<122>(this->_data);
-        DataType& z_low_limbs_range_constraint_0_shift = std::get<123>(this->_data);
-        DataType& z_low_limbs_range_constraint_1_shift = std::get<124>(this->_data);
-        DataType& z_low_limbs_range_constraint_2_shift = std::get<125>(this->_data);
-        DataType& z_low_limbs_range_constraint_3_shift = std::get<126>(this->_data);
-        DataType& z_low_limbs_range_constraint_4_shift = std::get<127>(this->_data);
-        DataType& z_low_limbs_range_constraint_tail_shift = std::get<128>(this->_data);
-        DataType& z_high_limbs_shift = std::get<129>(this->_data);
-        DataType& z_high_limbs_range_constraint_0_shift = std::get<130>(this->_data);
-        DataType& z_high_limbs_range_constraint_1_shift = std::get<131>(this->_data);
-        DataType& z_high_limbs_range_constraint_2_shift = std::get<132>(this->_data);
-        DataType& z_high_limbs_range_constraint_3_shift = std::get<133>(this->_data);
-        DataType& z_high_limbs_range_constraint_4_shift = std::get<134>(this->_data);
-        DataType& z_high_limbs_range_constraint_tail_shift = std::get<135>(this->_data);
-        DataType& accumulators_binary_limbs_0_shift = std::get<136>(this->_data);
-        DataType& accumulators_binary_limbs_1_shift = std::get<137>(this->_data);
-        DataType& accumulators_binary_limbs_2_shift = std::get<138>(this->_data);
-        DataType& accumulators_binary_limbs_3_shift = std::get<139>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_0_shift = std::get<140>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_1_shift = std::get<141>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_2_shift = std::get<142>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_3_shift = std::get<143>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_4_shift = std::get<144>(this->_data);
-        DataType& accumulator_low_limbs_range_constraint_tail_shift = std::get<145>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_0_shift = std::get<146>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_1_shift = std::get<147>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_2_shift = std::get<148>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_3_shift = std::get<149>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_4_shift = std::get<150>(this->_data);
-        DataType& accumulator_high_limbs_range_constraint_tail_shift = std::get<151>(this->_data);
-        DataType& quotient_low_binary_limbs_shift = std::get<152>(this->_data);
-        DataType& quotient_high_binary_limbs_shift = std::get<153>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_0_shift = std::get<154>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_1_shift = std::get<155>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_2_shift = std::get<156>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_3_shift = std::get<157>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_4_shift = std::get<158>(this->_data);
-        DataType& quotient_low_limbs_range_constraint_tail_shift = std::get<159>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_0_shift = std::get<160>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_1_shift = std::get<161>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_2_shift = std::get<162>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_3_shift = std::get<163>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_4_shift = std::get<164>(this->_data);
-        DataType& quotient_high_limbs_range_constraint_tail_shift = std::get<165>(this->_data);
-        DataType& relation_wide_limbs_shift = std::get<166>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_0_shift = std::get<167>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_1_shift = std::get<168>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_2_shift = std::get<169>(this->_data);
-        DataType& relation_wide_limbs_range_constraint_3_shift = std::get<170>(this->_data);
-        DataType& ordered_range_constraints_0_shift = std::get<171>(this->_data);
-        DataType& ordered_range_constraints_1_shift = std::get<172>(this->_data);
-        DataType& ordered_range_constraints_2_shift = std::get<173>(this->_data);
-        DataType& ordered_range_constraints_3_shift = std::get<174>(this->_data);
-        DataType& ordered_range_constraints_4_shift = std::get<175>(this->_data);
-        DataType& z_perm_shift = std::get<176>(this->_data);
-        DataType& lagrange_first = std::get<177>(this->_data);
-        DataType& lagrange_last = std::get<178>(this->_data);
-        DataType& lagrange_odd_in_minicircuit = std::get<179>(this->_data);
-        DataType& lagrange_even_in_minicircuit = std::get<180>(this->_data);
-        DataType& lagrange_second = std::get<181>(this->_data);
-        DataType& lagrange_second_to_last_in_minicircuit = std::get<182>(this->_data);
-        DataType& ordered_extra_range_constraints_numerator = std::get<183>(this->_data);
+        DataType& op() { return std::get<0>(this->_data); }
+        DataType& x_lo_y_hi() { return std::get<1>(this->_data); }
+        DataType& x_hi_z_1() { return std::get<2>(this->_data); }
+        DataType& y_lo_z_2() { return std::get<3>(this->_data); }
+        DataType& p_x_low_limbs() { return std::get<4>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_0() { return std::get<5>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_1() { return std::get<6>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_2() { return std::get<7>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_3() { return std::get<8>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_4() { return std::get<9>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_tail() { return std::get<10>(this->_data); }
+        DataType& p_x_high_limbs() { return std::get<11>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_0() { return std::get<12>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_1() { return std::get<13>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_2() { return std::get<14>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_3() { return std::get<15>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_4() { return std::get<16>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_tail() { return std::get<17>(this->_data); }
+        DataType& p_y_low_limbs() { return std::get<18>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_0() { return std::get<19>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_1() { return std::get<20>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_2() { return std::get<21>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_3() { return std::get<22>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_4() { return std::get<23>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_tail() { return std::get<24>(this->_data); }
+        DataType& p_y_high_limbs() { return std::get<25>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_0() { return std::get<26>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_1() { return std::get<27>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_2() { return std::get<28>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_3() { return std::get<29>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_4() { return std::get<30>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_tail() { return std::get<31>(this->_data); }
+        DataType& z_low_limbs() { return std::get<32>(this->_data); }
+        DataType& z_low_limbs_range_constraint_0() { return std::get<33>(this->_data); }
+        DataType& z_low_limbs_range_constraint_1() { return std::get<34>(this->_data); }
+        DataType& z_low_limbs_range_constraint_2() { return std::get<35>(this->_data); }
+        DataType& z_low_limbs_range_constraint_3() { return std::get<36>(this->_data); }
+        DataType& z_low_limbs_range_constraint_4() { return std::get<37>(this->_data); }
+        DataType& z_low_limbs_range_constraint_tail() { return std::get<38>(this->_data); }
+        DataType& z_high_limbs() { return std::get<39>(this->_data); }
+        DataType& z_high_limbs_range_constraint_0() { return std::get<40>(this->_data); }
+        DataType& z_high_limbs_range_constraint_1() { return std::get<41>(this->_data); }
+        DataType& z_high_limbs_range_constraint_2() { return std::get<42>(this->_data); }
+        DataType& z_high_limbs_range_constraint_3() { return std::get<43>(this->_data); }
+        DataType& z_high_limbs_range_constraint_4() { return std::get<44>(this->_data); }
+        DataType& z_high_limbs_range_constraint_tail() { return std::get<45>(this->_data); }
+        DataType& accumulators_binary_limbs_0() { return std::get<46>(this->_data); }
+        DataType& accumulators_binary_limbs_1() { return std::get<47>(this->_data); }
+        DataType& accumulators_binary_limbs_2() { return std::get<48>(this->_data); }
+        DataType& accumulators_binary_limbs_3() { return std::get<49>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_0() { return std::get<50>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_1() { return std::get<51>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_2() { return std::get<52>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_3() { return std::get<53>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_4() { return std::get<54>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_tail() { return std::get<55>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_0() { return std::get<56>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_1() { return std::get<57>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_2() { return std::get<58>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_3() { return std::get<59>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_4() { return std::get<60>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_tail() { return std::get<61>(this->_data); }
+        DataType& quotient_low_binary_limbs() { return std::get<62>(this->_data); }
+        DataType& quotient_high_binary_limbs() { return std::get<63>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_0() { return std::get<64>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_1() { return std::get<65>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_2() { return std::get<66>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_3() { return std::get<67>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_4() { return std::get<68>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_tail() { return std::get<69>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_0() { return std::get<70>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_1() { return std::get<71>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_2() { return std::get<72>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_3() { return std::get<73>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_4() { return std::get<74>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_tail() { return std::get<75>(this->_data); }
+        DataType& relation_wide_limbs() { return std::get<76>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_0() { return std::get<77>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_1() { return std::get<78>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_2() { return std::get<79>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_3() { return std::get<80>(this->_data); }
+        DataType& concatenated_range_constraints_0() { return std::get<81>(this->_data); }
+        DataType& concatenated_range_constraints_1() { return std::get<82>(this->_data); }
+        DataType& concatenated_range_constraints_2() { return std::get<83>(this->_data); }
+        DataType& concatenated_range_constraints_3() { return std::get<84>(this->_data); }
+        DataType& ordered_range_constraints_0() { return std::get<85>(this->_data); }
+        DataType& ordered_range_constraints_1() { return std::get<86>(this->_data); }
+        DataType& ordered_range_constraints_2() { return std::get<87>(this->_data); }
+        DataType& ordered_range_constraints_3() { return std::get<88>(this->_data); }
+        DataType& ordered_range_constraints_4() { return std::get<89>(this->_data); }
+        DataType& z_perm() { return std::get<90>(this->_data); }
+        DataType& x_lo_y_hi_shift() { return std::get<91>(this->_data); }
+        DataType& x_hi_z_1_shift() { return std::get<92>(this->_data); }
+        DataType& y_lo_z_2_shift() { return std::get<93>(this->_data); }
+        DataType& p_x_low_limbs_shift() { return std::get<94>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_0_shift() { return std::get<95>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_1_shift() { return std::get<96>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_2_shift() { return std::get<97>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_3_shift() { return std::get<98>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_4_shift() { return std::get<99>(this->_data); }
+        DataType& p_x_low_limbs_range_constraint_tail_shift() { return std::get<100>(this->_data); }
+        DataType& p_x_high_limbs_shift() { return std::get<101>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_0_shift() { return std::get<102>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_1_shift() { return std::get<103>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_2_shift() { return std::get<104>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_3_shift() { return std::get<105>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_4_shift() { return std::get<106>(this->_data); }
+        DataType& p_x_high_limbs_range_constraint_tail_shift() { return std::get<107>(this->_data); }
+        DataType& p_y_low_limbs_shift() { return std::get<108>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_0_shift() { return std::get<109>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_1_shift() { return std::get<110>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_2_shift() { return std::get<111>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_3_shift() { return std::get<112>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_4_shift() { return std::get<113>(this->_data); }
+        DataType& p_y_low_limbs_range_constraint_tail_shift() { return std::get<114>(this->_data); }
+        DataType& p_y_high_limbs_shift() { return std::get<115>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_0_shift() { return std::get<116>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_1_shift() { return std::get<117>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_2_shift() { return std::get<118>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_3_shift() { return std::get<119>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_4_shift() { return std::get<120>(this->_data); }
+        DataType& p_y_high_limbs_range_constraint_tail_shift() { return std::get<121>(this->_data); }
+        DataType& z_low_limbs_shift() { return std::get<122>(this->_data); }
+        DataType& z_low_limbs_range_constraint_0_shift() { return std::get<123>(this->_data); }
+        DataType& z_low_limbs_range_constraint_1_shift() { return std::get<124>(this->_data); }
+        DataType& z_low_limbs_range_constraint_2_shift() { return std::get<125>(this->_data); }
+        DataType& z_low_limbs_range_constraint_3_shift() { return std::get<126>(this->_data); }
+        DataType& z_low_limbs_range_constraint_4_shift() { return std::get<127>(this->_data); }
+        DataType& z_low_limbs_range_constraint_tail_shift() { return std::get<128>(this->_data); }
+        DataType& z_high_limbs_shift() { return std::get<129>(this->_data); }
+        DataType& z_high_limbs_range_constraint_0_shift() { return std::get<130>(this->_data); }
+        DataType& z_high_limbs_range_constraint_1_shift() { return std::get<131>(this->_data); }
+        DataType& z_high_limbs_range_constraint_2_shift() { return std::get<132>(this->_data); }
+        DataType& z_high_limbs_range_constraint_3_shift() { return std::get<133>(this->_data); }
+        DataType& z_high_limbs_range_constraint_4_shift() { return std::get<134>(this->_data); }
+        DataType& z_high_limbs_range_constraint_tail_shift() { return std::get<135>(this->_data); }
+        DataType& accumulators_binary_limbs_0_shift() { return std::get<136>(this->_data); }
+        DataType& accumulators_binary_limbs_1_shift() { return std::get<137>(this->_data); }
+        DataType& accumulators_binary_limbs_2_shift() { return std::get<138>(this->_data); }
+        DataType& accumulators_binary_limbs_3_shift() { return std::get<139>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_0_shift() { return std::get<140>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_1_shift() { return std::get<141>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_2_shift() { return std::get<142>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_3_shift() { return std::get<143>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_4_shift() { return std::get<144>(this->_data); }
+        DataType& accumulator_low_limbs_range_constraint_tail_shift() { return std::get<145>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_0_shift() { return std::get<146>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_1_shift() { return std::get<147>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_2_shift() { return std::get<148>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_3_shift() { return std::get<149>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_4_shift() { return std::get<150>(this->_data); }
+        DataType& accumulator_high_limbs_range_constraint_tail_shift() { return std::get<151>(this->_data); }
+        DataType& quotient_low_binary_limbs_shift() { return std::get<152>(this->_data); }
+        DataType& quotient_high_binary_limbs_shift() { return std::get<153>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_0_shift() { return std::get<154>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_1_shift() { return std::get<155>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_2_shift() { return std::get<156>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_3_shift() { return std::get<157>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_4_shift() { return std::get<158>(this->_data); }
+        DataType& quotient_low_limbs_range_constraint_tail_shift() { return std::get<159>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_0_shift() { return std::get<160>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_1_shift() { return std::get<161>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_2_shift() { return std::get<162>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_3_shift() { return std::get<163>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_4_shift() { return std::get<164>(this->_data); }
+        DataType& quotient_high_limbs_range_constraint_tail_shift() { return std::get<165>(this->_data); }
+        DataType& relation_wide_limbs_shift() { return std::get<166>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_0_shift() { return std::get<167>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_1_shift() { return std::get<168>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_2_shift() { return std::get<169>(this->_data); }
+        DataType& relation_wide_limbs_range_constraint_3_shift() { return std::get<170>(this->_data); }
+        DataType& ordered_range_constraints_0_shift() { return std::get<171>(this->_data); }
+        DataType& ordered_range_constraints_1_shift() { return std::get<172>(this->_data); }
+        DataType& ordered_range_constraints_2_shift() { return std::get<173>(this->_data); }
+        DataType& ordered_range_constraints_3_shift() { return std::get<174>(this->_data); }
+        DataType& ordered_range_constraints_4_shift() { return std::get<175>(this->_data); }
+        DataType& z_perm_shift() { return std::get<176>(this->_data); }
+        DataType& lagrange_first() { return std::get<177>(this->_data); }
+        DataType& lagrange_last() { return std::get<178>(this->_data); }
+        DataType& lagrange_odd_in_minicircuit() { return std::get<179>(this->_data); }
+        DataType& lagrange_even_in_minicircuit() { return std::get<180>(this->_data); }
+        DataType& lagrange_second() { return std::get<181>(this->_data); }
+        DataType& lagrange_second_to_last_in_minicircuit() { return std::get<182>(this->_data); }
+        DataType& ordered_extra_range_constraints_numerator() { return std::get<183>(this->_data); }
 
         std::vector<HandleType> get_wires() override
         {

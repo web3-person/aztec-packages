@@ -27,7 +27,7 @@ void ECCVMLookupRelationBase<FF>::accumulate(ContainerOverSubrelations& accumula
     using Accumulator = typename std::tuple_element_t<0, ContainerOverSubrelations>;
     using View = typename Accumulator::View;
 
-    auto lookup_inverses = View(in.lookup_inverses);
+    auto lookup_inverses = View(in.lookup_inverses());
 
     constexpr size_t NUM_TOTAL_TERMS = READ_TERMS + WRITE_TERMS;
     std::array<Accumulator, NUM_TOTAL_TERMS> lookup_terms;
@@ -52,8 +52,8 @@ void ECCVMLookupRelationBase<FF>::accumulate(ContainerOverSubrelations& accumula
 
     auto inverse_accumulator = Accumulator(lookup_inverses); // denominator_accumulator[NUM_TOTAL_TERMS - 1];
 
-    const auto row_has_write = View(in.precompute_select);
-    const auto row_has_read = View(in.msm_add) + View(in.msm_skew);
+    const auto row_has_write = View(in.precompute_select());
+    const auto row_has_read = View(in.msm_add()) + View(in.msm_skew());
     const auto inverse_exists = row_has_write + row_has_read - (row_has_write * row_has_read);
 
     std::get<0>(accumulator) +=

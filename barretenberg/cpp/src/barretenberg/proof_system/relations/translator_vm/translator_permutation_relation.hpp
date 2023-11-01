@@ -83,10 +83,10 @@ template <typename FF_> class GoblinTranslatorPermutationRelationImpl {
             using Accumulator = std::tuple_element_t<0, ContainerOverSubrelations>;
             using View = typename Accumulator::View;
 
-            auto z_perm = View(in.z_perm);
-            auto z_perm_shift = View(in.z_perm_shift);
-            auto lagrange_first = View(in.lagrange_first);
-            auto lagrange_last = View(in.lagrange_last);
+            auto z_perm = View(in.z_perm());
+            auto z_perm_shift = View(in.z_perm_shift());
+            auto lagrange_first = View(in.lagrange_first());
+            auto lagrange_last = View(in.lagrange_last());
 
             // Contribution (1)
             std::get<0>(accumulators) +=
@@ -99,8 +99,8 @@ template <typename FF_> class GoblinTranslatorPermutationRelationImpl {
             using Accumulator = std::tuple_element_t<1, ContainerOverSubrelations>;
             using View = typename Accumulator::View;
 
-            auto z_perm_shift = View(in.z_perm_shift);
-            auto lagrange_last = View(in.lagrange_last);
+            auto z_perm_shift = View(in.z_perm_shift());
+            auto lagrange_last = View(in.lagrange_last());
 
             // Contribution (2)
             std::get<1>(accumulators) += (lagrange_last * z_perm_shift) * scaling_factor;

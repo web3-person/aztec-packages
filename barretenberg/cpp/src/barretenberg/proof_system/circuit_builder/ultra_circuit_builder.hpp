@@ -301,34 +301,34 @@ template <typename FF> class UltraCircuitBuilder_ : public CircuitBuilderBase<ar
             stored_state.real_variable_index = builder.real_variable_index;
             stored_state.real_variable_tags = builder.real_variable_tags;
             stored_state.constant_variable_indices = builder.constant_variable_indices;
-            stored_state.w_l = builder.w_l;
-            stored_state.w_r = builder.w_r;
-            stored_state.w_o = builder.w_o;
-            stored_state.w_4 = builder.w_4;
-            stored_state.q_m = builder.q_m;
-            stored_state.q_c = builder.q_c;
-            stored_state.q_1 = builder.q_1;
-            stored_state.q_2 = builder.q_2;
-            stored_state.q_3 = builder.q_3;
-            stored_state.q_4 = builder.q_4;
-            stored_state.q_arith = builder.q_arith;
-            stored_state.q_sort = builder.q_sort;
-            stored_state.q_elliptic = builder.q_elliptic;
-            stored_state.q_aux = builder.q_aux;
-            stored_state.q_lookup_type = builder.q_lookup_type;
-            stored_state.current_tag = builder.current_tag;
-            stored_state.tau = builder.tau;
+            stored_state.w_l = builder.w_l();
+            stored_state.w_r = builder.w_r();
+            stored_state.w_o = builder.w_o();
+            stored_state.w_4 = builder.w_4();
+            stored_state.q_m = builder.q_m();
+            stored_state.q_c = builder.q_c();
+            stored_state.q_1 = builder.q_1();
+            stored_state.q_2 = builder.q_2();
+            stored_state.q_3 = builder.q_3();
+            stored_state.q_4 = builder.q_4();
+            stored_state.q_arith = builder.q_arith();
+            stored_state.q_sort = builder.q_sort();
+            stored_state.q_elliptic = builder.q_elliptic();
+            stored_state.q_aux = builder.q_aux();
+            stored_state.q_lookup_type = builder.q_lookup_type();
+            stored_state.current_tag = builder.current_tag();
+            stored_state.tau = builder.tau();
 
-            stored_state.ram_arrays = builder.ram_arrays;
-            stored_state.rom_arrays = builder.rom_arrays;
+            stored_state.ram_arrays = builder.ram_arrays();
+            stored_state.rom_arrays = builder.rom_arrays();
 
-            stored_state.memory_read_records = builder.memory_read_records;
-            stored_state.memory_write_records = builder.memory_write_records;
-            stored_state.range_lists = builder.range_lists;
-            stored_state.circuit_finalised = builder.circuit_finalised;
-            stored_state.num_gates = builder.num_gates;
+            stored_state.memory_read_records = builder.memory_read_records();
+            stored_state.memory_write_records = builder.memory_write_records();
+            stored_state.range_lists = builder.range_lists();
+            stored_state.circuit_finalised = builder.circuit_finalised();
+            stored_state.num_gates = builder.num_gates();
             stored_state.cached_partial_non_native_field_multiplications =
-                builder.cached_partial_non_native_field_multiplications;
+                builder.cached_partial_non_native_field_multiplications();
             return stored_state;
         }
 
@@ -529,10 +529,10 @@ template <typename FF> class UltraCircuitBuilder_ : public CircuitBuilderBase<ar
     using WireVector = std::vector<uint32_t, ContainerSlabAllocator<uint32_t>>;
     using SelectorVector = std::vector<FF, ContainerSlabAllocator<FF>>;
 
-    WireVector& w_l = std::get<0>(this->wires);
-    WireVector& w_r = std::get<1>(this->wires);
-    WireVector& w_o = std::get<2>(this->wires);
-    WireVector& w_4 = std::get<3>(this->wires);
+    WireVector& w_l() { return std::get<0>(this->wires); }
+    WireVector& w_r() { return std::get<1>(this->wires); }
+    WireVector& w_o() { return std::get<2>(this->wires); }
+    WireVector& w_4() { return std::get<3>(this->wires); }
 
     SelectorVector& q_m = this->selectors.q_m;
     SelectorVector& q_c = this->selectors.q_c;
@@ -585,10 +585,10 @@ template <typename FF> class UltraCircuitBuilder_ : public CircuitBuilderBase<ar
     UltraCircuitBuilder_(const size_t size_hint = 0)
         : CircuitBuilderBase<arithmetization::Ultra<FF>>(ultra_selector_names(), size_hint)
     {
-        w_l.reserve(size_hint);
-        w_r.reserve(size_hint);
-        w_o.reserve(size_hint);
-        w_4.reserve(size_hint);
+        w_l().reserve(size_hint);
+        w_r().reserve(size_hint);
+        w_o().reserve(size_hint);
+        w_4().reserve(size_hint);
         this->zero_idx = put_constant_variable(FF::zero());
         this->tau.insert({ DUMMY_TAG, DUMMY_TAG }); // TODO(luke): explain this
     };

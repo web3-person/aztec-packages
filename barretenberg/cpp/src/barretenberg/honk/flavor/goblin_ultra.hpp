@@ -78,43 +78,46 @@ class GoblinUltra {
      */
     class PrecomputedEntities : public PrecomputedEntities_<DataType, HandleType, NUM_PRECOMPUTED_ENTITIES> {
       public:
-        DataType& q_m = std::get<0>(this->_data);
-        DataType& q_c = std::get<1>(this->_data);
-        DataType& q_l = std::get<2>(this->_data);
-        DataType& q_r = std::get<3>(this->_data);
-        DataType& q_o = std::get<4>(this->_data);
-        DataType& q_4 = std::get<5>(this->_data);
-        DataType& q_arith = std::get<6>(this->_data);
-        DataType& q_sort = std::get<7>(this->_data);
-        DataType& q_elliptic = std::get<8>(this->_data);
-        DataType& q_aux = std::get<9>(this->_data);
-        DataType& q_lookup = std::get<10>(this->_data);
-        DataType& sigma_1 = std::get<11>(this->_data);
-        DataType& sigma_2 = std::get<12>(this->_data);
-        DataType& sigma_3 = std::get<13>(this->_data);
-        DataType& sigma_4 = std::get<14>(this->_data);
-        DataType& id_1 = std::get<15>(this->_data);
-        DataType& id_2 = std::get<16>(this->_data);
-        DataType& id_3 = std::get<17>(this->_data);
-        DataType& id_4 = std::get<18>(this->_data);
-        DataType& table_1 = std::get<19>(this->_data);
-        DataType& table_2 = std::get<20>(this->_data);
-        DataType& table_3 = std::get<21>(this->_data);
-        DataType& table_4 = std::get<22>(this->_data);
-        DataType& lagrange_first = std::get<23>(this->_data);
-        DataType& lagrange_last = std::get<24>(this->_data);
-        DataType& lagrange_ecc_op = std::get<25>(this->_data); // indicator poly for ecc op gates
+        CONST_FRIENDLY_GETTER(DataType, q_m, std::get<0>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_c, std::get<1>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_l, std::get<2>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_r, std::get<3>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_o, std::get<4>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_4, std::get<5>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_arith, std::get<6>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_sort, std::get<7>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_elliptic, std::get<8>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_aux, std::get<9>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_lookup, std::get<10>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_1, std::get<11>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_2, std::get<12>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_3, std::get<13>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_4, std::get<14>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_1, std::get<15>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_2, std::get<16>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_3, std::get<17>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_4, std::get<18>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_1, std::get<19>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_2, std::get<20>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_3, std::get<21>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_4, std::get<22>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_first, std::get<23>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_last, std::get<24>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_ecc_op, std::get<25>(this->_data)) // indicator poly for ecc op gates
 
         static constexpr CircuitType CIRCUIT_TYPE = CircuitBuilder::CIRCUIT_TYPE;
 
         std::vector<HandleType> get_selectors() override
         {
-            return { q_m, q_c, q_l, q_r, q_o, q_4, q_arith, q_sort, q_elliptic, q_aux, q_lookup };
+            return { q_m(), q_c(), q_l(), q_r(), q_o(), q_4(), q_arith(), q_sort(), q_elliptic(), q_aux(), q_lookup() };
         };
-        std::vector<HandleType> get_sigma_polynomials() override { return { sigma_1, sigma_2, sigma_3, sigma_4 }; };
-        std::vector<HandleType> get_id_polynomials() override { return { id_1, id_2, id_3, id_4 }; };
+        std::vector<HandleType> get_sigma_polynomials() override
+        {
+            return { sigma_1(), sigma_2(), sigma_3(), sigma_4() };
+        };
+        std::vector<HandleType> get_id_polynomials() override { return { id_1(), id_2(), id_3(), id_4() }; };
 
-        std::vector<HandleType> get_table_polynomials() { return { table_1, table_2, table_3, table_4 }; };
+        std::vector<HandleType> get_table_polynomials() { return { table_1(), table_2(), table_3(), table_4() }; };
     };
 
     /**
@@ -124,29 +127,29 @@ class GoblinUltra {
     template <typename DataType, typename HandleType>
     class WitnessEntities : public WitnessEntities_<DataType, HandleType, NUM_WITNESS_ENTITIES> {
       public:
-        DataType& w_l = std::get<0>(this->_data);
-        DataType& w_r = std::get<1>(this->_data);
-        DataType& w_o = std::get<2>(this->_data);
-        DataType& w_4 = std::get<3>(this->_data);
-        DataType& sorted_1 = std::get<4>(this->_data);
-        DataType& sorted_2 = std::get<5>(this->_data);
-        DataType& sorted_3 = std::get<6>(this->_data);
-        DataType& sorted_4 = std::get<7>(this->_data);
-        DataType& sorted_accum = std::get<8>(this->_data);
-        DataType& z_perm = std::get<9>(this->_data);
-        DataType& z_lookup = std::get<10>(this->_data);
-        DataType& ecc_op_wire_1 = std::get<11>(this->_data);
-        DataType& ecc_op_wire_2 = std::get<12>(this->_data);
-        DataType& ecc_op_wire_3 = std::get<13>(this->_data);
-        DataType& ecc_op_wire_4 = std::get<14>(this->_data);
+        CONST_FRIENDLY_GETTER(DataType, w_l, std::get<0>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_r, std::get<1>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_o, std::get<2>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_4, std::get<3>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_1, std::get<4>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_2, std::get<5>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_3, std::get<6>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_4, std::get<7>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_accum, std::get<8>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_perm, std::get<9>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_lookup, std::get<10>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, ecc_op_wire_1, std::get<11>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, ecc_op_wire_2, std::get<12>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, ecc_op_wire_3, std::get<13>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, ecc_op_wire_4, std::get<14>(this->_data))
 
-        std::vector<HandleType> get_wires() override { return { w_l, w_r, w_o, w_4 }; };
+        std::vector<HandleType> get_wires() override { return { w_l(), w_r(), w_o(), w_4() }; };
         std::vector<HandleType> get_ecc_op_wires()
         {
-            return { ecc_op_wire_1, ecc_op_wire_2, ecc_op_wire_3, ecc_op_wire_4 };
+            return { ecc_op_wire_1(), ecc_op_wire_2(), ecc_op_wire_3(), ecc_op_wire_4() };
         };
         // The sorted concatenations of table and witness data needed for plookup.
-        std::vector<HandleType> get_sorted_polynomials() { return { sorted_1, sorted_2, sorted_3, sorted_4 }; };
+        std::vector<HandleType> get_sorted_polynomials() { return { sorted_1(), sorted_2(), sorted_3(), sorted_4() }; };
     };
 
     /**
@@ -161,91 +164,93 @@ class GoblinUltra {
     template <typename DataType, typename HandleType>
     class AllEntities : public AllEntities_<DataType, HandleType, NUM_ALL_ENTITIES> {
       public:
-        DataType& q_c = std::get<0>(this->_data);
-        DataType& q_l = std::get<1>(this->_data);
-        DataType& q_r = std::get<2>(this->_data);
-        DataType& q_o = std::get<3>(this->_data);
-        DataType& q_4 = std::get<4>(this->_data);
-        DataType& q_m = std::get<5>(this->_data);
-        DataType& q_arith = std::get<6>(this->_data);
-        DataType& q_sort = std::get<7>(this->_data);
-        DataType& q_elliptic = std::get<8>(this->_data);
-        DataType& q_aux = std::get<9>(this->_data);
-        DataType& q_lookup = std::get<10>(this->_data);
-        DataType& sigma_1 = std::get<11>(this->_data);
-        DataType& sigma_2 = std::get<12>(this->_data);
-        DataType& sigma_3 = std::get<13>(this->_data);
-        DataType& sigma_4 = std::get<14>(this->_data);
-        DataType& id_1 = std::get<15>(this->_data);
-        DataType& id_2 = std::get<16>(this->_data);
-        DataType& id_3 = std::get<17>(this->_data);
-        DataType& id_4 = std::get<18>(this->_data);
-        DataType& table_1 = std::get<19>(this->_data);
-        DataType& table_2 = std::get<20>(this->_data);
-        DataType& table_3 = std::get<21>(this->_data);
-        DataType& table_4 = std::get<22>(this->_data);
-        DataType& lagrange_first = std::get<23>(this->_data);
-        DataType& lagrange_last = std::get<24>(this->_data);
-        DataType& lagrange_ecc_op = std::get<25>(this->_data);
-        DataType& w_l = std::get<26>(this->_data);
-        DataType& w_r = std::get<27>(this->_data);
-        DataType& w_o = std::get<28>(this->_data);
-        DataType& w_4 = std::get<29>(this->_data);
-        DataType& sorted_accum = std::get<30>(this->_data);
-        DataType& z_perm = std::get<31>(this->_data);
-        DataType& z_lookup = std::get<32>(this->_data);
-        DataType& ecc_op_wire_1 = std::get<33>(this->_data);
-        DataType& ecc_op_wire_2 = std::get<34>(this->_data);
-        DataType& ecc_op_wire_3 = std::get<35>(this->_data);
-        DataType& ecc_op_wire_4 = std::get<36>(this->_data);
-        DataType& table_1_shift = std::get<37>(this->_data);
-        DataType& table_2_shift = std::get<38>(this->_data);
-        DataType& table_3_shift = std::get<39>(this->_data);
-        DataType& table_4_shift = std::get<40>(this->_data);
-        DataType& w_l_shift = std::get<41>(this->_data);
-        DataType& w_r_shift = std::get<42>(this->_data);
-        DataType& w_o_shift = std::get<43>(this->_data);
-        DataType& w_4_shift = std::get<44>(this->_data);
-        DataType& sorted_accum_shift = std::get<45>(this->_data);
-        DataType& z_perm_shift = std::get<46>(this->_data);
-        DataType& z_lookup_shift = std::get<47>(this->_data);
+        CONST_FRIENDLY_GETTER(DataType, q_c, std::get<0>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_l, std::get<1>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_r, std::get<2>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_o, std::get<3>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_4, std::get<4>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_m, std::get<5>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_arith, std::get<6>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_sort, std::get<7>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_elliptic, std::get<8>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_aux, std::get<9>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_lookup, std::get<10>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_1, std::get<11>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_2, std::get<12>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_3, std::get<13>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_4, std::get<14>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_1, std::get<15>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_2, std::get<16>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_3, std::get<17>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_4, std::get<18>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_1, std::get<19>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_2, std::get<20>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_3, std::get<21>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_4, std::get<22>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_first, std::get<23>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_last, std::get<24>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_ecc_op, std::get<25>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_l, std::get<26>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_r, std::get<27>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_o, std::get<28>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_4, std::get<29>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_accum, std::get<30>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_perm, std::get<31>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_lookup, std::get<32>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, ecc_op_wire_1, std::get<33>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, ecc_op_wire_2, std::get<34>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, ecc_op_wire_3, std::get<35>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, ecc_op_wire_4, std::get<36>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_1_shift, std::get<37>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_2_shift, std::get<38>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_3_shift, std::get<39>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_4_shift, std::get<40>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_l_shift, std::get<41>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_r_shift, std::get<42>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_o_shift, std::get<43>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_4_shift, std::get<44>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_accum_shift, std::get<45>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_perm_shift, std::get<46>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_lookup_shift, std::get<47>(this->_data))
 
-        std::vector<HandleType> get_wires() override { return { w_l, w_r, w_o, w_4 }; };
+        std::vector<HandleType> get_wires() override { return { w_l(), w_r(), w_o(), w_4() }; };
         std::vector<HandleType> get_ecc_op_wires()
         {
-            return { ecc_op_wire_1, ecc_op_wire_2, ecc_op_wire_3, ecc_op_wire_4 };
+            return { ecc_op_wire_1(), ecc_op_wire_2(), ecc_op_wire_3(), ecc_op_wire_4() };
         };
         // Gemini-specific getters.
         std::vector<HandleType> get_unshifted() override
         {
-            return { q_c,           q_l,
-                     q_r,           q_o,
-                     q_4,           q_m,
-                     q_arith,       q_sort,
-                     q_elliptic,    q_aux,
-                     q_lookup,      sigma_1,
-                     sigma_2,       sigma_3,
-                     sigma_4,       id_1,
-                     id_2,          id_3,
-                     id_4,          table_1,
-                     table_2,       table_3,
-                     table_4,       lagrange_first,
-                     lagrange_last, lagrange_ecc_op,
-                     w_l,           w_r,
-                     w_o,           w_4,
-                     sorted_accum,  z_perm,
-                     z_lookup,      ecc_op_wire_1,
-                     ecc_op_wire_2, ecc_op_wire_3,
-                     ecc_op_wire_4 };
+            return { q_c(),           q_l(),
+                     q_r(),           q_o(),
+                     q_4(),           q_m(),
+                     q_arith(),       q_sort(),
+                     q_elliptic(),    q_aux(),
+                     q_lookup(),      sigma_1(),
+                     sigma_2(),       sigma_3(),
+                     sigma_4(),       id_1(),
+                     id_2(),          id_3(),
+                     id_4(),          table_1(),
+                     table_2(),       table_3(),
+                     table_4(),       lagrange_first(),
+                     lagrange_last(), lagrange_ecc_op(),
+                     w_l(),           w_r(),
+                     w_o(),           w_4(),
+                     sorted_accum(),  z_perm(),
+                     z_lookup(),      ecc_op_wire_1(),
+                     ecc_op_wire_2(), ecc_op_wire_3(),
+                     ecc_op_wire_4() };
         };
         std::vector<HandleType> get_to_be_shifted() override
         {
-            return { table_1, table_2, table_3, table_4, w_l, w_r, w_o, w_4, sorted_accum, z_perm, z_lookup };
+            return { table_1(), table_2(), table_3(),      table_4(), w_l(),     w_r(),
+                     w_o(),     w_4(),     sorted_accum(), z_perm(),  z_lookup() };
         };
         std::vector<HandleType> get_shifted() override
         {
-            return { table_1_shift, table_2_shift, table_3_shift,      table_4_shift, w_l_shift,     w_r_shift,
-                     w_o_shift,     w_4_shift,     sorted_accum_shift, z_perm_shift,  z_lookup_shift };
+            return { table_1_shift(),      table_2_shift(), table_3_shift(), table_4_shift(),
+                     w_l_shift(),          w_r_shift(),     w_o_shift(),     w_4_shift(),
+                     sorted_accum_shift(), z_perm_shift(),  z_lookup_shift() };
         };
 
         AllEntities() = default;
@@ -294,7 +299,7 @@ class GoblinUltra {
         size_t num_ecc_op_gates; // needed to determine public input offset
 
         // The plookup wires that store plookup read data.
-        std::array<PolynomialHandle, 3> get_table_column_wires() { return { w_l, w_r, w_o }; };
+        std::array<PolynomialHandle, 3> get_table_column_wires() { return { w_l(), w_r(), w_o() }; };
     };
 
     /**
@@ -373,45 +378,45 @@ class GoblinUltra {
       public:
         CommitmentLabels()
         {
-            w_l = "W_L";
-            w_r = "W_R";
-            w_o = "W_O";
-            w_4 = "W_4";
-            z_perm = "Z_PERM";
-            z_lookup = "Z_LOOKUP";
-            sorted_accum = "SORTED_ACCUM";
-            ecc_op_wire_1 = "ECC_OP_WIRE_1";
-            ecc_op_wire_2 = "ECC_OP_WIRE_2";
-            ecc_op_wire_3 = "ECC_OP_WIRE_3";
-            ecc_op_wire_4 = "ECC_OP_WIRE_4";
+            w_l() = "W_L";
+            w_r() = "W_R";
+            w_o() = "W_O";
+            w_4() = "W_4";
+            z_perm() = "Z_PERM";
+            z_lookup() = "Z_LOOKUP";
+            sorted_accum() = "SORTED_ACCUM";
+            ecc_op_wire_1() = "ECC_OP_WIRE_1";
+            ecc_op_wire_2() = "ECC_OP_WIRE_2";
+            ecc_op_wire_3() = "ECC_OP_WIRE_3";
+            ecc_op_wire_4() = "ECC_OP_WIRE_4";
 
             // The ones beginning with "__" are only used for debugging
-            q_c = "__Q_C";
-            q_l = "__Q_L";
-            q_r = "__Q_R";
-            q_o = "__Q_O";
-            q_4 = "__Q_4";
-            q_m = "__Q_M";
-            q_arith = "__Q_ARITH";
-            q_sort = "__Q_SORT";
-            q_elliptic = "__Q_ELLIPTIC";
-            q_aux = "__Q_AUX";
-            q_lookup = "__Q_LOOKUP";
-            sigma_1 = "__SIGMA_1";
-            sigma_2 = "__SIGMA_2";
-            sigma_3 = "__SIGMA_3";
-            sigma_4 = "__SIGMA_4";
-            id_1 = "__ID_1";
-            id_2 = "__ID_2";
-            id_3 = "__ID_3";
-            id_4 = "__ID_4";
-            table_1 = "__TABLE_1";
-            table_2 = "__TABLE_2";
-            table_3 = "__TABLE_3";
-            table_4 = "__TABLE_4";
-            lagrange_first = "__LAGRANGE_FIRST";
-            lagrange_last = "__LAGRANGE_LAST";
-            lagrange_ecc_op = "__Q_ECC_OP_QUEUE";
+            q_c() = "__Q_C";
+            q_l() = "__Q_L";
+            q_r() = "__Q_R";
+            q_o() = "__Q_O";
+            q_4() = "__Q_4";
+            q_m() = "__Q_M";
+            q_arith() = "__Q_ARITH";
+            q_sort() = "__Q_SORT";
+            q_elliptic() = "__Q_ELLIPTIC";
+            q_aux() = "__Q_AUX";
+            q_lookup() = "__Q_LOOKUP";
+            sigma_1() = "__SIGMA_1";
+            sigma_2() = "__SIGMA_2";
+            sigma_3() = "__SIGMA_3";
+            sigma_4() = "__SIGMA_4";
+            id_1() = "__ID_1";
+            id_2() = "__ID_2";
+            id_3() = "__ID_3";
+            id_4() = "__ID_4";
+            table_1() = "__TABLE_1";
+            table_2() = "__TABLE_2";
+            table_3() = "__TABLE_3";
+            table_4() = "__TABLE_4";
+            lagrange_first() = "__LAGRANGE_FIRST";
+            lagrange_last() = "__LAGRANGE_LAST";
+            lagrange_ecc_op() = "__Q_ECC_OP_QUEUE";
         };
     };
 
@@ -421,32 +426,32 @@ class GoblinUltra {
                             [[maybe_unused]] const BaseTranscript<FF>& transcript)
         {
             static_cast<void>(transcript);
-            q_m = verification_key->q_m;
-            q_l = verification_key->q_l;
-            q_r = verification_key->q_r;
-            q_o = verification_key->q_o;
-            q_4 = verification_key->q_4;
-            q_c = verification_key->q_c;
-            q_arith = verification_key->q_arith;
-            q_sort = verification_key->q_sort;
-            q_elliptic = verification_key->q_elliptic;
-            q_aux = verification_key->q_aux;
-            q_lookup = verification_key->q_lookup;
-            sigma_1 = verification_key->sigma_1;
-            sigma_2 = verification_key->sigma_2;
-            sigma_3 = verification_key->sigma_3;
-            sigma_4 = verification_key->sigma_4;
-            id_1 = verification_key->id_1;
-            id_2 = verification_key->id_2;
-            id_3 = verification_key->id_3;
-            id_4 = verification_key->id_4;
-            table_1 = verification_key->table_1;
-            table_2 = verification_key->table_2;
-            table_3 = verification_key->table_3;
-            table_4 = verification_key->table_4;
-            lagrange_first = verification_key->lagrange_first;
-            lagrange_last = verification_key->lagrange_last;
-            lagrange_ecc_op = verification_key->lagrange_ecc_op;
+            q_m() = verification_key->q_m;
+            q_l() = verification_key->q_l;
+            q_r() = verification_key->q_r;
+            q_o() = verification_key->q_o;
+            q_4() = verification_key->q_4;
+            q_c() = verification_key->q_c;
+            q_arith() = verification_key->q_arith;
+            q_sort() = verification_key->q_sort;
+            q_elliptic() = verification_key->q_elliptic;
+            q_aux() = verification_key->q_aux;
+            q_lookup() = verification_key->q_lookup;
+            sigma_1() = verification_key->sigma_1;
+            sigma_2() = verification_key->sigma_2;
+            sigma_3() = verification_key->sigma_3;
+            sigma_4() = verification_key->sigma_4;
+            id_1() = verification_key->id_1;
+            id_2() = verification_key->id_2;
+            id_3() = verification_key->id_3;
+            id_4() = verification_key->id_4;
+            table_1() = verification_key->table_1;
+            table_2() = verification_key->table_2;
+            table_3() = verification_key->table_3;
+            table_4() = verification_key->table_4;
+            lagrange_first() = verification_key->lagrange_first;
+            lagrange_last() = verification_key->lagrange_last;
+            lagrange_ecc_op() = verification_key->lagrange_ecc_op;
         }
     };
 

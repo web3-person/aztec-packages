@@ -37,16 +37,16 @@ template <typename FF_> class ECCVMLookupRelationBase {
         using View = typename Accumulator::View;
 
         if constexpr (read_index == 0) {
-            return Accumulator(View(in.msm_add1));
+            return Accumulator(View(in.msm_add1()));
         }
         if constexpr (read_index == 1) {
-            return Accumulator(View(in.msm_add2));
+            return Accumulator(View(in.msm_add2()));
         }
         if constexpr (read_index == 2) {
-            return Accumulator(View(in.msm_add3));
+            return Accumulator(View(in.msm_add3()));
         }
         if constexpr (read_index == 3) {
-            return Accumulator(View(in.msm_add4));
+            return Accumulator(View(in.msm_add4()));
         }
         return Accumulator(1);
     }
@@ -57,11 +57,11 @@ template <typename FF_> class ECCVMLookupRelationBase {
         using View = typename Accumulator::View;
 
         if constexpr (write_index == 0) {
-            return Accumulator(View(in.precompute_select));
+            return Accumulator(View(in.precompute_select()));
         }
         if constexpr (write_index == 1) {
             // TODO(https://github.com/AztecProtocol/barretenberg/issues/750) Is this a bug?
-            return Accumulator(View(in.precompute_select));
+            return Accumulator(View(in.precompute_select()));
         }
         return Accumulator(1);
     }
@@ -90,10 +90,10 @@ template <typename FF_> class ECCVMLookupRelationBase {
         // 15 -> 15[P]
         // negative points map pc, round, x, -y
         // positive points map pc, 15 - (round * 2), x, y
-        const auto& precompute_pc = View(in.precompute_pc);
-        const auto& tx = View(in.precompute_tx);
-        const auto& ty = View(in.precompute_ty);
-        const auto& precompute_round = View(in.precompute_round);
+        const auto& precompute_pc = View(in.precompute_pc());
+        const auto& tx = View(in.precompute_tx());
+        const auto& ty = View(in.precompute_ty());
+        const auto& precompute_round = View(in.precompute_round());
         const auto& gamma = params.gamma;
         const auto& beta = params.beta;
         const auto& beta_sqr = params.beta_sqr;
@@ -149,20 +149,20 @@ template <typename FF_> class ECCVMLookupRelationBase {
         const auto& beta = params.beta;
         const auto& beta_sqr = params.beta_sqr;
         const auto& beta_cube = params.beta_cube;
-        const auto& msm_pc = View(in.msm_pc);
-        const auto& msm_count = View(in.msm_count);
-        const auto& msm_slice1 = View(in.msm_slice1);
-        const auto& msm_slice2 = View(in.msm_slice2);
-        const auto& msm_slice3 = View(in.msm_slice3);
-        const auto& msm_slice4 = View(in.msm_slice4);
-        const auto& msm_x1 = View(in.msm_x1);
-        const auto& msm_x2 = View(in.msm_x2);
-        const auto& msm_x3 = View(in.msm_x3);
-        const auto& msm_x4 = View(in.msm_x4);
-        const auto& msm_y1 = View(in.msm_y1);
-        const auto& msm_y2 = View(in.msm_y2);
-        const auto& msm_y3 = View(in.msm_y3);
-        const auto& msm_y4 = View(in.msm_y4);
+        const auto& msm_pc = View(in.msm_pc());
+        const auto& msm_count = View(in.msm_count());
+        const auto& msm_slice1 = View(in.msm_slice1());
+        const auto& msm_slice2 = View(in.msm_slice2());
+        const auto& msm_slice3 = View(in.msm_slice3());
+        const auto& msm_slice4 = View(in.msm_slice4());
+        const auto& msm_x1 = View(in.msm_x1());
+        const auto& msm_x2 = View(in.msm_x2());
+        const auto& msm_x3 = View(in.msm_x3());
+        const auto& msm_x4 = View(in.msm_x4());
+        const auto& msm_y1 = View(in.msm_y1());
+        const auto& msm_y2 = View(in.msm_y2());
+        const auto& msm_y3 = View(in.msm_y3());
+        const auto& msm_y4 = View(in.msm_y4());
 
         // how do we get pc value
         // row pc = value of pc after msm

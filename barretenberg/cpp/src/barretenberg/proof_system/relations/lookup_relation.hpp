@@ -73,29 +73,29 @@ template <typename FF_> class LookupRelationImpl {
         const auto one_plus_beta = beta + FF(1);
         const auto gamma_by_one_plus_beta = gamma * one_plus_beta;
 
-        auto w_1 = View(in.w_l);
-        auto w_2 = View(in.w_r);
-        auto w_3 = View(in.w_o);
+        auto w_1 = View(in.w_l());
+        auto w_2 = View(in.w_r());
+        auto w_3 = View(in.w_o());
 
-        auto w_1_shift = View(in.w_l_shift);
-        auto w_2_shift = View(in.w_r_shift);
-        auto w_3_shift = View(in.w_o_shift);
+        auto w_1_shift = View(in.w_l_shift());
+        auto w_2_shift = View(in.w_r_shift());
+        auto w_3_shift = View(in.w_o_shift());
 
-        auto table_1 = View(in.table_1);
-        auto table_2 = View(in.table_2);
-        auto table_3 = View(in.table_3);
-        auto table_4 = View(in.table_4);
+        auto table_1 = View(in.table_1());
+        auto table_2 = View(in.table_2());
+        auto table_3 = View(in.table_3());
+        auto table_4 = View(in.table_4());
 
-        auto table_1_shift = View(in.table_1_shift);
-        auto table_2_shift = View(in.table_2_shift);
-        auto table_3_shift = View(in.table_3_shift);
-        auto table_4_shift = View(in.table_4_shift);
+        auto table_1_shift = View(in.table_1_shift());
+        auto table_2_shift = View(in.table_2_shift());
+        auto table_3_shift = View(in.table_3_shift());
+        auto table_4_shift = View(in.table_4_shift());
 
-        auto table_index = View(in.q_o);
-        auto column_1_step_size = View(in.q_r);
-        auto column_2_step_size = View(in.q_m);
-        auto column_3_step_size = View(in.q_c);
-        auto q_lookup = View(in.q_lookup);
+        auto table_index = View(in.q_o());
+        auto column_1_step_size = View(in.q_r());
+        auto column_2_step_size = View(in.q_m());
+        auto column_3_step_size = View(in.q_c());
+        auto q_lookup = View(in.q_lookup());
 
         // (w_1 + q_2*w_1_shift) + η(w_2 + q_m*w_2_shift) + η²(w_3 + q_c*w_3_shift) + η³q_index.
         // deg 2 or 4
@@ -141,8 +141,8 @@ template <typename FF_> class LookupRelationImpl {
         const auto gamma_by_one_plus_beta = gamma * one_plus_beta; // deg 0 or 2
 
         // Contribution (1)
-        auto s_accum = View(in.sorted_accum);
-        auto s_accum_shift = View(in.sorted_accum_shift);
+        auto s_accum = View(in.sorted_accum());
+        auto s_accum_shift = View(in.sorted_accum_shift());
 
         auto tmp = (s_accum + s_accum_shift * beta + gamma_by_one_plus_beta); // 1 or 2
         return tmp;
@@ -180,11 +180,11 @@ template <typename FF_> class LookupRelationImpl {
 
             const auto& grand_product_delta = ParameterView(params.lookup_grand_product_delta);
 
-            auto z_lookup = View(in.z_lookup);
-            auto z_lookup_shift = View(in.z_lookup_shift);
+            auto z_lookup = View(in.z_lookup());
+            auto z_lookup_shift = View(in.z_lookup_shift());
 
-            auto lagrange_first = View(in.lagrange_first);
-            auto lagrange_last = View(in.lagrange_last);
+            auto lagrange_first = View(in.lagrange_first());
+            auto lagrange_last = View(in.lagrange_last());
 
             const auto lhs = compute_grand_product_numerator<Accumulator>(in, params);   // deg 4 or 10
             const auto rhs = compute_grand_product_denominator<Accumulator>(in, params); // deg 1 or 2
@@ -198,8 +198,8 @@ template <typename FF_> class LookupRelationImpl {
         {
             using Accumulator = std::tuple_element_t<1, ContainerOverSubrelations>;
             using View = typename Accumulator::View;
-            auto z_lookup_shift = View(in.z_lookup_shift);
-            auto lagrange_last = View(in.lagrange_last);
+            auto z_lookup_shift = View(in.z_lookup_shift());
+            auto lagrange_last = View(in.lagrange_last());
 
             // Contribution (2)
             std::get<1>(accumulators) += (lagrange_last * z_lookup_shift) * scaling_factor;

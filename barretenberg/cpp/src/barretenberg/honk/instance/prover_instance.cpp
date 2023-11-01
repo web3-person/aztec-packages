@@ -256,52 +256,52 @@ std::shared_ptr<typename Flavor::ProvingKey> ProverInstance_<Flavor>::compute_pr
 
 template <class Flavor> void ProverInstance_<Flavor>::initialise_prover_polynomials()
 {
-    prover_polynomials.q_c = proving_key->q_c;
-    prover_polynomials.q_l = proving_key->q_l;
-    prover_polynomials.q_r = proving_key->q_r;
-    prover_polynomials.q_o = proving_key->q_o;
-    prover_polynomials.q_m = proving_key->q_m;
-    prover_polynomials.sigma_1 = proving_key->sigma_1;
-    prover_polynomials.sigma_2 = proving_key->sigma_2;
-    prover_polynomials.sigma_3 = proving_key->sigma_3;
-    prover_polynomials.id_1 = proving_key->id_1;
-    prover_polynomials.id_2 = proving_key->id_2;
-    prover_polynomials.id_3 = proving_key->id_3;
-    prover_polynomials.lagrange_first = proving_key->lagrange_first;
-    prover_polynomials.lagrange_last = proving_key->lagrange_last;
-    prover_polynomials.w_l = proving_key->w_l;
-    prover_polynomials.w_r = proving_key->w_r;
-    prover_polynomials.w_o = proving_key->w_o;
+    prover_polynomials.q_c() = proving_key->q_c;
+    prover_polynomials.q_l() = proving_key->q_l;
+    prover_polynomials.q_r() = proving_key->q_r;
+    prover_polynomials.q_o() = proving_key->q_o;
+    prover_polynomials.q_m() = proving_key->q_m;
+    prover_polynomials.sigma_1() = proving_key->sigma_1;
+    prover_polynomials.sigma_2() = proving_key->sigma_2;
+    prover_polynomials.sigma_3() = proving_key->sigma_3;
+    prover_polynomials.id_1() = proving_key->id_1;
+    prover_polynomials.id_2() = proving_key->id_2;
+    prover_polynomials.id_3() = proving_key->id_3;
+    prover_polynomials.lagrange_first() = proving_key->lagrange_first;
+    prover_polynomials.lagrange_last() = proving_key->lagrange_last;
+    prover_polynomials.w_l() = proving_key->w_l;
+    prover_polynomials.w_r() = proving_key->w_r;
+    prover_polynomials.w_o() = proving_key->w_o;
 
-    prover_polynomials.q_4 = proving_key->q_4;
-    prover_polynomials.q_arith = proving_key->q_arith;
-    prover_polynomials.q_sort = proving_key->q_sort;
-    prover_polynomials.q_elliptic = proving_key->q_elliptic;
-    prover_polynomials.q_aux = proving_key->q_aux;
-    prover_polynomials.q_lookup = proving_key->q_lookup;
-    prover_polynomials.sigma_4 = proving_key->sigma_4;
-    prover_polynomials.id_4 = proving_key->id_4;
-    prover_polynomials.table_1 = proving_key->table_1;
-    prover_polynomials.table_2 = proving_key->table_2;
-    prover_polynomials.table_3 = proving_key->table_3;
-    prover_polynomials.table_4 = proving_key->table_4;
-    prover_polynomials.table_1_shift = proving_key->table_1.shifted();
-    prover_polynomials.table_2_shift = proving_key->table_2.shifted();
-    prover_polynomials.table_3_shift = proving_key->table_3.shifted();
-    prover_polynomials.table_4_shift = proving_key->table_4.shifted();
-    prover_polynomials.w_l_shift = proving_key->w_l.shifted();
-    prover_polynomials.w_r_shift = proving_key->w_r.shifted();
-    prover_polynomials.w_o_shift = proving_key->w_o.shifted();
+    prover_polynomials.q_4() = proving_key->q_4;
+    prover_polynomials.q_arith() = proving_key->q_arith;
+    prover_polynomials.q_sort() = proving_key->q_sort;
+    prover_polynomials.q_elliptic() = proving_key->q_elliptic;
+    prover_polynomials.q_aux() = proving_key->q_aux;
+    prover_polynomials.q_lookup() = proving_key->q_lookup;
+    prover_polynomials.sigma_4() = proving_key->sigma_4;
+    prover_polynomials.id_4() = proving_key->id_4;
+    prover_polynomials.table_1() = proving_key->table_1;
+    prover_polynomials.table_2() = proving_key->table_2;
+    prover_polynomials.table_3() = proving_key->table_3;
+    prover_polynomials.table_4() = proving_key->table_4;
+    prover_polynomials.table_1_shift() = proving_key->table_1.shifted();
+    prover_polynomials.table_2_shift() = proving_key->table_2.shifted();
+    prover_polynomials.table_3_shift() = proving_key->table_3.shifted();
+    prover_polynomials.table_4_shift() = proving_key->table_4.shifted();
+    prover_polynomials.w_l_shift() = proving_key->w_l.shifted();
+    prover_polynomials.w_r_shift() = proving_key->w_r.shifted();
+    prover_polynomials.w_o_shift() = proving_key->w_o.shifted();
 
     if constexpr (IsGoblinFlavor<Flavor>) {
-        prover_polynomials.ecc_op_wire_1 = proving_key->ecc_op_wire_1;
-        prover_polynomials.ecc_op_wire_2 = proving_key->ecc_op_wire_2;
-        prover_polynomials.ecc_op_wire_3 = proving_key->ecc_op_wire_3;
-        prover_polynomials.ecc_op_wire_4 = proving_key->ecc_op_wire_4;
-        prover_polynomials.lagrange_ecc_op = proving_key->lagrange_ecc_op;
+        prover_polynomials.ecc_op_wire_1() = proving_key->ecc_op_wire_1;
+        prover_polynomials.ecc_op_wire_2() = proving_key->ecc_op_wire_2;
+        prover_polynomials.ecc_op_wire_3() = proving_key->ecc_op_wire_3;
+        prover_polynomials.ecc_op_wire_4() = proving_key->ecc_op_wire_4;
+        prover_polynomials.lagrange_ecc_op() = proving_key->lagrange_ecc_op;
     }
 
-    std::span<FF> public_wires_source = prover_polynomials.w_r;
+    std::span<FF> public_wires_source = prover_polynomials.w_r();
 
     // Determine public input offsets in the circuit relative to the 0th index for Ultra flavors
     pub_inputs_offset = Flavor::has_zero_row ? 1 : 0;

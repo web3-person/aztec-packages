@@ -48,17 +48,17 @@ template <typename FF_> class EllipticRelationImpl {
 
         using Accumulator = typename std::tuple_element_t<0, ContainerOverSubrelations>;
         using View = typename Accumulator::View;
-        auto x_1 = View(in.w_r);
-        auto y_1 = View(in.w_o);
+        auto x_1 = View(in.w_r());
+        auto y_1 = View(in.w_o());
 
-        auto x_2 = View(in.w_l_shift);
-        auto y_2 = View(in.w_4_shift);
-        auto y_3 = View(in.w_o_shift);
-        auto x_3 = View(in.w_r_shift);
+        auto x_2 = View(in.w_l_shift());
+        auto y_2 = View(in.w_4_shift());
+        auto y_3 = View(in.w_o_shift());
+        auto x_3 = View(in.w_r_shift());
 
-        auto q_sign = View(in.q_l);
-        auto q_elliptic = View(in.q_elliptic);
-        auto q_is_double = View(in.q_m);
+        auto q_sign = View(in.q_l());
+        auto q_elliptic = View(in.q_elliptic());
+        auto q_is_double = View(in.q_m());
 
         // Contribution (1) point addition, x-coordinate check
         // q_elliptic * (x3 + x2 + x1)(x2 - x1)(x2 - x1) - y2^2 - y1^2 + 2(y2y1)*q_sign = 0

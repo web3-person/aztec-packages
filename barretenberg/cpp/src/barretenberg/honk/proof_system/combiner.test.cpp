@@ -20,14 +20,14 @@ TEST(Protogalaxy, CombinerOn2Instances)
     using ProtoGalaxyProver = ProtoGalaxyProver_<ProverInstances>;
 
     const auto restrict_to_standard_arithmetic_relation = [](auto& polys) {
-        std::fill(polys.q_arith.begin(), polys.q_arith.end(), 1);
-        std::fill(polys.q_sort.begin(), polys.q_sort.end(), 0);
-        std::fill(polys.q_elliptic.begin(), polys.q_elliptic.end(), 0);
-        std::fill(polys.q_aux.begin(), polys.q_aux.end(), 0);
-        std::fill(polys.q_lookup.begin(), polys.q_lookup.end(), 0);
-        std::fill(polys.q_4.begin(), polys.q_4.end(), 0);
-        std::fill(polys.w_4.begin(), polys.w_4.end(), 0);
-        std::fill(polys.w_4_shift.begin(), polys.w_4_shift.end(), 0);
+        std::fill(polys.q_arith().begin(), polys.q_arith().end(), 1);
+        std::fill(polys.q_sort().begin(), polys.q_sort().end(), 0);
+        std::fill(polys.q_elliptic().begin(), polys.q_elliptic().end(), 0);
+        std::fill(polys.q_aux().begin(), polys.q_aux().end(), 0);
+        std::fill(polys.q_lookup().begin(), polys.q_lookup().end(), 0);
+        std::fill(polys.q_4().begin(), polys.q_4().end(), 0);
+        std::fill(polys.w_4().begin(), polys.w_4().end(), 0);
+        std::fill(polys.w_4_shift().begin(), polys.w_4_shift().end(), 0);
     };
 
     auto run_test = [&](bool is_random_input) {
@@ -86,20 +86,20 @@ TEST(Protogalaxy, CombinerOn2Instances)
             ProverInstances instances{ instance_data };
 
             const auto create_add_gate = [](auto& polys, const size_t idx, FF w_l, FF w_r) {
-                polys.w_l[idx] = w_l;
-                polys.w_r[idx] = w_r;
-                polys.w_o[idx] = w_l + w_r;
-                polys.q_l[idx] = 1;
-                polys.q_r[idx] = 1;
-                polys.q_o[idx] = -1;
+                polys.w_l()[idx] = w_l;
+                polys.w_r()[idx] = w_r;
+                polys.w_o()[idx] = w_l + w_r;
+                polys.q_l()[idx] = 1;
+                polys.q_r()[idx] = 1;
+                polys.q_o()[idx] = -1;
             };
 
             const auto create_mul_gate = [](auto& polys, const size_t idx, FF w_l, FF w_r) {
-                polys.w_l[idx] = w_l;
-                polys.w_r[idx] = w_r;
-                polys.w_o[idx] = w_l * w_r;
-                polys.q_m[idx] = 1;
-                polys.q_o[idx] = -1;
+                polys.w_l()[idx] = w_l;
+                polys.w_r()[idx] = w_r;
+                polys.w_o()[idx] = w_l * w_r;
+                polys.q_m()[idx] = 1;
+                polys.q_o()[idx] = -1;
             };
 
             create_add_gate(instances[0]->prover_polynomials, 0, 1, 2);
@@ -147,14 +147,14 @@ TEST(Protogalaxy, CombinerOn4Instances)
     using ProtoGalaxyProver = ProtoGalaxyProver_<ProverInstances>;
 
     const auto zero_all_selectors = [](auto& polys) {
-        std::fill(polys.q_arith.begin(), polys.q_arith.end(), 0);
-        std::fill(polys.q_sort.begin(), polys.q_sort.end(), 0);
-        std::fill(polys.q_elliptic.begin(), polys.q_elliptic.end(), 0);
-        std::fill(polys.q_aux.begin(), polys.q_aux.end(), 0);
-        std::fill(polys.q_lookup.begin(), polys.q_lookup.end(), 0);
-        std::fill(polys.q_4.begin(), polys.q_4.end(), 0);
-        std::fill(polys.w_4.begin(), polys.w_4.end(), 0);
-        std::fill(polys.w_4_shift.begin(), polys.w_4_shift.end(), 0);
+        std::fill(polys.q_arith().begin(), polys.q_arith().end(), 0);
+        std::fill(polys.q_sort().begin(), polys.q_sort().end(), 0);
+        std::fill(polys.q_elliptic().begin(), polys.q_elliptic().end(), 0);
+        std::fill(polys.q_aux().begin(), polys.q_aux().end(), 0);
+        std::fill(polys.q_lookup().begin(), polys.q_lookup().end(), 0);
+        std::fill(polys.q_4().begin(), polys.q_4().end(), 0);
+        std::fill(polys.w_4().begin(), polys.w_4().end(), 0);
+        std::fill(polys.w_4_shift().begin(), polys.w_4_shift().end(), 0);
     };
 
     auto run_test = [&]() {
