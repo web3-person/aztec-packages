@@ -237,9 +237,9 @@ Accumulator ECCVMSetRelationBase<FF>::compute_permutation_denominator(const AllE
     const auto& beta = params.beta;
     const auto& beta_sqr = params.beta_sqr;
     const auto& beta_cube = params.beta_cube;
-    const auto& msm_pc = View(in.msm_pc);
-    const auto& msm_count = View(in.msm_count);
-    const auto& msm_round = View(in.msm_round);
+    const auto& msm_pc = View(in.msm_pc());
+    const auto& msm_count = View(in.msm_count());
+    const auto& msm_round = View(in.msm_round());
 
     /**
      * @brief First term: tuple of (pc, round, wnaf_slice), used to determine which points we extract from lookup tables
