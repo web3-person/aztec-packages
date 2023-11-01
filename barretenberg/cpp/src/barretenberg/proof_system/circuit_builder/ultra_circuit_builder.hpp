@@ -1,4 +1,5 @@
 #pragma once
+#include "barretenberg/common/getters.hpp"
 #include "barretenberg/plonk/proof_system/constants.hpp"
 #include "barretenberg/plonk/proof_system/types/polynomial_manifest.hpp"
 #include "barretenberg/plonk/proof_system/types/prover_settings.hpp"
@@ -529,10 +530,10 @@ template <typename FF> class UltraCircuitBuilder_ : public CircuitBuilderBase<ar
     using WireVector = std::vector<uint32_t, ContainerSlabAllocator<uint32_t>>;
     using SelectorVector = std::vector<FF, ContainerSlabAllocator<FF>>;
 
-    WireVector& w_l() { return std::get<0>(this->wires); }
-    WireVector& w_r() { return std::get<1>(this->wires); }
-    WireVector& w_o() { return std::get<2>(this->wires); }
-    WireVector& w_4() { return std::get<3>(this->wires); }
+    CONST_FRIENDLY_GETTER(WireVector, w_l, std::get<0>(this->wires))
+    CONST_FRIENDLY_GETTER(WireVector, w_r, std::get<1>(this->wires))
+    CONST_FRIENDLY_GETTER(WireVector, w_o, std::get<2>(this->wires))
+    CONST_FRIENDLY_GETTER(WireVector, w_4, std::get<3>(this->wires))
 
     SelectorVector& q_m = this->selectors.q_m;
     SelectorVector& q_c = this->selectors.q_c;

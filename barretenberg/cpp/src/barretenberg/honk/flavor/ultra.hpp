@@ -82,31 +82,31 @@ class Ultra {
      */
     class PrecomputedEntities : public PrecomputedEntities_<DataType, HandleType, NUM_PRECOMPUTED_ENTITIES> {
       public:
-        DataType& q_m() { return std::get<0>(this->_data); }
-        DataType& q_c() { return std::get<1>(this->_data); }
-        DataType& q_l() { return std::get<2>(this->_data); }
-        DataType& q_r() { return std::get<3>(this->_data); }
-        DataType& q_o() { return std::get<4>(this->_data); }
-        DataType& q_4() { return std::get<5>(this->_data); }
-        DataType& q_arith() { return std::get<6>(this->_data); }
-        DataType& q_sort() { return std::get<7>(this->_data); }
-        DataType& q_elliptic() { return std::get<8>(this->_data); }
-        DataType& q_aux() { return std::get<9>(this->_data); }
-        DataType& q_lookup() { return std::get<10>(this->_data); }
-        DataType& sigma_1() { return std::get<11>(this->_data); }
-        DataType& sigma_2() { return std::get<12>(this->_data); }
-        DataType& sigma_3() { return std::get<13>(this->_data); }
-        DataType& sigma_4() { return std::get<14>(this->_data); }
-        DataType& id_1() { return std::get<15>(this->_data); }
-        DataType& id_2() { return std::get<16>(this->_data); }
-        DataType& id_3() { return std::get<17>(this->_data); }
-        DataType& id_4() { return std::get<18>(this->_data); }
-        DataType& table_1() { return std::get<19>(this->_data); }
-        DataType& table_2() { return std::get<20>(this->_data); }
-        DataType& table_3() { return std::get<21>(this->_data); }
-        DataType& table_4() { return std::get<22>(this->_data); }
-        DataType& lagrange_first() { return std::get<23>(this->_data); }
-        DataType& lagrange_last() { return std::get<24>(this->_data); }
+        CONST_FRIENDLY_GETTER(DataType, q_m, std::get<0>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_c, std::get<1>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_l, std::get<2>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_r, std::get<3>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_o, std::get<4>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_4, std::get<5>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_arith, std::get<6>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_sort, std::get<7>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_elliptic, std::get<8>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_aux, std::get<9>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, q_lookup, std::get<10>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_1, std::get<11>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_2, std::get<12>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_3, std::get<13>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sigma_4, std::get<14>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_1, std::get<15>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_2, std::get<16>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_3, std::get<17>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, id_4, std::get<18>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_1, std::get<19>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_2, std::get<20>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_3, std::get<21>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, table_4, std::get<22>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_first, std::get<23>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, lagrange_last, std::get<24>(this->_data))
 
         static constexpr CircuitType CIRCUIT_TYPE = CircuitBuilder::CIRCUIT_TYPE;
 
@@ -130,17 +130,17 @@ class Ultra {
     template <typename DataType, typename HandleType>
     class WitnessEntities : public WitnessEntities_<DataType, HandleType, NUM_WITNESS_ENTITIES> {
       public:
-        DataType& w_l() { return std::get<0>(this->_data); }
-        DataType& w_r() { return std::get<1>(this->_data); }
-        DataType& w_o() { return std::get<2>(this->_data); }
-        DataType& w_4() { return std::get<3>(this->_data); }
-        DataType& sorted_1() { return std::get<4>(this->_data); }
-        DataType& sorted_2() { return std::get<5>(this->_data); }
-        DataType& sorted_3() { return std::get<6>(this->_data); }
-        DataType& sorted_4() { return std::get<7>(this->_data); }
-        DataType& sorted_accum() { return std::get<8>(this->_data); }
-        DataType& z_perm() { return std::get<9>(this->_data); }
-        DataType& z_lookup() { return std::get<10>(this->_data); }
+        CONST_FRIENDLY_GETTER(DataType, w_l, std::get<0>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_r, std::get<1>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_o, std::get<2>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, w_4, std::get<3>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_1, std::get<4>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_2, std::get<5>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_3, std::get<6>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_4, std::get<7>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, sorted_accum, std::get<8>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_perm, std::get<9>(this->_data))
+        CONST_FRIENDLY_GETTER(DataType, z_lookup, std::get<10>(this->_data))
 
         std::vector<HandleType> get_wires() override { return { w_l(), w_r(), w_o(), w_4() }; };
         // The sorted concatenations of table and witness data needed for plookup.
