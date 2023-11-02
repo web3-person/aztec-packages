@@ -1,4 +1,5 @@
-use crate::abis::base_or_merge_rollup_public_inputs::{BaseOrMergeRollupPublicInputs, AggregationObject};
+use crate::abis::base_or_merge_rollup_public_inputs::BaseOrMergeRollupPublicInputs;
+use dep::types::mocked::AggregationObject;
 use dep::types::hash::accumulate_sha256;
 use dep::types::utils::uint128::U128;
 use dep::aztec::constants_gen::NUM_FIELDS_PER_SHA256;
