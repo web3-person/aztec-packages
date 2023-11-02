@@ -237,12 +237,12 @@ template <class FF> class GrandProductTests : public testing::Test {
         auto lookup_index_selector = get_random_polynomial(circuit_size);
         auto lookup_selector = get_random_polynomial(circuit_size);
 
-        proving_key->sorted_accum = sorted_batched;
-        populate_span(proving_key->q_r, column_1_step_size);
-        populate_span(proving_key->q_m, column_2_step_size);
-        populate_span(proving_key->q_c, column_3_step_size);
-        populate_span(proving_key->q_o, lookup_index_selector);
-        populate_span(proving_key->q_lookup, lookup_selector);
+        proving_key->sorted_accum() = sorted_batched;
+        populate_span(proving_key->q_r(), column_1_step_size);
+        populate_span(proving_key->q_m(), column_2_step_size);
+        populate_span(proving_key->q_c(), column_3_step_size);
+        populate_span(proving_key->q_o(), lookup_index_selector);
+        populate_span(proving_key->q_lookup(), lookup_selector);
 
         // Get random challenges
         auto beta = FF::random_element();
@@ -258,29 +258,29 @@ template <class FF> class GrandProductTests : public testing::Test {
         };
 
         Flavor::ProverPolynomials prover_polynomials;
-        prover_polynomials.w_l() = proving_key->w_l;
-        prover_polynomials.w_r() = proving_key->w_r;
-        prover_polynomials.w_o() = proving_key->w_o;
-        prover_polynomials.w_l_shift() = proving_key->w_l.shifted();
-        prover_polynomials.w_r_shift() = proving_key->w_r.shifted();
-        prover_polynomials.w_o_shift() = proving_key->w_o.shifted();
-        prover_polynomials.sorted_accum() = proving_key->sorted_accum;
-        prover_polynomials.sorted_accum_shift() = proving_key->sorted_accum.shifted();
-        prover_polynomials.table_1() = proving_key->table_1;
-        prover_polynomials.table_2() = proving_key->table_2;
-        prover_polynomials.table_3() = proving_key->table_3;
-        prover_polynomials.table_4() = proving_key->table_4;
-        prover_polynomials.table_1_shift() = proving_key->table_1.shifted();
-        prover_polynomials.table_2_shift() = proving_key->table_2.shifted();
-        prover_polynomials.table_3_shift() = proving_key->table_3.shifted();
-        prover_polynomials.table_4_shift() = proving_key->table_4.shifted();
-        prover_polynomials.q_m() = proving_key->q_m;
-        prover_polynomials.q_r() = proving_key->q_r;
-        prover_polynomials.q_o() = proving_key->q_o;
-        prover_polynomials.q_c() = proving_key->q_c;
-        prover_polynomials.q_lookup() = proving_key->q_lookup;
-        prover_polynomials.z_perm() = proving_key->z_perm;
-        prover_polynomials.z_lookup() = proving_key->z_lookup;
+        prover_polynomials.w_l() = proving_key->w_l();
+        prover_polynomials.w_r() = proving_key->w_r();
+        prover_polynomials.w_o() = proving_key->w_o();
+        prover_polynomials.w_l_shift() = proving_key->w_l().shifted();
+        prover_polynomials.w_r_shift() = proving_key->w_r().shifted();
+        prover_polynomials.w_o_shift() = proving_key->w_o().shifted();
+        prover_polynomials.sorted_accum() = proving_key->sorted_accum();
+        prover_polynomials.sorted_accum_shift() = proving_key->sorted_accum().shifted();
+        prover_polynomials.table_1() = proving_key->table_1();
+        prover_polynomials.table_2() = proving_key->table_2();
+        prover_polynomials.table_3() = proving_key->table_3();
+        prover_polynomials.table_4() = proving_key->table_4();
+        prover_polynomials.table_1_shift() = proving_key->table_1().shifted();
+        prover_polynomials.table_2_shift() = proving_key->table_2().shifted();
+        prover_polynomials.table_3_shift() = proving_key->table_3().shifted();
+        prover_polynomials.table_4_shift() = proving_key->table_4().shifted();
+        prover_polynomials.q_m() = proving_key->q_m();
+        prover_polynomials.q_r() = proving_key->q_r();
+        prover_polynomials.q_o() = proving_key->q_o();
+        prover_polynomials.q_c() = proving_key->q_c();
+        prover_polynomials.q_lookup() = proving_key->q_lookup();
+        prover_polynomials.z_perm() = proving_key->z_perm();
+        prover_polynomials.z_lookup() = proving_key->z_lookup();
 
         // Method 1: Compute z_lookup using the prover library method
         constexpr size_t LOOKUP_RELATION_INDEX = 1;
@@ -360,7 +360,7 @@ template <class FF> class GrandProductTests : public testing::Test {
             z_lookup_expected[i + 1] = accumulators[0][i] / accumulators[3][i];
         }
 
-        EXPECT_EQ(proving_key->z_lookup, z_lookup_expected);
+        EXPECT_EQ(proving_key->z_lookup(), z_lookup_expected);
     };
 };
 

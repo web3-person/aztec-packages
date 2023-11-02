@@ -99,10 +99,10 @@ TEST_F(SumcheckTests, PolynomialNormalization)
     }
     auto full_polynomials = construct_ultra_full_polynomials(random_polynomials);
 
-    info(full_polynomials.w_l[0]);
-    info(full_polynomials.w_l[1]);
-    info(full_polynomials.w_l[2]);
-    info(full_polynomials.w_l[3]);
+    info(full_polynomials.w_l()[0]);
+    info(full_polynomials.w_l()[1]);
+    info(full_polynomials.w_l()[2]);
+    info(full_polynomials.w_l()[3]);
 
     Flavor::Transcript transcript = Flavor::Transcript::prover_init_empty();
 
@@ -225,16 +225,16 @@ TEST_F(SumcheckTests, ProverAndVerifierSimple)
         std::array<FF, multivariate_n> q_arith = { 0, 1, 1, 0 };
         // Setting all of these to 0 ensures the GrandProductRelation is satisfied
 
-        full_polynomials.w_l = w_l;
-        full_polynomials.w_r = w_r;
-        full_polynomials.w_o = w_o;
-        full_polynomials.w_4 = w_4;
-        full_polynomials.q_m = q_m;
-        full_polynomials.q_l = q_l;
-        full_polynomials.q_r = q_r;
-        full_polynomials.q_o = q_o;
-        full_polynomials.q_c = q_c;
-        full_polynomials.q_arith = q_arith;
+        full_polynomials.w_l() = w_l;
+        full_polynomials.w_r() = w_r;
+        full_polynomials.w_o() = w_o;
+        full_polynomials.w_4() = w_4;
+        full_polynomials.q_m() = q_m;
+        full_polynomials.q_l() = q_l;
+        full_polynomials.q_r() = q_r;
+        full_polynomials.q_o() = q_o;
+        full_polynomials.q_c() = q_c;
+        full_polynomials.q_arith() = q_arith;
 
         // Set aribitrary random relation parameters
         proof_system::RelationParameters<FF> relation_parameters{

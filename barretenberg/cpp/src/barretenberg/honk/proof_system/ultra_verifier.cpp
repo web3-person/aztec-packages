@@ -66,20 +66,20 @@ template <typename Flavor> bool UltraVerifier_<Flavor>::verify_proof(const plonk
     }
 
     // Get commitments to first three wire polynomials
-    commitments.w_l = transcript.template receive_from_prover<Commitment>(commitment_labels.w_l);
-    commitments.w_r = transcript.template receive_from_prover<Commitment>(commitment_labels.w_r);
-    commitments.w_o = transcript.template receive_from_prover<Commitment>(commitment_labels.w_o);
+    commitments.w_l() = transcript.template receive_from_prover<Commitment>(commitment_labels.w_l());
+    commitments.w_r() = transcript.template receive_from_prover<Commitment>(commitment_labels.w_r());
+    commitments.w_o() = transcript.template receive_from_prover<Commitment>(commitment_labels.w_o());
 
     // If Goblin, get commitments to ECC op wire polynomials
     if constexpr (IsGoblinFlavor<Flavor>) {
-        commitments.ecc_op_wire_1 =
-            transcript.template receive_from_prover<Commitment>(commitment_labels.ecc_op_wire_1);
-        commitments.ecc_op_wire_2 =
-            transcript.template receive_from_prover<Commitment>(commitment_labels.ecc_op_wire_2);
-        commitments.ecc_op_wire_3 =
-            transcript.template receive_from_prover<Commitment>(commitment_labels.ecc_op_wire_3);
-        commitments.ecc_op_wire_4 =
-            transcript.template receive_from_prover<Commitment>(commitment_labels.ecc_op_wire_4);
+        commitments.ecc_op_wire_1() =
+            transcript.template receive_from_prover<Commitment>(commitment_labels.ecc_op_wire_1());
+        commitments.ecc_op_wire_2() =
+            transcript.template receive_from_prover<Commitment>(commitment_labels.ecc_op_wire_2());
+        commitments.ecc_op_wire_3() =
+            transcript.template receive_from_prover<Commitment>(commitment_labels.ecc_op_wire_3());
+        commitments.ecc_op_wire_4() =
+            transcript.template receive_from_prover<Commitment>(commitment_labels.ecc_op_wire_4());
     }
 
     // Get challenge for sorted list batching and wire four memory records
@@ -87,8 +87,8 @@ template <typename Flavor> bool UltraVerifier_<Flavor>::verify_proof(const plonk
     relation_parameters.eta = eta;
 
     // Get commitments to sorted list accumulator and fourth wire
-    commitments.sorted_accum = transcript.template receive_from_prover<Commitment>(commitment_labels.sorted_accum);
-    commitments.w_4 = transcript.template receive_from_prover<Commitment>(commitment_labels.w_4);
+    commitments.sorted_accum() = transcript.template receive_from_prover<Commitment>(commitment_labels.sorted_accum());
+    commitments.w_4() = transcript.template receive_from_prover<Commitment>(commitment_labels.w_4());
 
     // Get permutation challenges
     auto [beta, gamma] = transcript.get_challenges("beta", "gamma");
@@ -103,8 +103,8 @@ template <typename Flavor> bool UltraVerifier_<Flavor>::verify_proof(const plonk
     relation_parameters.lookup_grand_product_delta = lookup_grand_product_delta;
 
     // Get commitment to permutation and lookup grand products
-    commitments.z_perm = transcript.template receive_from_prover<Commitment>(commitment_labels.z_perm);
-    commitments.z_lookup = transcript.template receive_from_prover<Commitment>(commitment_labels.z_lookup);
+    commitments.z_perm() = transcript.template receive_from_prover<Commitment>(commitment_labels.z_perm());
+    commitments.z_lookup() = transcript.template receive_from_prover<Commitment>(commitment_labels.z_lookup());
 
     // Execute Sumcheck Verifier
     auto sumcheck = SumcheckVerifier<Flavor>(circuit_size);

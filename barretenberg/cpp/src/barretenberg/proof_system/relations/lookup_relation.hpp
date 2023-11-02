@@ -37,7 +37,7 @@ template <typename FF_> class LookupRelationImpl {
      * @param input
      * @return auto& either std::span<FF> or Flavor::Polynomial depending on context
      */
-    inline static auto& get_grand_product_polynomial(auto& input) { return input.z_lookup; }
+    inline static auto& get_grand_product_polynomial(auto& input) { return input.z_lookup(); }
 
     /**
      * @brief Get the shifted grand product polynomial object (either from the proving key or AllEntities depending on
@@ -46,7 +46,7 @@ template <typename FF_> class LookupRelationImpl {
      * @param input
      * @return auto& either std::span<FF> or Flavor::Polynomial depending on context
      */
-    inline static auto& get_shifted_grand_product_polynomial(auto& input) { return input.z_lookup_shift; }
+    inline static auto& get_shifted_grand_product_polynomial(auto& input) { return input.z_lookup_shift(); }
 
     /**
      * @brief Compute numerator term of the lookup relation:

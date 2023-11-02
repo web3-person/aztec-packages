@@ -343,9 +343,9 @@ template <typename Flavor> class ECCVMCircuitBuilder {
             polys[j] = Polynomial(num_rows_pow2);
         }
 
-        polys.lagrange_first[0] = 1;
-        polys.lagrange_second[1] = 1;
-        polys.lagrange_last[polys.lagrange_last.size() - 1] = 1;
+        polys.lagrange_first()[0] = 1;
+        polys.lagrange_second()[1] = 1;
+        polys.lagrange_last()[polys.lagrange_last().size() - 1] = 1;
 
         for (size_t i = 0; i < point_table_read_counts[0].size(); ++i) {
             // Explanation of off-by-one offset
@@ -354,30 +354,30 @@ template <typename Flavor> class ECCVMCircuitBuilder {
             // `lookup_read_counts`. We do this mapping in `ecc_msm_relation`. We are off-by-one because we add an empty
             // row at the start of the WNAF columns that is not accounted for (index of lookup_read_counts maps to the
             // row in our WNAF columns that computes a slice for a given value of pc and round)
-            polys.lookup_read_counts_0[i + 1] = point_table_read_counts[0][i];
-            polys.lookup_read_counts_1[i + 1] = point_table_read_counts[1][i];
+            polys.lookup_read_counts_0()[i + 1] = point_table_read_counts[0][i];
+            polys.lookup_read_counts_1()[i + 1] = point_table_read_counts[1][i];
         }
         for (size_t i = 0; i < transcript_state.size(); ++i) {
-            polys.transcript_accumulator_empty[i] = transcript_state[i].accumulator_empty;
-            polys.transcript_add[i] = transcript_state[i].q_add;
-            polys.transcript_mul[i] = transcript_state[i].q_mul;
-            polys.transcript_eq[i] = transcript_state[i].q_eq;
-            polys.transcript_reset_accumulator[i] = transcript_state[i].q_reset_accumulator;
-            polys.transcript_msm_transition[i] = transcript_state[i].msm_transition;
-            polys.transcript_pc[i] = transcript_state[i].pc;
-            polys.transcript_msm_count[i] = transcript_state[i].msm_count;
-            polys.transcript_x[i] = transcript_state[i].base_x;
-            polys.transcript_y[i] = transcript_state[i].base_y;
-            polys.transcript_z1[i] = transcript_state[i].z1;
-            polys.transcript_z2[i] = transcript_state[i].z2;
-            polys.transcript_z1zero[i] = transcript_state[i].z1_zero;
-            polys.transcript_z2zero[i] = transcript_state[i].z2_zero;
-            polys.transcript_op[i] = transcript_state[i].opcode;
-            polys.transcript_accumulator_x[i] = transcript_state[i].accumulator_x;
-            polys.transcript_accumulator_y[i] = transcript_state[i].accumulator_y;
-            polys.transcript_msm_x[i] = transcript_state[i].msm_output_x;
-            polys.transcript_msm_y[i] = transcript_state[i].msm_output_y;
-            polys.transcript_collision_check[i] = transcript_state[i].collision_check;
+            polys.transcript_accumulator_empty()[i] = transcript_state[i].accumulator_empty;
+            polys.transcript_add()[i] = transcript_state[i].q_add;
+            polys.transcript_mul()[i] = transcript_state[i].q_mul;
+            polys.transcript_eq()[i] = transcript_state[i].q_eq;
+            polys.transcript_reset_accumulator()[i] = transcript_state[i].q_reset_accumulator;
+            polys.transcript_msm_transition()[i] = transcript_state[i].msm_transition;
+            polys.transcript_pc()[i] = transcript_state[i].pc;
+            polys.transcript_msm_count()[i] = transcript_state[i].msm_count;
+            polys.transcript_x()[i] = transcript_state[i].base_x;
+            polys.transcript_y()[i] = transcript_state[i].base_y;
+            polys.transcript_z1()[i] = transcript_state[i].z1;
+            polys.transcript_z2()[i] = transcript_state[i].z2;
+            polys.transcript_z1zero()[i] = transcript_state[i].z1_zero;
+            polys.transcript_z2zero()[i] = transcript_state[i].z2_zero;
+            polys.transcript_op()[i] = transcript_state[i].opcode;
+            polys.transcript_accumulator_x()[i] = transcript_state[i].accumulator_x;
+            polys.transcript_accumulator_y()[i] = transcript_state[i].accumulator_y;
+            polys.transcript_msm_x()[i] = transcript_state[i].msm_output_x;
+            polys.transcript_msm_y()[i] = transcript_state[i].msm_output_y;
+            polys.transcript_collision_check()[i] = transcript_state[i].collision_check;
         }
 
         // TODO(@zac-williamson) if final opcode resets accumulator, all subsequent "is_accumulator_empty" row values
@@ -385,100 +385,100 @@ template <typename Flavor> class ECCVMCircuitBuilder {
         // all zero (issue #2217)
         if (transcript_state[transcript_state.size() - 1].accumulator_empty == 1) {
             for (size_t i = transcript_state.size(); i < num_rows_pow2; ++i) {
-                polys.transcript_accumulator_empty[i] = 1;
+                polys.transcript_accumulator_empty()[i] = 1;
             }
         }
         for (size_t i = 0; i < precompute_table_state.size(); ++i) {
             // first row is always an empty row (to accomodate shifted polynomials which must have 0 as 1st
             // coefficient). All other rows in the precompute_table_state represent active wnaf gates (i.e.
             // precompute_select = 1)
-            polys.precompute_select[i] = (i != 0) ? 1 : 0;
-            polys.precompute_pc[i] = precompute_table_state[i].pc;
-            polys.precompute_point_transition[i] = static_cast<uint64_t>(precompute_table_state[i].point_transition);
-            polys.precompute_round[i] = precompute_table_state[i].round;
-            polys.precompute_scalar_sum[i] = precompute_table_state[i].scalar_sum;
+            polys.precompute_select()[i] = (i != 0) ? 1 : 0;
+            polys.precompute_pc()[i] = precompute_table_state[i].pc;
+            polys.precompute_point_transition()[i] = static_cast<uint64_t>(precompute_table_state[i].point_transition);
+            polys.precompute_round()[i] = precompute_table_state[i].round;
+            polys.precompute_scalar_sum()[i] = precompute_table_state[i].scalar_sum;
 
-            polys.precompute_s1hi[i] = precompute_table_state[i].s1;
-            polys.precompute_s1lo[i] = precompute_table_state[i].s2;
-            polys.precompute_s2hi[i] = precompute_table_state[i].s3;
-            polys.precompute_s2lo[i] = precompute_table_state[i].s4;
-            polys.precompute_s3hi[i] = precompute_table_state[i].s5;
-            polys.precompute_s3lo[i] = precompute_table_state[i].s6;
-            polys.precompute_s4hi[i] = precompute_table_state[i].s7;
-            polys.precompute_s4lo[i] = precompute_table_state[i].s8;
+            polys.precompute_s1hi()[i] = precompute_table_state[i].s1;
+            polys.precompute_s1lo()[i] = precompute_table_state[i].s2;
+            polys.precompute_s2hi()[i] = precompute_table_state[i].s3;
+            polys.precompute_s2lo()[i] = precompute_table_state[i].s4;
+            polys.precompute_s3hi()[i] = precompute_table_state[i].s5;
+            polys.precompute_s3lo()[i] = precompute_table_state[i].s6;
+            polys.precompute_s4hi()[i] = precompute_table_state[i].s7;
+            polys.precompute_s4lo()[i] = precompute_table_state[i].s8;
             // If skew is active (i.e. we need to subtract a base point from the msm result),
             // write `7` into rows.precompute_skew. `7`, in binary representation, equals `-1` when converted into WNAF
             // form
-            polys.precompute_skew[i] = precompute_table_state[i].skew ? 7 : 0;
+            polys.precompute_skew()[i] = precompute_table_state[i].skew ? 7 : 0;
 
-            polys.precompute_dx[i] = precompute_table_state[i].precompute_double.x;
-            polys.precompute_dy[i] = precompute_table_state[i].precompute_double.y;
-            polys.precompute_tx[i] = precompute_table_state[i].precompute_accumulator.x;
-            polys.precompute_ty[i] = precompute_table_state[i].precompute_accumulator.y;
+            polys.precompute_dx()[i] = precompute_table_state[i].precompute_double.x;
+            polys.precompute_dy()[i] = precompute_table_state[i].precompute_double.y;
+            polys.precompute_tx()[i] = precompute_table_state[i].precompute_accumulator.x;
+            polys.precompute_ty()[i] = precompute_table_state[i].precompute_accumulator.y;
         }
 
         for (size_t i = 0; i < msm_state.size(); ++i) {
-            polys.msm_transition[i] = static_cast<int>(msm_state[i].msm_transition);
-            polys.msm_add[i] = static_cast<int>(msm_state[i].q_add);
-            polys.msm_double[i] = static_cast<int>(msm_state[i].q_double);
-            polys.msm_skew[i] = static_cast<int>(msm_state[i].q_skew);
-            polys.msm_accumulator_x[i] = msm_state[i].accumulator_x;
-            polys.msm_accumulator_y[i] = msm_state[i].accumulator_y;
-            polys.msm_pc[i] = msm_state[i].pc;
-            polys.msm_size_of_msm[i] = msm_state[i].msm_size;
-            polys.msm_count[i] = msm_state[i].msm_count;
-            polys.msm_round[i] = msm_state[i].msm_round;
-            polys.msm_add1[i] = static_cast<int>(msm_state[i].add_state[0].add);
-            polys.msm_add2[i] = static_cast<int>(msm_state[i].add_state[1].add);
-            polys.msm_add3[i] = static_cast<int>(msm_state[i].add_state[2].add);
-            polys.msm_add4[i] = static_cast<int>(msm_state[i].add_state[3].add);
-            polys.msm_x1[i] = msm_state[i].add_state[0].point.x;
-            polys.msm_y1[i] = msm_state[i].add_state[0].point.y;
-            polys.msm_x2[i] = msm_state[i].add_state[1].point.x;
-            polys.msm_y2[i] = msm_state[i].add_state[1].point.y;
-            polys.msm_x3[i] = msm_state[i].add_state[2].point.x;
-            polys.msm_y3[i] = msm_state[i].add_state[2].point.y;
-            polys.msm_x4[i] = msm_state[i].add_state[3].point.x;
-            polys.msm_y4[i] = msm_state[i].add_state[3].point.y;
-            polys.msm_collision_x1[i] = msm_state[i].add_state[0].collision_inverse;
-            polys.msm_collision_x2[i] = msm_state[i].add_state[1].collision_inverse;
-            polys.msm_collision_x3[i] = msm_state[i].add_state[2].collision_inverse;
-            polys.msm_collision_x4[i] = msm_state[i].add_state[3].collision_inverse;
-            polys.msm_lambda1[i] = msm_state[i].add_state[0].lambda;
-            polys.msm_lambda2[i] = msm_state[i].add_state[1].lambda;
-            polys.msm_lambda3[i] = msm_state[i].add_state[2].lambda;
-            polys.msm_lambda4[i] = msm_state[i].add_state[3].lambda;
-            polys.msm_slice1[i] = msm_state[i].add_state[0].slice;
-            polys.msm_slice2[i] = msm_state[i].add_state[1].slice;
-            polys.msm_slice3[i] = msm_state[i].add_state[2].slice;
-            polys.msm_slice4[i] = msm_state[i].add_state[3].slice;
+            polys.msm_transition()[i] = static_cast<int>(msm_state[i].msm_transition);
+            polys.msm_add()[i] = static_cast<int>(msm_state[i].q_add);
+            polys.msm_double()[i] = static_cast<int>(msm_state[i].q_double);
+            polys.msm_skew()[i] = static_cast<int>(msm_state[i].q_skew);
+            polys.msm_accumulator_x()[i] = msm_state[i].accumulator_x;
+            polys.msm_accumulator_y()[i] = msm_state[i].accumulator_y;
+            polys.msm_pc()[i] = msm_state[i].pc;
+            polys.msm_size_of_msm()[i] = msm_state[i].msm_size;
+            polys.msm_count()[i] = msm_state[i].msm_count;
+            polys.msm_round()[i] = msm_state[i].msm_round;
+            polys.msm_add1()[i] = static_cast<int>(msm_state[i].add_state[0].add);
+            polys.msm_add2()[i] = static_cast<int>(msm_state[i].add_state[1].add);
+            polys.msm_add3()[i] = static_cast<int>(msm_state[i].add_state[2].add);
+            polys.msm_add4()[i] = static_cast<int>(msm_state[i].add_state[3].add);
+            polys.msm_x1()[i] = msm_state[i].add_state[0].point.x;
+            polys.msm_y1()[i] = msm_state[i].add_state[0].point.y;
+            polys.msm_x2()[i] = msm_state[i].add_state[1].point.x;
+            polys.msm_y2()[i] = msm_state[i].add_state[1].point.y;
+            polys.msm_x3()[i] = msm_state[i].add_state[2].point.x;
+            polys.msm_y3()[i] = msm_state[i].add_state[2].point.y;
+            polys.msm_x4()[i] = msm_state[i].add_state[3].point.x;
+            polys.msm_y4()[i] = msm_state[i].add_state[3].point.y;
+            polys.msm_collision_x1()[i] = msm_state[i].add_state[0].collision_inverse;
+            polys.msm_collision_x2()[i] = msm_state[i].add_state[1].collision_inverse;
+            polys.msm_collision_x3()[i] = msm_state[i].add_state[2].collision_inverse;
+            polys.msm_collision_x4()[i] = msm_state[i].add_state[3].collision_inverse;
+            polys.msm_lambda1()[i] = msm_state[i].add_state[0].lambda;
+            polys.msm_lambda2()[i] = msm_state[i].add_state[1].lambda;
+            polys.msm_lambda3()[i] = msm_state[i].add_state[2].lambda;
+            polys.msm_lambda4()[i] = msm_state[i].add_state[3].lambda;
+            polys.msm_slice1()[i] = msm_state[i].add_state[0].slice;
+            polys.msm_slice2()[i] = msm_state[i].add_state[1].slice;
+            polys.msm_slice3()[i] = msm_state[i].add_state[2].slice;
+            polys.msm_slice4()[i] = msm_state[i].add_state[3].slice;
         }
 
-        polys.transcript_mul_shift = Polynomial(polys.transcript_mul.shifted());
-        polys.transcript_msm_count_shift = Polynomial(polys.transcript_msm_count.shifted());
-        polys.transcript_accumulator_x_shift = Polynomial(polys.transcript_accumulator_x.shifted());
-        polys.transcript_accumulator_y_shift = Polynomial(polys.transcript_accumulator_y.shifted());
-        polys.precompute_scalar_sum_shift = Polynomial(polys.precompute_scalar_sum.shifted());
-        polys.precompute_s1hi_shift = Polynomial(polys.precompute_s1hi.shifted());
-        polys.precompute_dx_shift = Polynomial(polys.precompute_dx.shifted());
-        polys.precompute_dy_shift = Polynomial(polys.precompute_dy.shifted());
-        polys.precompute_tx_shift = Polynomial(polys.precompute_tx.shifted());
-        polys.precompute_ty_shift = Polynomial(polys.precompute_ty.shifted());
-        polys.msm_transition_shift = Polynomial(polys.msm_transition.shifted());
-        polys.msm_add_shift = Polynomial(polys.msm_add.shifted());
-        polys.msm_double_shift = Polynomial(polys.msm_double.shifted());
-        polys.msm_skew_shift = Polynomial(polys.msm_skew.shifted());
-        polys.msm_accumulator_x_shift = Polynomial(polys.msm_accumulator_x.shifted());
-        polys.msm_accumulator_y_shift = Polynomial(polys.msm_accumulator_y.shifted());
-        polys.msm_count_shift = Polynomial(polys.msm_count.shifted());
-        polys.msm_round_shift = Polynomial(polys.msm_round.shifted());
-        polys.msm_add1_shift = Polynomial(polys.msm_add1.shifted());
-        polys.msm_pc_shift = Polynomial(polys.msm_pc.shifted());
-        polys.precompute_pc_shift = Polynomial(polys.precompute_pc.shifted());
-        polys.transcript_pc_shift = Polynomial(polys.transcript_pc.shifted());
-        polys.precompute_round_shift = Polynomial(polys.precompute_round.shifted());
-        polys.transcript_accumulator_empty_shift = Polynomial(polys.transcript_accumulator_empty.shifted());
-        polys.precompute_select_shift = Polynomial(polys.precompute_select.shifted());
+        polys.transcript_mul_shift() = Polynomial(polys.transcript_mul().shifted());
+        polys.transcript_msm_count_shift() = Polynomial(polys.transcript_msm_count().shifted());
+        polys.transcript_accumulator_x_shift() = Polynomial(polys.transcript_accumulator_x().shifted());
+        polys.transcript_accumulator_y_shift() = Polynomial(polys.transcript_accumulator_y().shifted());
+        polys.precompute_scalar_sum_shift() = Polynomial(polys.precompute_scalar_sum().shifted());
+        polys.precompute_s1hi_shift() = Polynomial(polys.precompute_s1hi().shifted());
+        polys.precompute_dx_shift() = Polynomial(polys.precompute_dx().shifted());
+        polys.precompute_dy_shift() = Polynomial(polys.precompute_dy().shifted());
+        polys.precompute_tx_shift() = Polynomial(polys.precompute_tx().shifted());
+        polys.precompute_ty_shift() = Polynomial(polys.precompute_ty().shifted());
+        polys.msm_transition_shift() = Polynomial(polys.msm_transition().shifted());
+        polys.msm_add_shift() = Polynomial(polys.msm_add().shifted());
+        polys.msm_double_shift() = Polynomial(polys.msm_double().shifted());
+        polys.msm_skew_shift() = Polynomial(polys.msm_skew().shifted());
+        polys.msm_accumulator_x_shift() = Polynomial(polys.msm_accumulator_x().shifted());
+        polys.msm_accumulator_y_shift() = Polynomial(polys.msm_accumulator_y().shifted());
+        polys.msm_count_shift() = Polynomial(polys.msm_count().shifted());
+        polys.msm_round_shift() = Polynomial(polys.msm_round().shifted());
+        polys.msm_add1_shift() = Polynomial(polys.msm_add1().shifted());
+        polys.msm_pc_shift() = Polynomial(polys.msm_pc().shifted());
+        polys.precompute_pc_shift() = Polynomial(polys.precompute_pc().shifted());
+        polys.transcript_pc_shift() = Polynomial(polys.transcript_pc().shifted());
+        polys.precompute_round_shift() = Polynomial(polys.precompute_round().shifted());
+        polys.transcript_accumulator_empty_shift() = Polynomial(polys.transcript_accumulator_empty().shifted());
+        polys.precompute_select_shift() = Polynomial(polys.precompute_select().shifted());
         return polys;
     }
 
@@ -511,7 +511,7 @@ template <typename Flavor> class ECCVMCircuitBuilder {
         honk::permutation_library::compute_permutation_grand_product<Flavor, honk::sumcheck::ECCVMSetRelation<FF>>(
             num_rows, polynomials, params);
 
-        polynomials.z_perm_shift = Polynomial(polynomials.z_perm().shifted());
+        polynomials.z_perm_shift() = Polynomial(polynomials.z_perm().shifted());
 
         const auto evaluate_relation = [&]<typename Relation>(const std::string& relation_name) {
             typename Relation::SumcheckArrayOfValuesOverSubrelations result;

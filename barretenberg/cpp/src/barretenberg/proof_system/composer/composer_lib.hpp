@@ -34,7 +34,7 @@ void construct_selector_polynomials(const typename Flavor::CircuitBuilder& circu
         for (size_t i = 0; i < num_ecc_op_gates; ++i) {
             selector_poly_lagrange[i + op_gate_offset] = 1;
         }
-        proving_key->lagrange_ecc_op = selector_poly_lagrange;
+        proving_key->lagrange_ecc_op() = selector_poly_lagrange;
     }
 
     // TODO(#398): Loose coupling here! Would rather build up pk from arithmetization

@@ -317,19 +317,19 @@ template <typename FF> class UltraCircuitBuilder_ : public CircuitBuilderBase<ar
             stored_state.q_elliptic = builder.q_elliptic();
             stored_state.q_aux = builder.q_aux();
             stored_state.q_lookup_type = builder.q_lookup_type();
-            stored_state.current_tag = builder.current_tag();
-            stored_state.tau = builder.tau();
+            stored_state.current_tag = builder.current_tag;
+            stored_state.tau = builder.tau;
 
-            stored_state.ram_arrays = builder.ram_arrays();
-            stored_state.rom_arrays = builder.rom_arrays();
+            stored_state.ram_arrays = builder.ram_arrays;
+            stored_state.rom_arrays = builder.rom_arrays;
 
-            stored_state.memory_read_records = builder.memory_read_records();
-            stored_state.memory_write_records = builder.memory_write_records();
-            stored_state.range_lists = builder.range_lists();
-            stored_state.circuit_finalised = builder.circuit_finalised();
-            stored_state.num_gates = builder.num_gates();
+            stored_state.memory_read_records = builder.memory_read_records;
+            stored_state.memory_write_records = builder.memory_write_records;
+            stored_state.range_lists = builder.range_lists;
+            stored_state.circuit_finalised = builder.circuit_finalised;
+            stored_state.num_gates = builder.num_gates;
             stored_state.cached_partial_non_native_field_multiplications =
-                builder.cached_partial_non_native_field_multiplications();
+                builder.cached_partial_non_native_field_multiplications;
             return stored_state;
         }
 
@@ -401,21 +401,21 @@ template <typename FF> class UltraCircuitBuilder_ : public CircuitBuilderBase<ar
             builder->circuit_finalised = circuit_finalised;
             builder->num_gates = num_gates;
             builder->cached_partial_non_native_field_multiplications = cached_partial_non_native_field_multiplications;
-            builder->w_l.resize(num_gates);
-            builder->w_r.resize(num_gates);
-            builder->w_o.resize(num_gates);
-            builder->w_4.resize(num_gates);
-            builder->q_m.resize(num_gates);
-            builder->q_c.resize(num_gates);
-            builder->q_1.resize(num_gates);
-            builder->q_2.resize(num_gates);
-            builder->q_3.resize(num_gates);
-            builder->q_4.resize(num_gates);
-            builder->q_arith.resize(num_gates);
-            builder->q_sort.resize(num_gates);
-            builder->q_elliptic.resize(num_gates);
-            builder->q_aux.resize(num_gates);
-            builder->q_lookup_type.resize(num_gates);
+            builder->w_l().resize(num_gates);
+            builder->w_r().resize(num_gates);
+            builder->w_o().resize(num_gates);
+            builder->w_4().resize(num_gates);
+            builder->q_m().resize(num_gates);
+            builder->q_c().resize(num_gates);
+            builder->q_1().resize(num_gates);
+            builder->q_2().resize(num_gates);
+            builder->q_3().resize(num_gates);
+            builder->q_4().resize(num_gates);
+            builder->q_arith().resize(num_gates);
+            builder->q_sort().resize(num_gates);
+            builder->q_elliptic().resize(num_gates);
+            builder->q_aux().resize(num_gates);
+            builder->q_lookup_type().resize(num_gates);
         }
         /**
          * @brief Checks that the circuit state is the same as the stored circuit's one
@@ -447,49 +447,49 @@ template <typename FF> class UltraCircuitBuilder_ : public CircuitBuilderBase<ar
             if (!(constant_variable_indices == builder.constant_variable_indices)) {
                 return false;
             }
-            if (!(w_l == builder.w_l)) {
+            if (!(w_l == builder.w_l())) {
                 return false;
             }
-            if (!(w_r == builder.w_r)) {
+            if (!(w_r == builder.w_r())) {
                 return false;
             }
-            if (!(w_o == builder.w_o)) {
+            if (!(w_o == builder.w_o())) {
                 return false;
             }
-            if (!(w_4 == builder.w_4)) {
+            if (!(w_4 == builder.w_4())) {
                 return false;
             }
-            if (!(q_m == builder.q_m)) {
+            if (!(q_m == builder.q_m())) {
                 return false;
             }
-            if (!(q_c == builder.q_c)) {
+            if (!(q_c == builder.q_c())) {
                 return false;
             }
-            if (!(q_1 == builder.q_1)) {
+            if (!(q_1 == builder.q_1())) {
                 return false;
             }
-            if (!(q_2 == builder.q_2)) {
+            if (!(q_2 == builder.q_2())) {
                 return false;
             }
-            if (!(q_3 == builder.q_3)) {
+            if (!(q_3 == builder.q_3())) {
                 return false;
             }
-            if (!(q_4 == builder.q_4)) {
+            if (!(q_4 == builder.q_4())) {
                 return false;
             }
-            if (!(q_arith == builder.q_arith)) {
+            if (!(q_arith == builder.q_arith())) {
                 return false;
             }
-            if (!(q_sort == builder.q_sort)) {
+            if (!(q_sort == builder.q_sort())) {
                 return false;
             }
-            if (!(q_elliptic == builder.q_elliptic)) {
+            if (!(q_elliptic == builder.q_elliptic())) {
                 return false;
             }
-            if (!(q_aux == builder.q_aux)) {
+            if (!(q_aux == builder.q_aux())) {
                 return false;
             }
-            if (!(q_lookup_type == builder.q_lookup_type)) {
+            if (!(q_lookup_type == builder.q_lookup_type())) {
                 return false;
             }
             if (!(current_tag == builder.current_tag)) {

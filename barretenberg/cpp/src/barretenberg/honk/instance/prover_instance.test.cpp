@@ -71,7 +71,7 @@ template <class Flavor> class InstanceTests : public testing::Test {
 
         // Method 1: computed sorted list accumulator polynomial using prover library method
         instance.compute_sorted_list_accumulator(eta);
-        auto sorted_list_accumulator = instance.proving_key->sorted_accum;
+        auto sorted_list_accumulator = instance.proving_key->sorted_accum();
 
         // Method 2: Compute local sorted list accumulator simply and inefficiently
         const FF eta_sqr = eta.sqr();

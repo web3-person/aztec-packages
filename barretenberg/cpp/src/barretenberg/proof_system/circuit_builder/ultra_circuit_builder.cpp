@@ -411,7 +411,7 @@ template <typename FF> void UltraCircuitBuilder_<FF>::create_ecc_add_gate(const 
 
     if (can_fuse_into_previous_gate) {
         q_1()[this->num_gates - 1] = in.sign_coefficient;
-        q_elliptic[this->num_gates - 1] = 1;
+        q_elliptic()[this->num_gates - 1] = 1;
     } else {
         w_l().emplace_back(this->zero_idx);
         w_r().emplace_back(in.x1);
@@ -593,8 +593,8 @@ plookup::ReadData<uint32_t> UltraCircuitBuilder_<FF>::create_gates_from_plookup_
         read_data[plookup::ColumnIdx::C3].push_back(third_idx);
         this->assert_valid_variables({ first_idx, second_idx, third_idx });
 
-        q_lookup_type.emplace_back(FF(1));
-        q_3.emplace_back(FF(table.table_index));
+        q_lookup_type().emplace_back(FF(1));
+        q_3().emplace_back(FF(table.table_index));
         w_l().emplace_back(first_idx);
         w_r().emplace_back(second_idx);
         w_o().emplace_back(third_idx);
@@ -1158,59 +1158,59 @@ std::vector<uint32_t> UltraCircuitBuilder_<FF>::decompose_into_default_range_bet
  */
 template <typename FF> void UltraCircuitBuilder_<FF>::apply_aux_selectors(const AUX_SELECTORS type)
 {
-    q_aux.emplace_back(type == AUX_SELECTORS::NONE ? 0 : 1);
-    q_sort.emplace_back(0);
-    q_lookup_type.emplace_back(0);
-    q_elliptic.emplace_back(0);
+    q_aux().emplace_back(type == AUX_SELECTORS::NONE ? 0 : 1);
+    q_sort().emplace_back(0);
+    q_lookup_type().emplace_back(0);
+    q_elliptic().emplace_back(0);
     switch (type) {
     case AUX_SELECTORS::LIMB_ACCUMULATE_1: {
-        q_1.emplace_back(0);
-        q_2.emplace_back(0);
-        q_3.emplace_back(1);
-        q_4.emplace_back(1);
-        q_m.emplace_back(0);
-        q_c.emplace_back(0);
-        q_arith.emplace_back(0);
+        q_1().emplace_back(0);
+        q_2().emplace_back(0);
+        q_3().emplace_back(1);
+        q_4().emplace_back(1);
+        q_m().emplace_back(0);
+        q_c().emplace_back(0);
+        q_arith().emplace_back(0);
         break;
     }
     case AUX_SELECTORS::LIMB_ACCUMULATE_2: {
-        q_1.emplace_back(0);
-        q_2.emplace_back(0);
-        q_3.emplace_back(1);
-        q_4.emplace_back(0);
-        q_m.emplace_back(1);
-        q_c.emplace_back(0);
-        q_arith.emplace_back(0);
+        q_1().emplace_back(0);
+        q_2().emplace_back(0);
+        q_3().emplace_back(1);
+        q_4().emplace_back(0);
+        q_m().emplace_back(1);
+        q_c().emplace_back(0);
+        q_arith().emplace_back(0);
         break;
     }
     case AUX_SELECTORS::NON_NATIVE_FIELD_1: {
-        q_1.emplace_back(0);
-        q_2.emplace_back(1);
-        q_3.emplace_back(1);
-        q_4.emplace_back(0);
-        q_m.emplace_back(0);
-        q_c.emplace_back(0);
-        q_arith.emplace_back(0);
+        q_1().emplace_back(0);
+        q_2().emplace_back(1);
+        q_3().emplace_back(1);
+        q_4().emplace_back(0);
+        q_m().emplace_back(0);
+        q_c().emplace_back(0);
+        q_arith().emplace_back(0);
         break;
     }
     case AUX_SELECTORS::NON_NATIVE_FIELD_2: {
-        q_1.emplace_back(0);
-        q_2.emplace_back(1);
-        q_3.emplace_back(0);
-        q_4.emplace_back(1);
-        q_m.emplace_back(0);
-        q_c.emplace_back(0);
-        q_arith.emplace_back(0);
+        q_1().emplace_back(0);
+        q_2().emplace_back(1);
+        q_3().emplace_back(0);
+        q_4().emplace_back(1);
+        q_m().emplace_back(0);
+        q_c().emplace_back(0);
+        q_arith().emplace_back(0);
         break;
     }
     case AUX_SELECTORS::NON_NATIVE_FIELD_3: {
-        q_1.emplace_back(0);
-        q_2.emplace_back(1);
-        q_3.emplace_back(0);
-        q_4.emplace_back(0);
-        q_m.emplace_back(1);
-        q_c.emplace_back(0);
-        q_arith.emplace_back(0);
+        q_1().emplace_back(0);
+        q_2().emplace_back(1);
+        q_3().emplace_back(0);
+        q_4().emplace_back(0);
+        q_m().emplace_back(1);
+        q_c().emplace_back(0);
+        q_arith().emplace_back(0);
         break;
     }
     case AUX_SELECTORS::ROM_CONSISTENCY_CHECK: {
@@ -1218,13 +1218,13 @@ template <typename FF> void UltraCircuitBuilder_<FF>::apply_aux_selectors(const 
         // Apply sorted memory read checks with the following additional check:
         // 1. Assert that if index field across two gates does not change, the value field does not change.
         // Used for ROM reads and RAM reads across write/read boundaries
-        q_1.emplace_back(1);
-        q_2.emplace_back(1);
-        q_3.emplace_back(0);
-        q_4.emplace_back(0);
-        q_m.emplace_back(0);
-        q_c.emplace_back(0);
-        q_arith.emplace_back(0);
+        q_1().emplace_back(1);
+        q_2().emplace_back(1);
+        q_3().emplace_back(0);
+        q_4().emplace_back(0);
+        q_m().emplace_back(0);
+        q_c().emplace_back(0);
+        q_arith().emplace_back(0);
         break;
     }
     case AUX_SELECTORS::RAM_CONSISTENCY_CHECK: {
@@ -1233,74 +1233,74 @@ template <typename FF> void UltraCircuitBuilder_<FF>::apply_aux_selectors(const 
         // 2. Validate record computation (r = read_write_flag + index * \eta + \timestamp * \eta^2 + value * \eta^3)
         // 3. If adjacent index values across 2 gates does not change, and the next gate's read_write_flag is set to
         // 'read', validate adjacent values do not change Used for ROM reads and RAM reads across read/write boundaries
-        q_1.emplace_back(0);
-        q_2.emplace_back(0);
-        q_3.emplace_back(0);
-        q_4.emplace_back(0);
-        q_m.emplace_back(0);
-        q_c.emplace_back(0);
-        q_arith.emplace_back(1);
+        q_1().emplace_back(0);
+        q_2().emplace_back(0);
+        q_3().emplace_back(0);
+        q_4().emplace_back(0);
+        q_m().emplace_back(0);
+        q_c().emplace_back(0);
+        q_arith().emplace_back(1);
         break;
     }
     case AUX_SELECTORS::RAM_TIMESTAMP_CHECK: {
         // For two adjacent RAM entries that share the same index, validate the timestamp value is monotonically
         // increasing
-        q_1.emplace_back(1);
-        q_2.emplace_back(0);
-        q_3.emplace_back(0);
-        q_4.emplace_back(1);
-        q_m.emplace_back(0);
-        q_c.emplace_back(0);
-        q_arith.emplace_back(0);
+        q_1().emplace_back(1);
+        q_2().emplace_back(0);
+        q_3().emplace_back(0);
+        q_4().emplace_back(1);
+        q_m().emplace_back(0);
+        q_c().emplace_back(0);
+        q_arith().emplace_back(0);
         break;
     }
     case AUX_SELECTORS::ROM_READ: {
         // Memory read gate for reading memory cells.
         // Validates record witness computation (r = read_write_flag + index * \eta + timestamp * \eta^2 + value *
         // \eta^3)
-        q_1.emplace_back(1);
-        q_2.emplace_back(0);
-        q_3.emplace_back(0);
-        q_4.emplace_back(0);
-        q_m.emplace_back(1); // validate record witness is correctly computed
-        q_c.emplace_back(0); // read/write flag stored in q_c
-        q_arith.emplace_back(0);
+        q_1().emplace_back(1);
+        q_2().emplace_back(0);
+        q_3().emplace_back(0);
+        q_4().emplace_back(0);
+        q_m().emplace_back(1); // validate record witness is correctly computed
+        q_c().emplace_back(0); // read/write flag stored in q_c
+        q_arith().emplace_back(0);
         break;
     }
     case AUX_SELECTORS::RAM_READ: {
         // Memory read gate for reading memory cells.
         // Validates record witness computation (r = read_write_flag + index * \eta + timestamp * \eta^2 + value *
         // \eta^3)
-        q_1.emplace_back(1);
-        q_2.emplace_back(0);
-        q_3.emplace_back(0);
-        q_4.emplace_back(0);
-        q_m.emplace_back(1); // validate record witness is correctly computed
-        q_c.emplace_back(0); // read/write flag stored in q_c
-        q_arith.emplace_back(0);
+        q_1().emplace_back(1);
+        q_2().emplace_back(0);
+        q_3().emplace_back(0);
+        q_4().emplace_back(0);
+        q_m().emplace_back(1); // validate record witness is correctly computed
+        q_c().emplace_back(0); // read/write flag stored in q_c
+        q_arith().emplace_back(0);
         break;
     }
     case AUX_SELECTORS::RAM_WRITE: {
         // Memory read gate for writing memory cells.
         // Validates record witness computation (r = read_write_flag + index * \eta + timestamp * \eta^2 + value *
         // \eta^3)
-        q_1.emplace_back(1);
-        q_2.emplace_back(0);
-        q_3.emplace_back(0);
-        q_4.emplace_back(0);
-        q_m.emplace_back(1); // validate record witness is correctly computed
-        q_c.emplace_back(1); // read/write flag stored in q_c
-        q_arith.emplace_back(0);
+        q_1().emplace_back(1);
+        q_2().emplace_back(0);
+        q_3().emplace_back(0);
+        q_4().emplace_back(0);
+        q_m().emplace_back(1); // validate record witness is correctly computed
+        q_c().emplace_back(1); // read/write flag stored in q_c
+        q_arith().emplace_back(0);
         break;
     }
     default: {
-        q_1.emplace_back(0);
-        q_2.emplace_back(0);
-        q_3.emplace_back(0);
-        q_4.emplace_back(0);
-        q_m.emplace_back(0);
-        q_c.emplace_back(0);
-        q_arith.emplace_back(0);
+        q_1().emplace_back(0);
+        q_2().emplace_back(0);
+        q_3().emplace_back(0);
+        q_4().emplace_back(0);
+        q_m().emplace_back(0);
+        q_c().emplace_back(0);
+        q_arith().emplace_back(0);
         break;
     }
     }
@@ -3244,17 +3244,17 @@ template <typename FF> bool UltraCircuitBuilder_<FF>::check_circuit()
         FF w_4_value;
         FF w_4_index;
         // Get the values of selectors and wires and update tag products along the way
-        q_arith_value = q_arith[i];
-        q_aux_value = q_aux[i];
-        q_elliptic_value = q_elliptic[i];
-        q_sort_value = q_sort[i];
-        q_lookup_type_value = q_lookup_type[i];
-        q_1_value = q_1[i];
-        q_2_value = q_2[i];
-        q_3_value = q_3[i];
-        q_4_value = q_4[i];
-        q_m_value = q_m[i];
-        q_c_value = q_c[i];
+        q_arith_value = q_arith()[i];
+        q_aux_value = q_aux()[i];
+        q_elliptic_value = q_elliptic()[i];
+        q_sort_value = q_sort()[i];
+        q_lookup_type_value = q_lookup_type()[i];
+        q_1_value = q_1()[i];
+        q_2_value = q_2()[i];
+        q_3_value = q_3()[i];
+        q_4_value = q_4()[i];
+        q_m_value = q_m()[i];
+        q_c_value = q_c()[i];
         w_1_value = this->get_variable(w_l()[i]);
         update_tag_check_information(w_l()[i], w_1_value);
         w_2_value = this->get_variable(w_r()[i]);
@@ -3279,10 +3279,10 @@ template <typename FF> bool UltraCircuitBuilder_<FF>::check_circuit()
         FF w_3_shifted_value;
         FF w_4_shifted_value;
         if (i < (this->num_gates - 1)) {
-            w_1_shifted_value = this->get_variable(w_l[i + 1]);
-            w_2_shifted_value = this->get_variable(w_r[i + 1]);
-            w_3_shifted_value = this->get_variable(w_o[i + 1]);
-            w_4_shifted_value = this->get_variable(w_4[i + 1]);
+            w_1_shifted_value = this->get_variable(w_l()[i + 1]);
+            w_2_shifted_value = this->get_variable(w_r()[i + 1]);
+            w_3_shifted_value = this->get_variable(w_o()[i + 1]);
+            w_4_shifted_value = this->get_variable(w_4()[i + 1]);
         } else {
             w_1_shifted_value = FF::zero();
             w_2_shifted_value = FF::zero();

@@ -76,8 +76,8 @@ template <UltraFlavor Flavor> void UltraProver_<Flavor>::execute_sorted_list_acc
     // polynomial
     auto sorted_accum_commitment = commitment_key->commit(instance->proving_key->sorted_accum());
     auto w_4_commitment = commitment_key->commit(instance->proving_key->w_4());
-    transcript.send_to_verifier(commitment_labels.sorted_accum, sorted_accum_commitment);
-    transcript.send_to_verifier(commitment_labels.w_4, w_4_commitment);
+    transcript.send_to_verifier(commitment_labels.sorted_accum(), sorted_accum_commitment);
+    transcript.send_to_verifier(commitment_labels.w_4(), w_4_commitment);
 }
 
 /**
@@ -91,10 +91,10 @@ template <UltraFlavor Flavor> void UltraProver_<Flavor>::execute_grand_product_c
 
     instance->compute_grand_product_polynomials(beta, gamma);
 
-    auto z_perm_commitment = commitment_key->commit(instance->proving_key->z_perm);
-    auto z_lookup_commitment = commitment_key->commit(instance->proving_key->z_lookup);
-    transcript.send_to_verifier(commitment_labels.z_perm, z_perm_commitment);
-    transcript.send_to_verifier(commitment_labels.z_lookup, z_lookup_commitment);
+    auto z_perm_commitment = commitment_key->commit(instance->proving_key->z_perm());
+    auto z_lookup_commitment = commitment_key->commit(instance->proving_key->z_lookup());
+    transcript.send_to_verifier(commitment_labels.z_perm(), z_perm_commitment);
+    transcript.send_to_verifier(commitment_labels.z_lookup(), z_lookup_commitment);
 }
 
 /**
