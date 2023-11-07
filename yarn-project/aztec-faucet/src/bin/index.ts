@@ -14,7 +14,6 @@ const {
   FAUCET_PORT = 8082,
   API_PREFIX = '',
   API_KEY = '',
-  RPC_URL = '',
   CHAIN_ID = '',
   PRIVATE_KEY = '',
   INTERVAL = '',
@@ -23,7 +22,6 @@ const {
 
 const logger = createDebugLogger('aztec:faucet');
 
-const rpcUrl = RPC_URL;
 const apiKey = API_KEY;
 const chainId = +CHAIN_ID;
 const privateKey: Hex = PRIVATE_KEY ? createHex(PRIVATE_KEY) : NULL_KEY;
@@ -60,7 +58,7 @@ function checkThrottle(address: Hex) {
  * @param address - Address to receive some ETH
  */
 async function transferEth(address: string) {
-  const chain = createEthereumChain(rpcUrl, apiKey);
+  const chain = createEthereumChain('testnet', apiKey);
 
   const account = privateKeyToAccount(privateKey);
   const walletClient = createWalletClient({
@@ -109,7 +107,7 @@ function createRouter(apiPrefix: string) {
 async function main() {
   logger.info(`Setting up Aztec Faucet...`);
 
-  const chain = createEthereumChain(rpcUrl, apiKey);
+  const chain = createEthereumChain('testnet', apiKey);
   if (chain.chainInfo.id !== chainId) {
     throw new Error(`Incorrect chain id, expected ${chain.chainInfo.id}`);
   }

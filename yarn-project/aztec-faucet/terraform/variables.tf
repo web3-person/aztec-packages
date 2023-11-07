@@ -6,7 +6,7 @@ variable "RPC_URL" {
   type = string
 }
 
-variable "API_KEY" {
+variable "INFURA_API_KEY" {
   type = string
 }
 
@@ -15,7 +15,8 @@ variable "API_PREFIX" {
 }
 
 variable "CHAIN_ID" {
-  type = string
+  type    = string
+  default = 31337
 }
 
 variable "PRIVATE_KEY" {

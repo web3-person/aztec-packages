@@ -111,7 +111,7 @@ resource "aws_ecs_task_definition" "aztec-faucet" {
       },
       {
         "name": "API_KEY",
-        "value": "${var.API_KEY}"
+        "value": "${var.INFURA_API_KEY}"
       },
       {
         "name": "API_PREFIX",

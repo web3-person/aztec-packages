@@ -14,7 +14,7 @@ mkdir -p serve
 # Contract addresses will be mounted in the serve directory
 docker run \
   -v $(pwd)/serve:/usr/src/contracts/serve \
-  -e ETHEREUM_HOST=$ETHEREUM_HOST -e PRIVATE_KEY=$PRIVATE_KEY \
+  -e ETHEREUM_HOST=$ETHEREUM_HOST -e PRIVATE_KEY=$CONTRACT_PUBLISHER_PRIVATE_KEY \
   278380418400.dkr.ecr.eu-west-2.amazonaws.com/l1-contracts:$COMMIT_HASH \
   ./scripts/deploy_contracts.sh
 
